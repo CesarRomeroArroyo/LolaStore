@@ -9,16 +9,16 @@
     justify-content: flex-end;
     padding: 20px 16px 0px 16px;
     z-index: 999;
-    background: #dedbdbee;
+    background: #e5e1de;
   }
   &__image{
-    height: 250px;
+    height: 240px;
     width: 100%;
     display: flex;
     justify-content: center;
     position: absolute;
     z-index: 99;
-    background: #dedbdbee;
+    background: #e5e1de;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
