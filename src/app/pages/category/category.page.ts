@@ -8,13 +8,16 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class CategoryPage implements OnInit {
   category: any;
+  categorySel: any;
   productosCategoria: any = [];
   productos : any = [];
+  productosSeleccionados : any = [];
   constructor(
     private firebase: FirebaseService
   ) { }
 
   ngOnInit() {
+    this.categorySel = 'all';
     this.firebase.obtenerUniqueId("categorias", "54c1ad43-e223-4c5f-aee0-9f302694bae1").subscribe((cat) => {
       this.category = cat[0];
       this.firebase.obtenerProductoCategoria(this.category.idunico).subscribe((prod)=>{
@@ -33,6 +36,17 @@ export class CategoryPage implements OnInit {
       this.productos.push(producto);
       console.log(this.productos);
     });
+    this.productosSeleccionados = this.productos;
+  }
+
+  selectCategory(cat){
+    console.log(cat);
+    this.categorySel = cat;
+    if(cat == 'all'){
+      this.productosSeleccionados = this.productos;
+    } else {
+      this.productosSeleccionados = [cat];
+    }
   }
 
 }

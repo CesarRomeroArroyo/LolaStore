@@ -16,17 +16,18 @@
     </div>
     <div class="container__categories" *ngIf="category">
        <div class="container__categories__category">
-        <div class="container__categories__category__option subselected">
+        <div class="container__categories__category__option" [ngClass]="{'subselected': categorySel=='all'}" (click)="selectCategory('all')">
           TODAS
         </div>
 
-        <div class="container__categories__category__option" *ngFor="let cat of productos">
+        <div class="container__categories__category__option" *ngFor="let cat of productos"
+          [ngClass]="{'subselected': categorySel!='all' && cat.nombre == categorySel.nombre}" (click)="selectCategory(cat)">
           {{cat.nombre}}
         </div>
       </div> 
     </div>
     <div class="container__products" *ngIf="category">
-      <div class="container__products__product" *ngFor="let producto of productos">
+      <div class="container__products__product" *ngFor="let producto of productosSeleccionados">
         <div class="container__products__product__title" *ngIf="producto.productos.length > 0">{{producto.nombre}}</div>
         <div class="container__products__product__list"  *ngIf="producto.productos.length > 0">
           <div class="container__products__product__list__item" *ngFor="let prod of producto.productos">
