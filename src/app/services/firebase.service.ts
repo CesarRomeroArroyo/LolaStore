@@ -40,7 +40,20 @@ export class FirebaseService {
   }
 
   obtenerUniqueId(tabla, id): Observable<any> {
-		this.itemsCollection = this.db.collection(tabla, ref => ref.where('uniqueid', '==', id));
+		this.itemsCollection = this.db.collection(tabla, ref => ref.where('idunico', '==', id));
+		return this.itemsCollection.snapshotChanges().pipe(
+			map(data => {
+				return data.map(d => {
+					const retorno = d.payload.doc.data();
+					retorno['id'] = d.payload.doc.id;
+					return retorno;
+				});
+			})
+		);
+  }
+
+  obtenerProductoCategoria(categoria): Observable<any> {
+		this.itemsCollection = this.db.collection('productos', ref => ref.where('idunicoCategoria', '==', categoria));
 		return this.itemsCollection.snapshotChanges().pipe(
 			map(data => {
 				return data.map(d => {

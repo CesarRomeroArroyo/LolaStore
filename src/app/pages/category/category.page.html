@@ -1,9 +1,55 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>category</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" >
+  <div class="container">
+    <div class="container__header">
+      <div class="container__header__back">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </div>
+      <div class="container__header__search">
+        <ion-icon name="search-outline"></ion-icon>
+      </div>      
+    </div>
+    <div class="container__img" *ngIf="category">
+      <img src="{{category.foto}}" alt="">
+      <div class="container__img__nombre">
+        {{category.nombre}}
+      </div>
+    </div>
+    <div class="container__categories" *ngIf="category">
+       <div class="container__categories__category">
+        <div class="container__categories__category__option subselected">
+          TODAS
+        </div>
 
-<ion-content>
+        <div class="container__categories__category__option" *ngFor="let cat of productos">
+          {{cat.nombre}}
+        </div>
+      </div> 
+    </div>
+    <div class="container__products" *ngIf="category">
+      <div class="container__products__product" *ngFor="let producto of productos">
+        <div class="container__products__product__title" *ngIf="producto.productos.length > 0">{{producto.nombre}}</div>
+        <div class="container__products__product__list"  *ngIf="producto.productos.length > 0">
+          <div class="container__products__product__list__item" *ngFor="let prod of producto.productos">
 
+            <div class="container__products__product__list__item__like">
+              <div class="container__products__product__list__item__like__container">
+                <ion-icon name="heart-outline"></ion-icon>
+              </div>
+            </div>
+            <div class="container__products__product__list__item__img">
+              <img src="{{prod.url}}" alt="">
+            </div>
+            <div class="container__products__product__list__item__title">
+              {{prod.nombre}}
+            </div>
+            <div class="container__products__product__list__item__price">
+              {{prod.precio | currency: 'USD':true:'2.0'}}
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
 </ion-content>
