@@ -9,5 +9,12 @@
     <div class="container__image">
       <img src="../../assets/logo.png" alt="">
     </div>
+    <div class="container__categories">
+      <div (click)="irDetalle(cat)"
+        [ngClass]="{'fondo1': obtenerColor(index)==1,'fondo2': obtenerColor(index) ==2,'fondo3': obtenerColor(index) ==3 }" *ngFor="let cat of categorias;let index=index;">
+        <img src="{{cat.foto}}" alt="">
+        {{cat.nombre}}
+      </div>
+    </div>
   </div>
 </ion-content>
