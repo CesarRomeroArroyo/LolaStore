@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { StateApp } from 'src/app/services/state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -13,18 +15,23 @@ export class CategoryPage implements OnInit {
   productos : any = [];
   productosSeleccionados : any = [];
   constructor(
-    private firebase: FirebaseService
+    private firebase: FirebaseService,
+    private state: StateApp,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.categorySel = 'all';
-    this.firebase.obtenerUniqueId("categorias", "54c1ad43-e223-4c5f-aee0-9f302694bae1").subscribe((cat) => {
-      this.category = cat[0];
-      this.firebase.obtenerProductoCategoria(this.category.idunico).subscribe((prod)=>{
-        this.productosCategoria = prod;
-        this.ordenarProductosSubCategoria();
+    this.state.getObservable().subscribe((data)=>{
+      this.firebase.obtenerUniqueId("categorias", data.idcategoria).subscribe((cat) => {
+        this.category = cat[0];
+        this.firebase.obtenerProductoCategoria(this.category.idunico).subscribe((prod)=>{
+          this.productosCategoria = prod;
+          this.ordenarProductosSubCategoria();
+        });
       });
     });
+    
   }
 
   ordenarProductosSubCategoria() {
@@ -47,6 +54,10 @@ export class CategoryPage implements OnInit {
     } else {
       this.productosSeleccionados = [cat];
     }
+  }
+
+  irAtras(){
+    this.router.navigate(['home']);
   }
 
 }
