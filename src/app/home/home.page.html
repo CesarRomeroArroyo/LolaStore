@@ -13,11 +13,11 @@
 			<div (click)="irDetalle(cat)"
 				[ngClass]="{'fondo1': obtenerColor(index)==1,'fondo2': obtenerColor(index) ==2,'fondo3': obtenerColor(index) ==3 }"
 				*ngFor="let cat of categorias;let index=index;">
-				<div class="img">
+				<div class="container__categories__img">
 					<img src="{{cat.foto}}" alt="">
 				</div>
-				<div class="text">
-					<h3>{{cat.nombre}}</h3>
+				<div class="container__categories__text">
+					{{cat.nombre}}
 				</div>
 			</div>
 		</div>
