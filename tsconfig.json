@@ -3,6 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@components/*": ["src/app/components/*"],
+    },
     "sourceMap": true,
     "declaration": false,
     "module": "esnext",

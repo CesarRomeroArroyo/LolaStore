@@ -1,20 +1,25 @@
 <ion-content [fullscreen]="true">
-  <div class="container">
-    <div class="container__header">
-      <div class="container__header__search">
-        <ion-icon name="search-outline"></ion-icon>
-      </div>
-      
-    </div>
-    <div class="container__image">
-      <img src="../../assets/logo.png" alt="">
-    </div>
-    <div class="container__categories">
-      <div (click)="irDetalle(cat)"
-        [ngClass]="{'fondo1': obtenerColor(index)==1,'fondo2': obtenerColor(index) ==2,'fondo3': obtenerColor(index) ==3 }" *ngFor="let cat of categorias;let index=index;">
-        <img src="{{cat.foto}}" alt="">
-        {{cat.nombre}}
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="container__header">
+			<div class="container__header__search">
+				<ion-icon name="search-outline"></ion-icon>
+			</div>
+
+		</div>
+		<div class="container__image">
+			<img src="../../assets/logo.png" alt="">
+		</div>
+		<div class="container__categories">
+			<div (click)="irDetalle(cat)"
+				[ngClass]="{'fondo1': obtenerColor(index)==1,'fondo2': obtenerColor(index) ==2,'fondo3': obtenerColor(index) ==3 }"
+				*ngFor="let cat of categorias;let index=index;">
+				<div class="img">
+					<img src="{{cat.foto}}" alt="">
+				</div>
+				<div class="text">
+					<h3>{{cat.nombre}}</h3>
+				</div>
+			</div>
+		</div>
+	</div>
 </ion-content>

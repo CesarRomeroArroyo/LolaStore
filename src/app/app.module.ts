@@ -1,3 +1,4 @@
+import { ComponentsModule } from '@components/components.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFirestoreModule,
     AngularFireStorageModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ComponentsModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
