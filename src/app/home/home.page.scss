@@ -33,10 +33,10 @@
     flex-wrap: wrap;
     position: relative;
 	top: 160px;
-	margin-bottom:  63px;
+	margin-bottom:  75px;
 	&__img{
 		img{
-			width:  190px !important;
+			width:  90%;
 		}
 	}
 	&__text{
@@ -54,6 +54,7 @@
   width: 50%;
   height: 150px;
   text-align: center;
+  padding: 8px;
   img{
     width: 90%;
   }
@@ -67,6 +68,7 @@
   width: 50%;
   height: 150px;
   text-align: center;
+  padding: 8px;
   img{
     width: 90%;
   }
@@ -80,6 +82,7 @@
   width: 50%;
   height: 150px;
   text-align: center;
+  padding: 8px;
   img{
     width: 90%;
   }
