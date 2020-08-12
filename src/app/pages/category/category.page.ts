@@ -1,63 +1,91 @@
+import { finalize } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { StateApp } from 'src/app/services/state.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.page.html',
-  styleUrls: ['./category.page.scss'],
+	selector: 'app-category',
+	templateUrl: './category.page.html',
+	styleUrls: ['./category.page.scss'],
 })
 export class CategoryPage implements OnInit {
-  category: any;
-  categorySel: any;
-  productosCategoria: any = [];
-  productos : any = [];
-  productosSeleccionados : any = [];
-  constructor(
-    private firebase: FirebaseService,
-    private state: StateApp,
-    private router: Router
-  ) { }
 
-  ngOnInit() {
-    this.categorySel = 'all';
-    this.state.getObservable().subscribe((data)=>{
-      this.firebase.obtenerUniqueId("categorias", data.idcategoria).subscribe((cat) => {
-        this.category = cat[0];
-        this.firebase.obtenerProductoCategoria(this.category.idunico).subscribe((prod)=>{
-          this.productosCategoria = prod;
-          this.ordenarProductosSubCategoria();
-        });
-      });
-    });
-    
-  }
+	category: any;
+	categorySel: any;
+	productosCategoria: any = [];
+	productos: any = [];
+	productosSeleccionados: any = [];
+	search: boolean = false;
+	dataShow: any[] = [];
 
-  ordenarProductosSubCategoria() {
-    this.category.subcategorias.forEach(sub => {
-      const producto = {nombre: sub.nombre, productos: []};
-      producto.productos = this.productosCategoria.filter((prod) =>{
-        return prod.idunicoSubcategoria == sub.idunico;
-      });
-      this.productos.push(producto);
-      console.log(this.productos);
-    });
-    this.productosSeleccionados = this.productos;
-  }
+	constructor(
+		private firebase: FirebaseService,
+		private state: StateApp,
+		private router: Router
+	) { }
 
-  selectCategory(cat){
-    console.log(cat);
-    this.categorySel = cat;
-    if(cat == 'all'){
-      this.productosSeleccionados = this.productos;
-    } else {
-      this.productosSeleccionados = [cat];
-    }
-  }
+	ngOnInit() {
+		this.categorySel = 'all';
+		this.state.getObservable().subscribe((data) => {
+			this.firebase.obtenerUniqueId("categorias", data.idcategoria).subscribe((cat) => {
+				this.category = cat[0];
+				this.firebase.obtenerProductoCategoria(this.category.idunico).subscribe((prod) => {
+					this.productosCategoria = prod;
+					this.ordenarProductosSubCategoria();
+				});
+			});
+		});
 
-  irAtras(){
-    this.router.navigate(['home']);
-  }
+	}
 
+	ordenarProductosSubCategoria() {
+		this.category.subcategorias.forEach(sub => {
+			const producto = { nombre: sub.nombre, productos: [] };
+			producto.productos = this.productosCategoria.filter((prod) => {
+				return prod.idunicoSubcategoria == sub.idunico;
+			});
+			this.productos.push(producto);
+			// console.log(this.productos);
+		});
+		this.productosSeleccionados = this.productos;
+		this.dataShow = this.productos;
+
+	}
+
+	selectCategory(cat) {
+		console.log(cat);
+		this.categorySel = cat;
+		if (cat == 'all') {
+			this.productosSeleccionados = this.productos;
+			this.dataShow = this.productosSeleccionados;
+		} else {
+			this.productosSeleccionados = [cat];
+			this.dataShow = this.productosSeleccionados;
+		}
+	}
+
+	irAtras() {
+		this.router.navigate(['home']);
+	}
+
+	buscar(query: string) {
+		if (query == '') {
+			this.dataShow = this.productosSeleccionados;
+			console.log(this.dataShow);
+			return;
+		} else {
+			let data: any[] = [];
+			query = query.toUpperCase();
+			this.productosSeleccionados.forEach(element => {
+				data.push({
+					nombre: element.nombre,
+					productos: element.productos.filter(prod => {
+						return prod.nombre.toUpperCase().indexOf(query) >= 0;
+					})
+				})
+			});
+			this.dataShow = data;
+		}
+	}
 }

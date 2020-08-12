@@ -1,59 +1,76 @@
-.container{
+.container {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
 
-    &__header{
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 20px 16px 0px 16px;
-      position: relative;
-      font-size: 20px;
-    }
-    &__img{
-      width: 100%;
-      display: flex;
-      justify-content: center;  
-      position: relative;
-      height: 300px;
-      &__nombre{
-        position: absolute;
-        bottom: 30px;
-        left: 0px;
-        font-weight: bolder;
-        background-color: rgba($color: #ffffff, $alpha: 0.8);
-        width: 70%;
-        height: 50px;
+    &__header {
+        width: 100%;
+        height: 45px;
         display: flex;
-        align-items: center;
-        border-bottom-right-radius: 20px;
-        border-top-right-radius: 20px;
-        padding-left: 10px;
-        justify-content: center;
-        font-size: 25px;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-      }
-      img{
-          width: 100%;
-      }
-      
+        justify-content: space-between;
+        padding: 20px 16px 0px 16px;
+        position: relative;
+        font-size: 20px;
+        &__back {
+            display: flex;
+            align-items: center;
+        }
+        &__search {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            &__input {
+                background-color: var(--ion-color-light);
+                border-radius: 20px;
+                margin: 0;
+                font-size: 14px;
+                height: 25px;
+                margin-right: 2%;
+            }
+        }
     }
-    &__categories{
+    &__img {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        height: 300px;
+        &__nombre {
+            position: absolute;
+            bottom: 30px;
+            left: 0px;
+            font-weight: bolder;
+            background-color: rgba($color: #ffffff, $alpha: 0.8);
+            width: 70%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            border-bottom-right-radius: 20px;
+            border-top-right-radius: 20px;
+            padding-left: 10px;
+            justify-content: center;
+            font-size: 25px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
+        img {
+            width: 100%;
+        }
+    }
+    &__categories {
         width: 100%;
         display: flex;
         height: 44px;
         margin-top: 20px;
         position: relative;
-        &__category{
+        &__category {
             width: 95%;
             display: flex;
             overflow: scroll;
             padding-bottom: 3px;
             margin-left: 5px;
-            &__option{
+            &__option {
                 background-color: rgba($color: #ffffff, $alpha: 0.4);
                 padding: 7px 20px;
                 margin: 0px 5px;
@@ -63,11 +80,11 @@
                 align-items: center;
                 font-size: 12px;
                 font-weight: bolder;
-                box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
             }
         }
     }
-    &__products{
+    &__products {
         width: 100%;
         height: auto;
         padding: 0px 16px;
@@ -75,21 +92,21 @@
         display: flex;
         flex-direction: column;
         position: relative;
-        margin-bottom:  63px;
-        &__product{
-            &__title{
+        margin-bottom: 63px;
+        &__product {
+            &__title {
                 font-weight: bold;
                 margin-top: 20px;
                 margin-bottom: 20px;
             }
-            &__list{
+            &__list {
                 width: 100%;
                 overflow-x: unset;
                 overflow-y: scroll;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
-                &__item{
+                &__item {
                     background-color: white;
                     width: 40%;
                     height: 240px;
@@ -97,12 +114,12 @@
                     margin-right: 20px;
                     margin-bottom: 20px;
                     padding: 10px 9px;
-                    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-                    &__like{
+                    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+                    &__like {
                         width: 100%;
                         display: flex;
                         justify-content: flex-end;
-                        &__container{
+                        &__container {
                             display: flex;
                             justify-content: center;
                             align-items: center;
@@ -115,22 +132,22 @@
                             color: #c5c7c6;
                         }
                     }
-                    &__img{
+                    &__img {
                         width: 100%;
                         height: 60%;
                         display: flex;
                         justify-content: center;
                         margin-top: 5px;
                         margin-bottom: 5px;
-                        img{
+                        img {
                             width: 80%;
                         }
                     }
-                    &__title{
+                    &__title {
                         font-size: 12px;
                         font-weight: bold;
                     }
-                    &__price{
+                    &__price {
                         font-size: 14px;
                         font-weight: bold;
                         width: 100%;
@@ -141,12 +158,12 @@
             }
         }
     }
-  }
-
-ion-content {
-	--ion-background-color: linear-gradient(to bottom, #f7d8dd, #f4d2d9, #f0cdd5, #edc7d1, #e9c2ce);
 }
 
-.subselected{
+ion-content {
+    --ion-background-color: linear-gradient(to bottom, #f7d8dd, #f4d2d9, #f0cdd5, #edc7d1, #e9c2ce);
+}
+
+.subselected {
     background-color: white !important;
 }
