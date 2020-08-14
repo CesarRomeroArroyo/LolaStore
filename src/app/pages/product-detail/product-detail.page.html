@@ -1,0 +1,46 @@
+<ion-content>
+	<div class="container" *ngIf="producto">
+		<div class="container__header">
+			<img [src]="producto.url">
+			<div class="container__header__icon">
+				<ion-icon name="arrow-back-outline" (click)="back()"></ion-icon>
+				<div class="container__header__ticked">
+					<div class="container__header__ticked__triangulo"></div>
+					<div class="container__header__icon__desc">
+						{{producto.descuento}}% descuento
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container__details">
+			<div class="container__details__title">
+				<h5>Detalles</h5>
+				<ion-icon name="heart-outline"></ion-icon>
+			</div>
+			<div class="container__details__info">
+				<div class="container__details__info__title">
+					{{producto.nombre}}
+				</div>
+				<div class="container__details__info__text">
+					{{producto.descripcion}}
+				</div>
+				<div class="container__details__info__precio">
+					${{producto.precio | number}}
+				</div>
+			</div>
+			<div class="container__details__cantidad">
+				<div class="container__details__cantidad__title">
+					<h5>Cantidad</h5>
+				</div>
+				<div class="container__details__cantidad__inputs">
+					<ion-icon name="add-outline" (click)="adicionar()"></ion-icon>
+					<ion-input [(ngModel)]="cantidad" [disabled]="true" type="number" class="input"></ion-input>
+					<ion-icon name="remove-outline" (click)="restar()"></ion-icon>
+				</div>
+			</div>
+			<div class="container__details__buttom">
+				<ion-button shape="round" >Adicionar al carrito</ion-button>
+			</div>
+		</div>
+	</div>
+</ion-content>

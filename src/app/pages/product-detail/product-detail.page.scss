@@ -1,0 +1,123 @@
+.container {
+	display: flex;
+	background-color: #ccc;
+	min-height: 100vh;
+	width: 100%;
+	&__header {
+		display: flex;
+		position: relative;
+		font-size: 4vh;
+		height: 60vh;
+		width: 100%;
+		overflow: hidden;
+		> img {
+			position: absolute;
+			object-fit: cover;
+			object-position: top;
+			width: 100%;
+			height: 100%;
+		}
+		&__ticked {
+			z-index: 1;
+			display: flex;
+			position: relative;
+			right: -18px;
+			&__triangulo {
+				border-right: 20px solid white;
+				border-bottom: 20px solid transparent;
+				border-top: 20px solid transparent;
+				position: relative;
+				z-index: 1;
+				width: 0;
+				height: 0;
+				right: -1px;
+			}
+		}
+		&__icon {
+			display: flex;
+			justify-content: space-between;
+			height: min-content;
+			color: var(--ion-color-light);
+			width: 100%;
+			padding: 16px;
+			&__desc {
+				background-color: white;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: black;
+				font-weight: bold;
+				padding: 2%;
+				width: 15vh;
+				z-index: 1;
+				font-size: 2vh;
+				border-top-left-radius: 3px;
+				border-bottom-left-radius: 3px;
+			}
+		}
+	}
+	&__details {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 50vh;
+		bottom: 0px;
+		background-color: var(--ion-color-light);
+		border-radius: 50px 50px 0 0;
+		box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.16), 0 -3px 8px rgba(0, 0, 0, 0.23);
+		padding: 16px 28px;
+		&__title {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			> h5 {
+				color: var(--ion-color-medium);
+			}
+		}
+		&__info {
+			&__title {
+				font-size: 16px;
+				font-weight: bold;
+				margin-bottom: 2%;
+			}
+			&__text {
+				font-size: 14px;
+				margin-bottom: 2%;
+			}
+			&__precio {
+				font-weight: bold;
+				display: flex;
+				justify-content: space-between;
+				font-size: 18px;
+				color: var(--ion-color-primary);
+			}
+		}
+		&__cantidad {
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
+			&__title {
+				color: var(--ion-color-medium);
+			}
+			&__inputs {
+				display: flex;
+				align-items: center;
+				width: 12vh;
+				> ion-input {
+					height: 5vh;
+				}
+				> ion-icon {
+					font-size: 4vh;
+				}
+			}
+		}
+		&__buttom {
+			display: flex;
+			justify-content: center;
+			position: relative;
+			height: 100%;
+			align-items: center;
+		}
+	}
+}

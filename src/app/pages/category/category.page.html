@@ -46,7 +46,7 @@
 						</div>
 
 						<div class="container__products__product__list__item__img">
-							<img src="{{prod.url}}" alt="">
+							<img src="{{prod.url}}" alt="" (click)="goToDetail(prod)">
 						</div>
 
 						<div class="container__products__product__list__item__title">
@@ -63,3 +63,5 @@
 		</div>
 	</div>
 </ion-content>
+
+<app-tags></app-tags>
