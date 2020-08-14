@@ -9,7 +9,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "auth": "sudo chmod -R 777 ./",
+    "resources": "cordova-res ios && cordova-res android && node scripts/resources.js"
   },
   "private": true,
   "dependencies": {
@@ -20,9 +22,12 @@
     "@angular/platform-browser": "~9.1.6",
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
+    "@capacitor/android": "^2.1.2",
     "@capacitor/cli": "^2.1.2",
     "@capacitor/core": "^2.1.2",
+    "@capacitor/ios": "^2.1.2",
     "@ionic/angular": "^5.0.0",
+    "capacitor-resources": "^2.0.3",
     "firebase": "^7.14.3",
     "rxjs": "~6.5.1",
     "sweetalert2": "^9.10.13",

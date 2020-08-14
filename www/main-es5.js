@@ -166,7 +166,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n";
+    __webpack_exports__["default"] = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n  <app-tags></app-tags>\n</ion-app>\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/components/tags/tags.component.html":
+  /*!*******************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/tags/tags.component.html ***!
+    \*******************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppComponentsTagsTagsComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<div class=\"tabs\">\n\t<div class=\"tabs__tab\" routerLinkActive=\"linkActive\">\n\t\t<div class=\"tabs__tab\" [routerLink]=\"[ '/home' ]\">\n\t\t\t<ion-icon name=\"home-outline\"></ion-icon>\n\t\t\t<h4>Inicio</h4>\n\t\t</div>\n\t</div>\n\t<div class=\"tabs__tab\" routerLinkActive=\"linkActive\">\n\t\t<div class=\"tabs__tab\">\n\t\t\t<ion-icon name=\"cart-outline\"></ion-icon>\n\t\t\t<h4>Carrito</h4>\n\t\t</div>\n\t</div>\n\t<div class=\"tabs__tab\" routerLinkActive=\"linkActive\">\n\t\t<div class=\"tabs__tab\">\n\t\t\t<ion-icon name=\"person-outline\"></ion-icon>\n\t\t\t<h4>Perfil</h4>\n\t\t</div>\n\t</div>\n</div>";
     /***/
   },
 
@@ -211,12 +231,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var routes = [{
       path: 'home',
       loadChildren: function loadChildren() {
-        return __webpack_require__.e(
+        return Promise.all(
         /*! import() | home-home-module */
-        "home-home-module").then(__webpack_require__.bind(null,
+        [__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null,
         /*! ./home/home.module */
         "./src/app/home/home.module.ts")).then(function (m) {
           return m.HomePageModule;
+        });
+      }
+    }, {
+      path: 'category',
+      loadChildren: function loadChildren() {
+        return Promise.all(
+        /*! import() | pages-category-category-module */
+        [__webpack_require__.e("common"), __webpack_require__.e("pages-category-category-module")]).then(__webpack_require__.bind(null,
+        /*! ./pages/category/category.module */
+        "./src/app/pages/category/category.module.ts")).then(function (m) {
+          return m.CategoryPageModule;
         });
       }
     }, {
@@ -292,42 +323,67 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _capacitor_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @capacitor/core */
+    "./node_modules/@capacitor/core/dist/esm/index.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @ionic/angular */
     "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-    /* harmony import */
-
-
-    var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! @ionic-native/splash-screen/ngx */
-    "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
-    /* harmony import */
-
-
-    var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! @ionic-native/status-bar/ngx */
-    "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
 
     var AppComponent = /*#__PURE__*/function () {
-      function AppComponent(platform, splashScreen, statusBar) {
+      function AppComponent(platform) {
         _classCallCheck(this, AppComponent);
 
         this.platform = platform;
-        this.splashScreen = splashScreen;
-        this.statusBar = statusBar;
         this.initializeApp();
       }
 
       _createClass(AppComponent, [{
         key: "initializeApp",
         value: function initializeApp() {
-          var _this = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var _capacitor_core__WEBP, SplashScreen, StatusBar;
 
-          this.platform.ready().then(function () {
-            _this.statusBar.styleDefault();
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _capacitor_core__WEBP = _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["Plugins"], SplashScreen = _capacitor_core__WEBP.SplashScreen, StatusBar = _capacitor_core__WEBP.StatusBar;
+                    _context.prev = 1;
+                    _context.next = 4;
+                    return SplashScreen.hide();
 
-            _this.splashScreen.hide();
-          });
+                  case 4:
+                    _context.next = 6;
+                    return StatusBar.setStyle({
+                      style: _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["StatusBarStyle"].Light
+                    });
+
+                  case 6:
+                    if (this.platform.is('android')) {
+                      StatusBar.setBackgroundColor({
+                        color: '#CDCDCD'
+                      });
+                    }
+
+                    _context.next = 12;
+                    break;
+
+                  case 9:
+                    _context.prev = 9;
+                    _context.t0 = _context["catch"](1);
+                    console.log('This is a normal Browser', _context.t0);
+
+                  case 12:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this, [[1, 9]]);
+          }));
         }
       }]);
 
@@ -336,11 +392,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     AppComponent.ctorParameters = function () {
       return [{
-        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"]
-      }, {
-        type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"]
-      }, {
-        type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"]
       }];
     };
 
@@ -352,7 +404,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
       /*! ./app.component.scss */
       "./src/app/app.component.scss"))["default"]]
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])], AppComponent);
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"]])], AppComponent);
     /***/
   },
 
@@ -384,21 +436,148 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @components/components.module */
+    "./src/app/components/components.module.ts");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
     /* harmony import */
 
 
-    var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/platform-browser */
     "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ./app.component */
+    "./src/app/app.component.ts");
+    /* harmony import */
+
+
+    var _app_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ./app-routing.module */
+    "./src/app/app-routing.module.ts");
+    /* harmony import */
+
+
+    var _environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ../environments/environment */
+    "./src/environments/environment.ts");
+    /* harmony import */
+
+
+    var _angular_fire__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! @angular/fire */
+    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
+    /* harmony import */
+
+
+    var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! @angular/fire/firestore */
+    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-firestore.js");
+    /* harmony import */
+
+
+    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! @angular/fire/storage */
+    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
+    /* harmony import */
+
+
+    var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    /*! @angular/fire/auth */
+    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-auth.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
+    var AppModule = function AppModule() {
+      _classCallCheck(this, AppModule);
+    };
+
+    AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]],
+      entryComponents: [],
+      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_9__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].firebase), _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__["AngularFireStorageModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_1__["ComponentsModule"]],
+      providers: [{
+        provide: _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouteReuseStrategy"],
+        useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicRouteStrategy"]
+      }, _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__["AngularFireAuth"]],
+      bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
+    })], AppModule);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/components.module.ts":
+  /*!*************************************************!*\
+    !*** ./src/app/components/components.module.ts ***!
+    \*************************************************/
+
+  /*! exports provided: ComponentsModule */
+
+  /***/
+  function srcAppComponentsComponentsModuleTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ComponentsModule", function () {
+      return ComponentsModule;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/common */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
     /* harmony import */
 
 
@@ -408,84 +587,112 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-    /*! @ionic-native/splash-screen/ngx */
-    "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
-    /* harmony import */
+    var _tags_tags_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ./tags/tags.component */
+    "./src/app/components/tags/tags.component.ts");
 
+    var components = [_tags_tags_component__WEBPACK_IMPORTED_MODULE_5__["TagsComponent"]];
 
-    var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-    /*! @ionic-native/status-bar/ngx */
-    "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
-    /* harmony import */
-
-
-    var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-    /*! ./app.component */
-    "./src/app/app.component.ts");
-    /* harmony import */
-
-
-    var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-    /*! ./app-routing.module */
-    "./src/app/app-routing.module.ts");
-    /* harmony import */
-
-
-    var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-    /*! ../environments/environment */
-    "./src/environments/environment.ts");
-    /* harmony import */
-
-
-    var _angular_fire__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
-    /*! @angular/fire */
-    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire.js");
-    /* harmony import */
-
-
-    var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
-    /*! @angular/fire/firestore */
-    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-firestore.js");
-    /* harmony import */
-
-
-    var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
-    /*! @angular/fire/storage */
-    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-storage.js");
-    /* harmony import */
-
-
-    var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
-    /*! @angular/fire/auth */
-    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-auth.js");
-    /* harmony import */
-
-
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
-    /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-    /* harmony import */
-
-
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
-    /*! @angular/common/http */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-
-    var AppModule = function AppModule() {
-      _classCallCheck(this, AppModule);
+    var ComponentsModule = function ComponentsModule() {
+      _classCallCheck(this, ComponentsModule);
     };
 
-    AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
-      entryComponents: [],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_10__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].firebase), _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_11__["AngularFirestoreModule"], _angular_fire_storage__WEBPACK_IMPORTED_MODULE_12__["AngularFireStorageModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_14__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"]],
-      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], {
-        provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
-        useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
-      }, _angular_fire_auth__WEBPACK_IMPORTED_MODULE_13__["AngularFireAuth"]],
-      bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
-    })], AppModule);
+    ComponentsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+      declarations: components,
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"]],
+      exports: [components]
+    })], ComponentsModule);
+    /***/
+  },
+
+  /***/
+  "./src/app/components/tags/tags.component.scss":
+  /*!*****************************************************!*\
+    !*** ./src/app/components/tags/tags.component.scss ***!
+    \*****************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppComponentsTagsTagsComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".tabs {\n  background: var(--ion-color-light);\n  color: black;\n  border-top-left-radius: 20px;\n  border-top-right-radius: 20px;\n  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.16), 0 -3px 8px rgba(0, 0, 0, 0.23);\n  position: fixed;\n  width: 100%;\n  height: 65px;\n  bottom: 0px;\n  display: flex;\n  justify-content: space-evenly;\n}\n.tabs__tab {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  flex: 1;\n}\n.tabs__tab > h4 {\n  margin: 0;\n  padding: 0;\n  font-size: 2vh;\n}\n.tabs__tab > ion-icon {\n  font-size: 3.5vh;\n}\n.tabs :active {\n  background-color: #ecc6d1;\n  border-radius: 20px 20px 10% 10%;\n  transition-property: all;\n  transition-duration: 0.2s;\n}\n.linkActive ion-icon {\n  color: #ff278b;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9qb2JzaXR5L1JlcG9zL090cm9zL0xvbGFTdG9yZS9zcmMvYXBwL2NvbXBvbmVudHMvdGFncy90YWdzLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9jb21wb25lbnRzL3RhZ3MvdGFncy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNDLGtDQUFBO0VBQ0EsWUFBQTtFQUNBLDRCQUFBO0VBQ0EsNkJBQUE7RUFDQSwwRUFBQTtFQUNBLGVBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtFQUNBLFdBQUE7RUFDQSxhQUFBO0VBQ0EsNkJBQUE7QUNDRDtBREFDO0VBQ0MsV0FBQTtFQUNBLGFBQUE7RUFDQSxzQkFBQTtFQUNBLG1CQUFBO0VBQ0EsdUJBQUE7RUFDQSxPQUFBO0FDRUY7QURERTtFQUNDLFNBQUE7RUFDQSxVQUFBO0VBQ0EsY0FBQTtBQ0dIO0FEREU7RUFDQyxnQkFBQTtBQ0dIO0FEQUM7RUFDQyx5QkFBQTtFQUNBLGdDQUFBO0VBQ0Esd0JBQUE7RUFDQSx5QkFBQTtBQ0VGO0FER0M7RUFDQyxjQUFBO0FDQUYiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3RhZ3MvdGFncy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50YWJzIHtcblx0YmFja2dyb3VuZDogdmFyKC0taW9uLWNvbG9yLWxpZ2h0KTtcblx0Y29sb3I6IGJsYWNrO1xuXHRib3JkZXItdG9wLWxlZnQtcmFkaXVzOiAyMHB4O1xuXHRib3JkZXItdG9wLXJpZ2h0LXJhZGl1czogMjBweDtcblx0Ym94LXNoYWRvdzogMCAtM3B4IDhweCByZ2JhKDAsIDAsIDAsIDAuMTYpLCAwIC0zcHggOHB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG5cdHBvc2l0aW9uOiBmaXhlZDtcblx0d2lkdGg6IDEwMCU7XG5cdGhlaWdodDogNjVweDtcblx0Ym90dG9tOiAwcHg7XG5cdGRpc3BsYXk6IGZsZXg7XG5cdGp1c3RpZnktY29udGVudDogc3BhY2UtZXZlbmx5O1xuXHQmX190YWIge1xuXHRcdHdpZHRoOiAxMDAlO1xuXHRcdGRpc3BsYXk6IGZsZXg7XG5cdFx0ZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcblx0XHRhbGlnbi1pdGVtczogY2VudGVyO1xuXHRcdGp1c3RpZnktY29udGVudDogY2VudGVyO1xuXHRcdGZsZXg6IDE7XG5cdFx0PiBoNCB7XG5cdFx0XHRtYXJnaW46IDA7XG5cdFx0XHRwYWRkaW5nOiAwO1xuXHRcdFx0Zm9udC1zaXplOiAydmg7XG5cdFx0fVxuXHRcdD4gaW9uLWljb24ge1xuXHRcdFx0Zm9udC1zaXplOiAzLjV2aDtcblx0XHR9XG5cdH1cblx0OmFjdGl2ZSB7XG5cdFx0YmFja2dyb3VuZC1jb2xvcjogI2VjYzZkMTtcblx0XHRib3JkZXItcmFkaXVzOiAyMHB4IDIwcHggMTAlIDEwJTtcblx0XHR0cmFuc2l0aW9uLXByb3BlcnR5OiBhbGwgO1xuXHRcdHRyYW5zaXRpb24tZHVyYXRpb246IDAuMnM7XG5cdH1cbn1cblxuLmxpbmtBY3RpdmUge1xuXHRpb24taWNvbiB7XG5cdFx0Y29sb3I6ICNmZjI3OGI7XG5cdH1cbn1cblxuXG4iLCIudGFicyB7XG4gIGJhY2tncm91bmQ6IHZhcigtLWlvbi1jb2xvci1saWdodCk7XG4gIGNvbG9yOiBibGFjaztcbiAgYm9yZGVyLXRvcC1sZWZ0LXJhZGl1czogMjBweDtcbiAgYm9yZGVyLXRvcC1yaWdodC1yYWRpdXM6IDIwcHg7XG4gIGJveC1zaGFkb3c6IDAgLTNweCA4cHggcmdiYSgwLCAwLCAwLCAwLjE2KSwgMCAtM3B4IDhweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDY1cHg7XG4gIGJvdHRvbTogMHB4O1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWV2ZW5seTtcbn1cbi50YWJzX190YWIge1xuICB3aWR0aDogMTAwJTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGZsZXg6IDE7XG59XG4udGFic19fdGFiID4gaDQge1xuICBtYXJnaW46IDA7XG4gIHBhZGRpbmc6IDA7XG4gIGZvbnQtc2l6ZTogMnZoO1xufVxuLnRhYnNfX3RhYiA+IGlvbi1pY29uIHtcbiAgZm9udC1zaXplOiAzLjV2aDtcbn1cbi50YWJzIDphY3RpdmUge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWNjNmQxO1xuICBib3JkZXItcmFkaXVzOiAyMHB4IDIwcHggMTAlIDEwJTtcbiAgdHJhbnNpdGlvbi1wcm9wZXJ0eTogYWxsO1xuICB0cmFuc2l0aW9uLWR1cmF0aW9uOiAwLjJzO1xufVxuXG4ubGlua0FjdGl2ZSBpb24taWNvbiB7XG4gIGNvbG9yOiAjZmYyNzhiO1xufSJdfQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/app/components/tags/tags.component.ts":
+  /*!***************************************************!*\
+    !*** ./src/app/components/tags/tags.component.ts ***!
+    \***************************************************/
+
+  /*! exports provided: TagsComponent */
+
+  /***/
+  function srcAppComponentsTagsTagsComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "TagsComponent", function () {
+      return TagsComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+
+    var TagsComponent = /*#__PURE__*/function () {
+      function TagsComponent(router) {
+        _classCallCheck(this, TagsComponent);
+
+        this.router = router;
+      }
+
+      _createClass(TagsComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }]);
+
+      return TagsComponent;
+    }();
+
+    TagsComponent.ctorParameters = function () {
+      return [{
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+      }];
+    };
+
+    TagsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-tags',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./tags.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/components/tags/tags.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./tags.component.scss */
+      "./src/app/components/tags/tags.component.scss"))["default"]]
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])], TagsComponent);
     /***/
   },
 
@@ -515,13 +722,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var environment = {
       production: false,
       firebase: {
-        apiKey: "AIzaSyDMH5SuzU2yZZHfDVyQAKD6KJZf0KbRdHc",
-        authDomain: "telenoticias-1150.firebaseapp.com",
-        databaseURL: "https://telenoticias-1150.firebaseio.com",
-        projectId: "telenoticias-1150",
-        storageBucket: "telenoticias-1150.appspot.com",
-        messagingSenderId: "966030009784",
-        appId: "1:966030009784:web:0b218fe2f644cd0e825b4d"
+        apiKey: "AIzaSyBQSEIiRZQWcgPCV39Ngww-_DKdYcnYXwg",
+        authDomain: "lolastore-b2e58.firebaseapp.com",
+        databaseURL: "https://lolastore-b2e58.firebaseio.com",
+        projectId: "lolastore-b2e58",
+        storageBucket: "lolastore-b2e58.appspot.com",
+        messagingSenderId: "357212241401",
+        appId: "1:357212241401:web:e8e6537269a7c24ac95128",
+        measurementId: "G-BQXKMF2VXQ"
       }
     };
     /*
@@ -595,7 +803,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! /Users/jobsity/Repos/Otros/StartApp/src/main.ts */
+    /*! /Users/jobsity/Repos/Otros/LolaStore/src/main.ts */
     "./src/main.ts");
     /***/
   }

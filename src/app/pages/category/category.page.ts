@@ -81,7 +81,7 @@ export class CategoryPage implements OnInit {
 				data.push({
 					nombre: element.nombre,
 					productos: element.productos.filter(prod => {
-						return prod.nombre.toUpperCase().indexOf(query) >= 0;
+						return prod.nombre.toUpperCase().indexOf(query.toUpperCase()) >= 0;
 					})
 				})
 			});

@@ -1,3 +1,9 @@
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -454,6 +460,287 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
     /***/
 
+  },
+
+  /***/
+  "./src/app/services/firebase.service.ts":
+  /*!**********************************************!*\
+    !*** ./src/app/services/firebase.service.ts ***!
+    \**********************************************/
+
+  /*! exports provided: FirebaseService */
+
+  /***/
+  function srcAppServicesFirebaseServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "FirebaseService", function () {
+      return FirebaseService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/fire/firestore */
+    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-firestore.js");
+    /* harmony import */
+
+
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! rxjs/operators */
+    "./node_modules/rxjs/_esm2015/operators/index.js");
+
+    var FirebaseService = /*#__PURE__*/function () {
+      function FirebaseService(db) {
+        _classCallCheck(this, FirebaseService);
+
+        this.db = db;
+      }
+
+      _createClass(FirebaseService, [{
+        key: "obtener",
+        value: function obtener(tabla, show) {
+          this.itemsCollection = this.db.collection(tabla);
+          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            return data.map(function (d) {
+              var retorno = d.payload.doc.data();
+              retorno['id'] = d.payload.doc.id;
+              return retorno;
+            });
+          }));
+        }
+      }, {
+        key: "obtenerId",
+        value: function obtenerId(tabla, id, show) {
+          this.itemsCollection = this.db.collection(tabla, function (ref) {
+            return ref.where('id', '==', id);
+          });
+          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            return data.map(function (d) {
+              var retorno = d.payload.doc.data();
+              retorno['id'] = d.payload.doc.id;
+              return retorno;
+            });
+          }));
+        }
+      }, {
+        key: "obtenerUniqueId",
+        value: function obtenerUniqueId(tabla, id) {
+          this.itemsCollection = this.db.collection(tabla, function (ref) {
+            return ref.where('idunico', '==', id);
+          });
+          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            return data.map(function (d) {
+              var retorno = d.payload.doc.data();
+              retorno['id'] = d.payload.doc.id;
+              return retorno;
+            });
+          }));
+        }
+      }, {
+        key: "obtenerProductoCategoria",
+        value: function obtenerProductoCategoria(categoria) {
+          this.itemsCollection = this.db.collection('productos', function (ref) {
+            return ref.where('idunicoCategoria', '==', categoria);
+          });
+          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            return data.map(function (d) {
+              var retorno = d.payload.doc.data();
+              retorno['id'] = d.payload.doc.id;
+              return retorno;
+            });
+          }));
+        }
+      }, {
+        key: "obtenerLogin",
+        value: function obtenerLogin(user, pass) {
+          this.itemsCollection = this.db.collection('usuarios', function (ref) {
+            return ref.where('user', '==', user).where('pass', '==', pass);
+          });
+          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            return data.map(function (d) {
+              var retorno = d.payload.doc.data();
+              retorno['id'] = d.payload.doc.id;
+              return retorno;
+            });
+          }));
+        }
+      }, {
+        key: "obtenerChat",
+        value: function obtenerChat(id) {
+          this.itemsCollection = this.db.collection('chat', function (ref) {
+            return ref.where('uniqueId', '==', id);
+          });
+          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            return data.map(function (d) {
+              var retorno = d.payload.doc.data();
+              retorno['id'] = d.payload.doc.id;
+              return retorno;
+            });
+          }));
+        }
+      }, {
+        key: "obtenerChatReceptor",
+        value: function obtenerChatReceptor(idReceptor) {
+          this.itemsCollection = this.db.collection('chat', function (ref) {
+            return ref.where('receptor', '==', idReceptor);
+          });
+          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            return data.map(function (d) {
+              var retorno = d.payload.doc.data();
+              retorno['id'] = d.payload.doc.id;
+              return retorno;
+            });
+          }));
+        }
+      }, {
+        key: "obtenerChatEmisor",
+        value: function obtenerChatEmisor(idEmisor) {
+          this.itemsCollection = this.db.collection('chat', function (ref) {
+            return ref.where('emisor', '==', idEmisor);
+          });
+          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            return data.map(function (d) {
+              var retorno = d.payload.doc.data();
+              retorno['id'] = d.payload.doc.id;
+              return retorno;
+            });
+          }));
+        }
+      }, {
+        key: "guardarDatos",
+        value: function guardarDatos(tabla, data) {
+          this.itemsCollection = this.db.collection(tabla);
+          return this.itemsCollection.add(JSON.parse(JSON.stringify(data))).then(function () {
+            return true;
+          })["catch"](function () {
+            return false;
+          });
+        }
+      }, {
+        key: "actualizarDatos",
+        value: function actualizarDatos(tabla, data, id) {
+          this.itemsCollection = this.db.collection(tabla);
+          return this.itemsCollection.doc(id).update(JSON.parse(JSON.stringify(data))).then(function () {
+            return true;
+          })["catch"](function () {
+            return false;
+          });
+        }
+      }, {
+        key: "eliminarDatos",
+        value: function eliminarDatos(tabla, id) {
+          this.itemsCollection = this.db.collection(tabla);
+          this.itemsCollection.doc(id)["delete"]().then(function () {
+            return true;
+          })["catch"](function () {
+            return false;
+          });
+        }
+      }]);
+
+      return FirebaseService;
+    }();
+
+    FirebaseService.ctorParameters = function () {
+      return [{
+        type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
+      }];
+    };
+
+    FirebaseService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]])], FirebaseService);
+    /***/
+  },
+
+  /***/
+  "./src/app/services/state.service.ts":
+  /*!*******************************************!*\
+    !*** ./src/app/services/state.service.ts ***!
+    \*******************************************/
+
+  /*! exports provided: StateApp */
+
+  /***/
+  function srcAppServicesStateServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "StateApp", function () {
+      return StateApp;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! rxjs */
+    "./node_modules/rxjs/_esm2015/index.js");
+
+    var StateApp = /*#__PURE__*/function () {
+      function StateApp() {
+        _classCallCheck(this, StateApp);
+
+        this.subject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
+        this.data = {
+          state: []
+        };
+        this.data['state'] = [];
+      }
+
+      _createClass(StateApp, [{
+        key: "getObservable",
+        value: function getObservable() {
+          return this.subject.asObservable();
+        }
+      }, {
+        key: "setData",
+        value: function setData(value) {
+          var keyValue = Object.keys(value);
+          this.data['state'][keyValue[0]] = value[keyValue[0]];
+          console.log("setData => ", this.data);
+          this.subject.next(this.data['state']);
+        }
+      }]);
+
+      return StateApp;
+    }();
+
+    StateApp = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])], StateApp);
+    /***/
   }
 }]);
 //# sourceMappingURL=common-es5.js.map
