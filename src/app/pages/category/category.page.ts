@@ -36,7 +36,6 @@ export class CategoryPage implements OnInit {
 				});
 			});
 		});
-
 	}
 
 	ordenarProductosSubCategoria() {
@@ -50,7 +49,6 @@ export class CategoryPage implements OnInit {
 		});
 		this.productosSeleccionados = this.productos;
 		this.dataShow = this.productos;
-
 	}
 
 	selectCategory(cat) {
@@ -87,5 +85,9 @@ export class CategoryPage implements OnInit {
 			});
 			this.dataShow = data;
 		}
+	}
+
+	goToDetail(producto) {
+		this.router.navigate(['/product-detail', producto.idunico]);
 	}
 }
