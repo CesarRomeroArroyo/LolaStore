@@ -1,0 +1,24 @@
+<ion-content>
+	<div class="container">
+		<div class="container__title">
+			Datos personales
+		</div>
+
+		<div class="container__form">
+			<ion-input class="input" placeholder="Nombre" [(ngModel)]="usuario.nombre"></ion-input>
+			<ion-input class="input" placeholder="Email" [(ngModel)]="usuario.email"></ion-input>
+			<ion-input class="input" placeholder="Cedula" [(ngModel)]="usuario.cedula"></ion-input>
+			<ion-input class="input" placeholder="Telefono" [(ngModel)]="usuario.contacto"></ion-input>
+			<ion-select class="input" value="brown" okText="Seleccionar" cancelText="Cerrar" placeholder="Seleccionar Ciudad" [(ngModel)]="usuario.ciudad">
+				<ion-select-option [value]="city" *ngFor="let city of cities">{{city}}</ion-select-option>
+			</ion-select>
+			<ion-input class="input" placeholder="Direccion" [(ngModel)]="usuario.direccion"></ion-input>
+		</div>
+
+		<div class="container__button">
+			<ion-button color="light" shape="round" expand="block" (click)="save()">Guardar datos</ion-button>
+		</div>
+	</div>
+</ion-content>
+
+<app-tags></app-tags>

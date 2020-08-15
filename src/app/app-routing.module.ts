@@ -15,12 +15,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/product-detail/product-detail.module').then(m => m.ProductDetailPageModule)
   },
   {
+    path: 'perfil',
+    loadChildren: () => import('./pages/perfil/perfil.module').then(m => m.PerfilPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
-
-
 ];
 
 @NgModule({
