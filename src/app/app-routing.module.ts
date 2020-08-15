@@ -15,10 +15,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/product-detail/product-detail.module').then(m => m.ProductDetailPageModule)
   },
   {
+    path: 'cart',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  
 
 
 ];

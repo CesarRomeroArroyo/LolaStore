@@ -2,19 +2,25 @@
 	<div class="tabs__tab" routerLinkActive="linkActive">
 		<div class="tabs__tab" [routerLink]="[ '/home' ]">
 			<ion-icon name="home-outline"></ion-icon>
-			<h4>Inicio</h4>
+			
 		</div>
 	</div>
 	<div class="tabs__tab" routerLinkActive="linkActive">
-		<div class="tabs__tab">
+		<div class="tabs__tab" [routerLink]="[ '/cart' ]">
 			<ion-icon name="cart-outline"></ion-icon>
-			<h4>Carrito</h4>
+			
+		</div>
+	</div>
+	<div class="tabs__tab" routerLinkActive="linkActive">
+		<div class="tabs__tab" >
+			<ion-icon name="heart-outline"></ion-icon>
+			
 		</div>
 	</div>
 	<div class="tabs__tab" routerLinkActive="linkActive">
 		<div class="tabs__tab">
 			<ion-icon name="person-outline"></ion-icon>
-			<h4>Perfil</h4>
+			
 		</div>
 	</div>
 </div>

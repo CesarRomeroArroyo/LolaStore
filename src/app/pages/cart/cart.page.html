@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="container__header">
+			<div class="container__header__back" (click)="irAtras()">
+				<ion-icon name="chevron-back-outline"></ion-icon>
+			</div>
+    </div>
+    <div class="container__list">
+      <div class="container__list__item" *ngFor="let product of products">
+        <div class="container__list__item__img">
+          <img src="{{product.producto.url}}" alt="">
+        </div>
+        <div class="container__list__item__data">
+          <div class="container__list__item__data__content">
+            <div class="container__list__item__data__content__name">
+              {{product.producto.nombre}}
+            </div>
+            <div class="container__list__item__data__content__cat">
+              {{product.producto.nombreCategoria}} - {{product.producto.nombreSubcategoria}}
+            </div>
+          </div>
+          <div class="container__list__item__data__value">
+            <div class="container__list__item__data__value__real" [ngClass]="{'descuento': (product.producto.descuento != '0')}">
+              {{product.producto.precio | currency: 'USD':true:'2.0'}}
+            </div>
+            <div class="container__list__item__data__value__disc">
+              {{calcularDescuento(product.producto) | currency: 'USD':true:'2.0'}}
+            </div>
+          </div>
+          <div class="container__list__item__data__option">
+            <i class="fa fa-times"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<app-tags></app-tags>
