@@ -3,7 +3,7 @@
 		<div class="container__header">
 			<img [src]="producto.url">
 			<div class="container__header__icon">
-				<ion-icon name="arrow-back-outline" (click)="back()"></ion-icon>
+				<ion-icon name="chevron-back-outline"(click)="back()"></ion-icon>
 				<div class="container__header__ticked">
 					<div class="container__header__ticked__triangulo"></div>
 					<div class="container__header__icon__desc">
@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="container__details__buttom">
-				<ion-button shape="round" >Adicionar al carrito</ion-button>
+				<ion-button shape="round" (click)="addCar()">Adicionar al carrito</ion-button>
 			</div>
 		</div>
 	</div>
