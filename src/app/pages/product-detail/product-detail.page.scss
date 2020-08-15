@@ -1,3 +1,7 @@
+ion-content {
+	--background: var(--ion-color-light);
+}
+
 .container {
 	display: flex;
 	background-color: #ccc;
@@ -23,7 +27,7 @@
 			position: relative;
 			right: -18px;
 			&__triangulo {
-				border-right: 20px solid white;
+				border-right: 20px solid var(--ion-color-primary);
 				border-bottom: 20px solid transparent;
 				border-top: 20px solid transparent;
 				position: relative;
@@ -40,8 +44,9 @@
 			color: var(--ion-color-light);
 			width: 100%;
 			padding: 16px;
+			font-size: 20px;
 			&__desc {
-				background-color: white;
+				background-color: var(--ion-color-primary);
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -61,18 +66,21 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		height: 50vh;
+		height: 50%;
 		bottom: 0px;
 		background-color: var(--ion-color-light);
 		border-radius: 50px 50px 0 0;
-		box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.16), 0 -3px 8px rgba(0, 0, 0, 0.23);
+		box-shadow: 0px -2px 2px var(--ion-color-gray-light);
 		padding: 16px 28px;
 		&__title {
 			display: flex;
-			justify-content: space-between;
+			justify-content: flex-end;
 			align-items: center;
 			> h5 {
 				color: var(--ion-color-medium);
+			}
+			> ion-icon {
+				margin: 16px 0 10px 0;
 			}
 		}
 		&__info {
@@ -107,6 +115,7 @@
 				> ion-input {
 					height: 5vh;
 					--padding-start: 0;
+					--padding-end: 0;
 					text-align: center;
 				}
 				> ion-icon {
@@ -120,6 +129,7 @@
 			position: relative;
 			height: 100%;
 			align-items: center;
+			margin: 3% 0;
 		}
 	}
 }

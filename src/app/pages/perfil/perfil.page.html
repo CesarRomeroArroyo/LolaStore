@@ -9,16 +9,20 @@
 			<ion-input class="input" placeholder="Email" [(ngModel)]="usuario.email"></ion-input>
 			<ion-input class="input" placeholder="Cedula" [(ngModel)]="usuario.cedula"></ion-input>
 			<ion-input class="input" placeholder="Telefono" [(ngModel)]="usuario.contacto"></ion-input>
-			<ion-select class="input" value="brown" okText="Seleccionar" cancelText="Cerrar" placeholder="Seleccionar Ciudad" [(ngModel)]="usuario.ciudad">
+			<ion-select class="input" value="brown" okText="Seleccionar" cancelText="Cerrar"
+				placeholder="Seleccionar Ciudad" [(ngModel)]="usuario.ciudad">
 				<ion-select-option [value]="city" *ngFor="let city of cities">{{city}}</ion-select-option>
 			</ion-select>
-			<ion-input class="input" placeholder="Direccion" [(ngModel)]="usuario.direccion"></ion-input>
+			<ion-input [readonly]="true" class="input direccion" placeholder="Direccion" [(ngModel)]="usuario.direccion"
+				(click)="showModal = !showModal"></ion-input>
 		</div>
 
 		<div class="container__button">
-			<ion-button color="light" shape="round" expand="block" (click)="save()">Guardar datos</ion-button>
+			<ion-button color="light" shape="round" expand="block" *ngIf="!usuario.idunico" (click)="save()">Guardar datos</ion-button>
+			<ion-button color="light" shape="round" expand="block" *ngIf="usuario.idunico" (click)="updateData()">Actualizar datos</ion-button>
 		</div>
 	</div>
 </ion-content>
 
+<app-direcciones class="modal animate__animated animate__fadeIn animate__faster" [usuario]="usuario" (showModal)="closeModal($event)" (direccionSelected)="selecAdress($event)" *ngIf="showModal"></app-direcciones>
 <app-tags></app-tags>

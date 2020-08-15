@@ -120,8 +120,8 @@ export class FirebaseService {
 	guardarDatos(tabla: string, data) {
 		this.itemsCollection = this.db.collection<any>(tabla);
 		return this.itemsCollection.add(JSON.parse(JSON.stringify(data))).then(
-			() => {
-				return true;
+			(resp) => {
+				return resp.id;
 			}
 		).catch(() => {
 			return false;

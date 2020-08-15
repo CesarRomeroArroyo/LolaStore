@@ -5,7 +5,8 @@ export interface UsuarioInterface {
     contacto: string,
     ciudad: string,
     direccion: string,
+    direcciones: string[],
     estado?: number,
     id?: string,
-    idunico?: string
+    idunico?: string,
 }
