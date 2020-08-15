@@ -1,5 +1,6 @@
 import { UniqueService } from './../../services/unique.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UsuarioInterface } from '@interfaces/usuario.interface';
@@ -11,36 +12,56 @@ import { UsuarioInterface } from '@interfaces/usuario.interface';
 })
 export class PerfilPage implements OnInit {
 
-	cities: string[] = [];
-	usuario: UsuarioInterface = {
+	public cities: string[] = [];
+	public usuario: UsuarioInterface = {
 		nombre: '',
 		ciudad: '',
 		cedula: '',
 		contacto: '',
 		direccion: '',
+		direcciones: [],
 		email: '',
 	};
+	public showModal: boolean = false;
+	public pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$";
 
 	constructor(
 		private firebaseSvc: FirebaseService,
-		private uniqueid: UniqueService) { }
+		private uniqueid: UniqueService,
+		public toastController: ToastController) { }
 
 	ngOnInit() {
 		this.init();
 	}
 
 	init() {
-		if(JSON.parse(localStorage.getItem("USER_LOLA"))) {
-			this.usuario = JSON.parse(localStorage.getItem("USER_LOLA"));
-			console.log(this.usuario);
-		}
 		this.getCities();
 	}
 
 	getCities() {
 		this.firebaseSvc.obtener("ciudades").subscribe((resp: any) => {
 			this.cities = resp[0].ciudades;
+			if (JSON.parse(localStorage.getItem("USER_LOLA"))) {
+				this.usuario = JSON.parse(localStorage.getItem("USER_LOLA"));
+			}
 		});
+	}
+
+	selecAdress(e) {
+		this.usuario.direccion = e;
+	}
+
+	closeModal(e) {
+		this.showModal = e;
+	}
+
+	async presentToast(message, color?) {
+		const toast = await this.toastController.create({
+			message: message,
+			duration: 2000,
+			color: color,
+		});
+		toast.present();
 	}
 
 	validation() {
@@ -52,16 +73,28 @@ export class PerfilPage implements OnInit {
 	}
 
 	save() {
+		console.log(this.usuario);
 		if (this.validation()) {
 			this.usuario.idunico = this.uniqueid.uniqueId();
 			this.usuario.estado = 1;
-			this.firebaseSvc.guardarDatos("clientes", this.usuario).then(() => {
+			this.firebaseSvc.guardarDatos("clientes", this.usuario).then((resp) => {
+				this.usuario.id = resp.toString();
 				localStorage.setItem("USER_LOLA", JSON.stringify(this.usuario));
-				console.log("Datos almacenados correctamente");
+				this.presentToast("Datos almacenados correctamente");
 			});
 		} else {
-			console.log("Verificar");
+			this.presentToast("¡Por favor verifique los campos!");
 		}
+	}
 
+	updateData() {
+		if (this.validation()) {
+			this.firebaseSvc.actualizarDatos("clientes", this.usuario, this.usuario.id).then((resp) => {
+				localStorage.setItem("USER_LOLA", JSON.stringify(this.usuario));
+				this.presentToast("Datos actualizados correctamente")
+			});
+		} else {
+			this.presentToast("¡Por favor verifique los campos!");
+		}
 	}
 }

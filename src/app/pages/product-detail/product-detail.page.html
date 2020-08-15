@@ -3,8 +3,8 @@
 		<div class="container__header">
 			<img [src]="producto.url">
 			<div class="container__header__icon">
-				<ion-icon name="chevron-back-outline"(click)="back()"></ion-icon>
-				<div class="container__header__ticked">
+				<ion-icon name="chevron-back-outline" color="primary" (click)="back()"></ion-icon>
+				<div class="container__header__ticked" *ngIf="producto.descuento > 0">
 					<div class="container__header__ticked__triangulo"></div>
 					<div class="container__header__icon__desc">
 						{{producto.descuento}}% descuento
@@ -14,12 +14,12 @@
 		</div>
 		<div class="container__details">
 			<div class="container__details__title">
-				<h5>Detalles</h5>
+				<!-- <h5>Detalles</h5> -->
 				<ion-icon name="heart-outline"></ion-icon>
 			</div>
 			<div class="container__details__info">
 				<div class="container__details__info__title">
-					{{producto.nombre}}
+					{{producto.nombre | uppercase}}
 				</div>
 				<div class="container__details__info__text">
 					{{producto.descripcion}}
@@ -29,9 +29,9 @@
 				</div>
 			</div>
 			<div class="container__details__cantidad">
-				<div class="container__details__cantidad__title">
+				<!-- <div class="container__details__cantidad__title">
 					<h5>Cantidad</h5>
-				</div>
+				</div> -->
 				<div class="container__details__cantidad__inputs">
 					<ion-icon name="add-outline" (click)="adicionar()"></ion-icon>
 					<ion-input [(ngModel)]="cantidad" [disabled]="true" type="number" class="input"></ion-input>
