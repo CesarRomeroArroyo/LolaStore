@@ -6,6 +6,9 @@
 			</div>
     </div>
     <div class="container__list">
+      <div class="container__list__title">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos en esta compra:
+      </div>
       <div class="container__list__item" *ngFor="let product of products">
         <div class="container__list__item__img">
           <img src="{{product.producto.url}}" alt="">
@@ -13,18 +16,21 @@
         <div class="container__list__item__data">
           <div class="container__list__item__data__content">
             <div class="container__list__item__data__content__name">
-              {{product.producto.nombre}}
+              {{product.producto.nombre}} 
             </div>
             <div class="container__list__item__data__content__cat">
               {{product.producto.nombreCategoria}} - {{product.producto.nombreSubcategoria}}
             </div>
+            <div class="container__list__item__data__content__name">
+              <i class="fa fa-times"></i> {{product.cantidad}}
+            </div>
           </div>
           <div class="container__list__item__data__value">
             <div class="container__list__item__data__value__real" [ngClass]="{'descuento': (product.producto.descuento != '0')}">
-              {{product.producto.precio | currency: 'USD':true:'2.0'}}
+              {{(product.producto.precio * product.cantidad)| currency: 'USD':true:'2.0'}}
             </div>
             <div class="container__list__item__data__value__disc">
-              {{calcularDescuento(product.producto) | currency: 'USD':true:'2.0'}}
+              {{calcularDescuento(product) | currency: 'USD':true:'2.0'}}
             </div>
           </div>
           <div class="container__list__item__data__option">
@@ -32,6 +38,33 @@
           </div>
         </div>
       </div>
+      <div class="container__discount">
+        <div class="container__discount__title">
+          <i class="fa fa-percent" aria-hidden="true"></i> Descuento a aplicar:
+        </div>
+        <div class="container__discount__item" *ngIf="discountProd" (click)="seleccionarDescuento('prod')">
+          <i class="fa fa-check" aria-hidden="true" *ngIf="decuentoAplicado == 'prod'"></i>&nbsp; Descuento por producto
+        </div>
+        <div class="container__discount__item" *ngIf="discount!=0" (click)="seleccionarDescuento('store')">
+          <i class="fa fa-check" aria-hidden="true" *ngIf="decuentoAplicado == 'store'"></i>&nbsp; Descuento de la tienda, -{{discount}}%
+        </div>
+      </div>
+      <div class="container__gifts">
+        <div class="container__gifts__title">
+          <i class="fa fa-gift" aria-hidden="true"></i> Por tu compra te regalamos:
+        </div>
+        <div class="container__discount__item" >
+          Dulce + Boleta
+        </div>
+      </div>
+      <div class="container__title">
+        Total a pagar: {{calcularPago()| currency: 'USD':true:'2.0'}}
+        <div class="container__title__sub">Toca para realizar el pedido</div>
+      </div>
+      <!-- <div class="container__btn">
+        <ion-button color="primary" shape="round" expand="block" (click)="save()">Confirmar Compra</ion-button>
+      </div> -->
+      <div class="container__footer">&nbsp;</div>
     </div>
   </div>
 </ion-content>
