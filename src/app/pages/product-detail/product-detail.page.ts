@@ -1,7 +1,8 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { FirebaseService } from './../../services/firebase.service';
+import { FirebaseService } from '@services/firebase.service';
+import { StateApp } from '@services/state.service';
 
 @Component({
 	selector: 'app-product-detail',
@@ -15,7 +16,9 @@ export class ProductDetailPage implements OnInit {
 
 	constructor(
 		private route: ActivatedRoute,
-		private firebaseSvc: FirebaseService) { }
+		private firebaseSvc: FirebaseService,
+		private router: Router,
+		private state: StateApp) { }
 
 	ngOnInit() {
 		this.init();
@@ -36,7 +39,7 @@ export class ProductDetailPage implements OnInit {
 	}
 
 	adicionar() {
-		if(this.cantidad === this.producto.cantidad) {
+		if(this.cantidad >= this.producto.cantidad) {
 		} else {
 			this.cantidad++
 		}
@@ -50,4 +53,9 @@ export class ProductDetailPage implements OnInit {
 		}
 	}
 
+	addCar() {
+		this.state.setData({producto: this.producto});
+		this.state.setData({cantidad: this.cantidad});
+		// this.router.navigate(['/']);
+	}
 }
