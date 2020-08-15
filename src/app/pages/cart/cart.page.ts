@@ -116,7 +116,7 @@ export class CartPage implements OnInit {
           nombre: "Producto descuento VOGUE",
           nombreCategoria: "LABIOS",
           nombreSubcategoria: "GLOSS (BRILLO)",
-          precio: 1000,
+          precio: 2000,
           url: "https://firebasestorage.googleapis.com/v0/b/lolastore-b2e58.appspot.com/o/productos%2F32ed2acf-38c8-4aa2-b2d2-70d7fef72d33%2F1988093375160_.jpg?alt=media&token=39dc2a54-3900-4ec9-9470-a5f57cfe4c91"
         }
       }
