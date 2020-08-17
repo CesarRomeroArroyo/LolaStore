@@ -397,8 +397,8 @@ let FirebaseService = class FirebaseService {
     }
     guardarDatos(tabla, data) {
         this.itemsCollection = this.db.collection(tabla);
-        return this.itemsCollection.add(JSON.parse(JSON.stringify(data))).then(() => {
-            return true;
+        return this.itemsCollection.add(JSON.parse(JSON.stringify(data))).then((resp) => {
+            return resp.id;
         }).catch(() => {
             return false;
         });

@@ -627,8 +627,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         key: "guardarDatos",
         value: function guardarDatos(tabla, data) {
           this.itemsCollection = this.db.collection(tabla);
-          return this.itemsCollection.add(JSON.parse(JSON.stringify(data))).then(function () {
-            return true;
+          return this.itemsCollection.add(JSON.parse(JSON.stringify(data))).then(function (resp) {
+            return resp.id;
           })["catch"](function () {
             return false;
           });

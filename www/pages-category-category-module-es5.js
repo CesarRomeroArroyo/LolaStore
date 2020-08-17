@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-content [fullscreen]=\"true\">\n\t<div class=\"container\">\n\t\t<div class=\"container__header\">\n\t\t\t<div class=\"container__header__back\" (click)=\"irAtras()\">\n\t\t\t\t<ion-icon name=\"chevron-back-outline\"></ion-icon>\n\t\t\t</div>\n\t\t\t<div class=\"container__header__search\">\n\t\t\t\t<ion-icon name=\"search-outline\" (click)=\"search = !search\"></ion-icon>\n\t\t\t\t<ion-input #buscarText class=\"container__header__search__input animate__animated animate__fadeIn\"\n\t\t\t\t\tplaceholder=\"Buscar...\" *ngIf=\"search\" (keyup)=\"buscar(buscarText.value)\"></ion-input>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"container__img\" *ngIf=\"category\">\n\t\t\t<img src=\"{{category.foto}}\" alt=\"\">\n\t\t\t<div class=\"container__img__nombre\">\n\t\t\t\t{{category.nombre}}\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"container__categories\" *ngIf=\"category\">\n\t\t\t<div class=\"container__categories__category\">\n\t\t\t\t<div class=\"container__categories__category__option\" [ngClass]=\"{'subselected': categorySel=='all'}\"\n\t\t\t\t\t(click)=\"selectCategory('all')\">\n\t\t\t\t\tTODAS\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"container__categories__category__option\" *ngFor=\"let cat of productos\"\n\t\t\t\t\t[ngClass]=\"{'subselected': categorySel!='all' && cat.nombre == categorySel.nombre}\"\n\t\t\t\t\t(click)=\"selectCategory(cat)\">\n\t\t\t\t\t{{cat.nombre}}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"container__products\" *ngIf=\"category\">\n\t\t\t<div class=\"container__products__product\" *ngFor=\"let producto of dataShow\">\n\t\t\t\t<div class=\"container__products__product__title\" *ngIf=\"producto.productos.length > 0\">\n\t\t\t\t\t{{producto.nombre}}\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"container__products__product__list\" *ngIf=\"producto.productos.length > 0\">\n\t\t\t\t\t<div class=\"container__products__product__list__item\" *ngFor=\"let prod of producto.productos\">\n\t\t\t\t\t\t<div class=\"container__products__product__list__item__like\">\n\t\t\t\t\t\t\t<div class=\"container__products__product__list__item__like__container\">\n\t\t\t\t\t\t\t\t<i class=\"fa fa-heart\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div class=\"container__products__product__list__item__img\">\n\t\t\t\t\t\t\t<img src=\"{{prod.url}}\" alt=\"\">\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div class=\"container__products__product__list__item__title\">\n\t\t\t\t\t\t\t{{prod.nombre}}\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div class=\"container__products__product__list__item__price\">\n\t\t\t\t\t\t\t{{prod.precio | currency: 'USD':true:'2.0'}}\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</ion-content>";
+    __webpack_exports__["default"] = "<ion-content [fullscreen]=\"true\">\n\t<div class=\"container\">\n\t\t<div class=\"container__header\">\n\t\t\t<div class=\"container__header__back\" (click)=\"irAtras()\">\n\t\t\t\t<ion-icon name=\"chevron-back-outline\"></ion-icon>\n\t\t\t</div>\n\t\t\t<div class=\"container__header__search\">\n\t\t\t\t<ion-icon name=\"search-outline\" (click)=\"search = !search\"></ion-icon>\n\t\t\t\t<ion-input #buscarText class=\"container__header__search__input animate__animated animate__fadeIn\"\n\t\t\t\t\tplaceholder=\"Buscar...\" *ngIf=\"search\" (keyup)=\"buscar(buscarText.value)\"></ion-input>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"container__img\" *ngIf=\"category\">\n\t\t\t<img src=\"{{category.foto}}\" alt=\"\">\n\t\t\t<div class=\"container__img__nombre\">\n\t\t\t\t{{category.nombre}}\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"container__categories\" *ngIf=\"category\">\n\t\t\t<div class=\"container__categories__category\">\n\t\t\t\t<div class=\"container__categories__category__option\" [ngClass]=\"{'subselected': categorySel=='all'}\"\n\t\t\t\t\t(click)=\"selectCategory('all')\">\n\t\t\t\t\tTODAS\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"container__categories__category__option\" *ngFor=\"let cat of productos\"\n\t\t\t\t\t[ngClass]=\"{'subselected': categorySel!='all' && cat.nombre == categorySel.nombre}\"\n\t\t\t\t\t(click)=\"selectCategory(cat)\">\n\t\t\t\t\t{{cat.nombre}}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"container__products\" *ngIf=\"category\">\n\t\t\t<div class=\"container__products__product\" *ngFor=\"let producto of dataShow\">\n\t\t\t\t<div class=\"container__products__product__title\" *ngIf=\"producto.productos.length > 0\">\n\t\t\t\t\t{{producto.nombre}}\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"container__products__product__list\" *ngIf=\"producto.productos.length > 0\">\n\t\t\t\t\t<div class=\"container__products__product__list__item\" *ngFor=\"let prod of producto.productos\">\n\t\t\t\t\t\t<div class=\"container__products__product__list__item__like\">\n\t\t\t\t\t\t\t<div class=\"container__products__product__list__item__like__container\">\n\t\t\t\t\t\t\t\t<i class=\"fa fa-heart\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div class=\"container__products__product__list__item__img\">\n\t\t\t\t\t\t\t<img src=\"{{prod.url}}\" alt=\"\" (click)=\"goToDetail(prod)\">\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div class=\"container__products__product__list__item__title\">\n\t\t\t\t\t\t\t{{prod.nombre}}\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div class=\"container__products__product__list__item__price\">\n\t\t\t\t\t\t\t{{prod.precio | currency: 'USD':true:'2.0'}}\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</ion-content>\n\n<app-tags></app-tags>";
     /***/
   },
 
@@ -143,7 +143,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _category_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _components_components_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! @components/components.module */
+    "./src/app/components/components.module.ts");
+    /* harmony import */
+
+
+    var _category_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ./category.page */
     "./src/app/pages/category/category.page.ts");
 
@@ -152,8 +158,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     CategoryPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _category_routing_module__WEBPACK_IMPORTED_MODULE_5__["CategoryPageRoutingModule"]],
-      declarations: [_category_page__WEBPACK_IMPORTED_MODULE_6__["CategoryPage"]]
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _category_routing_module__WEBPACK_IMPORTED_MODULE_5__["CategoryPageRoutingModule"], _components_components_module__WEBPACK_IMPORTED_MODULE_6__["ComponentsModule"]],
+      declarations: [_category_page__WEBPACK_IMPORTED_MODULE_7__["CategoryPage"]]
     })], CategoryPageModule);
     /***/
   },
@@ -319,6 +325,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             });
             this.dataShow = data;
           }
+        }
+      }, {
+        key: "goToDetail",
+        value: function goToDetail(producto) {
+          this.router.navigate(['/product-detail', producto.idunico]);
         }
       }]);
 
