@@ -17,10 +17,8 @@ export class HomePage implements OnInit {
 		private state: StateApp
 	) { }
 
-	ngOnInit() {
-		this.firebase.obtener("categorias").subscribe((data) => {
-			this.categorias = data;
-		});
+	async ngOnInit() {
+		this.categorias = this.firebase.obtenerPromise("categorias");
 	}
 
 	obtenerColor(index) {
