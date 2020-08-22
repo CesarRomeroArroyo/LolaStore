@@ -1,5 +1,7 @@
+import { ProductoInterface } from './../../models/producto.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 import { FirebaseService } from '@services/firebase.service';
 import { StateApp } from '@services/state.service';
@@ -11,17 +13,32 @@ import { StateApp } from '@services/state.service';
 })
 export class ProductDetailPage implements OnInit {
 
-	producto: any;
+	producto: ProductoInterface;
 	cantidad: number = 1;
+	colorSelected: string = "";
+
+	slideOpts = {
+		initialSlide: 0,
+		speed: 400
+	};
 
 	constructor(
 		private route: ActivatedRoute,
 		private firebaseSvc: FirebaseService,
-		private router: Router,
-		private state: StateApp) { }
+		private state: StateApp,
+		public toastController: ToastController) { }
 
 	ngOnInit() {
 		this.init();
+	}
+
+	async presentToast(message, color?) {
+		const toast = await this.toastController.create({
+			message: message,
+			duration: 2000,
+			color: color,
+		});
+		toast.present();
 	}
 
 	back() {
@@ -38,24 +55,43 @@ export class ProductDetailPage implements OnInit {
 		})
 	}
 
+	validation() {
+		if (this.producto.colores) {
+			if (this.colorSelected == '') {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+
 	adicionar() {
-		if(this.cantidad >= this.producto.cantidad) {
+		if (this.cantidad >= this.producto.cantidad) {
 		} else {
 			this.cantidad++
 		}
 	}
 
 	restar() {
-		if(this.cantidad === 1) {
+		if (this.cantidad === 1) {
 			this.cantidad = 1;
 		} else {
 			this.cantidad--;
 		}
 	}
 
+	selectColor(color) {
+		this.colorSelected = color;
+	}
+
 	addCar() {
-		this.state.setData({producto: this.producto});
-		this.state.setData({cantidad: this.cantidad});
-		// this.router.navigate(['/']);
+		if (this.validation()) {
+			this.state.setData({ producto: this.producto });
+			this.state.setData({ cantidad: this.cantidad });
+			this.state.setData({ color: this.colorSelected });
+			// this.router.navigate(['/']);
+		} else {
+			this.presentToast("Por favor elija un color");
+		}
 	}
 }

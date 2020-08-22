@@ -17,8 +17,7 @@ export class HomePage implements OnInit {
 		private state: StateApp
 	) { }
 
-	ngOnInit() {
-		
+	async ngOnInit() {
 	}
 
 	async ionViewWillEnter(){
