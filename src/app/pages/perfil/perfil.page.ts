@@ -41,8 +41,8 @@ export class PerfilPage implements OnInit {
 	getCities() {
 		this.firebaseSvc.obtener("ciudades").subscribe((resp: any) => {
 			this.cities = resp[0].ciudades;
-			if (JSON.parse(localStorage.getItem("USER_LOLA"))) {
-				this.usuario = JSON.parse(localStorage.getItem("USER_LOLA"));
+			if (JSON.parse(localStorage.getItem("APP_USER"))) {
+				this.usuario = JSON.parse(localStorage.getItem("APP_USER"));
 			}
 		});
 	}
@@ -79,7 +79,7 @@ export class PerfilPage implements OnInit {
 			this.usuario.estado = 1;
 			this.firebaseSvc.guardarDatos("clientes", this.usuario).then((resp) => {
 				this.usuario.id = resp.toString();
-				localStorage.setItem("USER_LOLA", JSON.stringify(this.usuario));
+				localStorage.setItem("APP_USER", JSON.stringify(this.usuario));
 				this.presentToast("Datos almacenados correctamente");
 			});
 		} else {
@@ -90,7 +90,7 @@ export class PerfilPage implements OnInit {
 	updateData() {
 		if (this.validation()) {
 			this.firebaseSvc.actualizarDatos("clientes", this.usuario, this.usuario.id).then((resp) => {
-				localStorage.setItem("USER_LOLA", JSON.stringify(this.usuario));
+				localStorage.setItem("APP_USER", JSON.stringify(this.usuario));
 				this.presentToast("Datos actualizados correctamente")
 			});
 		} else {

@@ -7,12 +7,12 @@
     background: white;
     &__header {
         width: 100%;
-        height: 143px;
+        height: 58px;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        padding: 20px 16px 0px 16px;
-        position: fixed;
+        padding: 20px 16px 16px 16px;
+        position: relative;
         font-size: 20px;
        /*  background-image: url("../../../assets/payment.png");
         background-repeat: no-repeat, repeat;
@@ -38,13 +38,34 @@
             }
         }
     }
+    &__address{
+        width: 100%;
+        height: 150px;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        &__title{
+            padding: 16px;
+            background: var(--ion-color-primary);
+        }
+        &__info{
+            width: 100%;
+            display: flex;
+            &__img{
+                width: 20%;
+            }
+            &__data{
+                width: 80%;
+            }
+        }
+            
+    }
     &__list{
         width: 100%;
         display: flex;
         flex-direction: column;
         height: auto;
         position: relative;
-        top: 58px;
         &__title{
             padding: 16px;
             background: var(--ion-color-primary);

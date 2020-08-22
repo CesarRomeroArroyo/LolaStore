@@ -72,8 +72,10 @@ export class ProductDetailPage implements OnInit {
 
 	validation() {
 		if (this.producto.colores) {
-			if (this.colorSelected == '') {
-				return false;
+			if(this.producto.colores.length > 0){
+				if (this.colorSelected == '') {
+					return false;
+				}
 			}
 		}
 		return true;

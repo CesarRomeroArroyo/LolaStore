@@ -5,6 +5,20 @@
 				<ion-icon name="chevron-back-outline"></ion-icon>
 			</div>
     </div>
+    <div class="container__address">
+      <div class="container__address__title">
+        <i class="fa fa-map-marker" aria-hidden="true"></i> Entregar en:
+      </div>
+      <div class="container__address__info">
+        <div class="container__address__info__img">
+          <img src="../../../assets/map.png" alt="">
+        </div>
+        <div class="container__address__info__data">
+          <app-direcciones class="modal animate__animated animate__fadeIn animate__faster" [usuario]="usuario" (showModal)="closeModal($event)" (direccionSelected)="selecAdress($event)" *ngIf="showModal"></app-direcciones>
+        </div>
+      </div>
+        
+    </div>
     <div class="container__list">
       <div class="container__list__title">
         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos en esta compra:
