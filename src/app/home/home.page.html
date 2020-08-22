@@ -9,7 +9,7 @@
 		<div class="container__image">
 			<img src="../../assets/logo.png" alt="">
 		</div>
-		<div class="container__categories">
+		<div class="container__categories" *ngIf="categorias">
 			<div (click)="irDetalle(cat)"
 				[ngClass]="{'fondo1': cat.fondo=='fondo1','fondo2': cat.fondo=='fondo2','fondo3': cat.fondo=='fondo3' }"
 				*ngFor="let cat of categorias;let index=index;">
