@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
 	) { }
 
 	async ngOnInit() {
-		this.categorias = this.firebase.obtenerPromise("categorias");
+		this.categorias = await this.firebase.obtenerPromise("categorias");
 	}
 
 	obtenerColor(index) {
