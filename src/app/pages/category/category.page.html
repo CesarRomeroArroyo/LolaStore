@@ -45,8 +45,12 @@
 							</div>
 						</div>
 
-						<div class="container__products__product__list__item__img">
+						<div class="container__products__product__list__item__img" *ngIf="!prod.fotos">
 							<img src="{{prod.url}}" alt="" (click)="goToDetail(prod)">
+						</div>
+
+						<div class="container__products__product__list__item__img" *ngIf="prod.fotos">
+							<img src="{{prod.urls[0]}}" alt="" (click)="goToDetail(prod)">
 						</div>
 
 						<div class="container__products__product__list__item__title">
