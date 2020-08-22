@@ -5,6 +5,7 @@ import { ToastController } from '@ionic/angular';
 
 import { FirebaseService } from '@services/firebase.service';
 import { StateApp } from '@services/state.service';
+import { CartService } from '@services/cart.service';
 
 @Component({
 	selector: 'app-product-detail',
@@ -12,7 +13,7 @@ import { StateApp } from '@services/state.service';
 	styleUrls: ['./product-detail.page.scss'],
 })
 export class ProductDetailPage implements OnInit {
-
+	pedido: any[];
 	producto: ProductoInterface;
 	cantidad: number = 1;
 	colorSelected: string = "";
@@ -24,12 +25,26 @@ export class ProductDetailPage implements OnInit {
 
 	constructor(
 		private route: ActivatedRoute,
+		private router: Router,
 		private firebaseSvc: FirebaseService,
 		private state: StateApp,
-		public toastController: ToastController) { }
+		public toastController: ToastController,
+		private cartService: CartService) { 
+			this.pedido = [];
+		}
 
 	ngOnInit() {
 		this.init();
+	}
+
+	ionViewWillEnter(){
+		const pedido = JSON.parse(localStorage.getItem("APP_PEDIDO"));
+		if(pedido){
+			this.pedido = pedido;
+		} else {
+			this.pedido = [];
+		}
+
 	}
 
 	async presentToast(message, color?) {
@@ -42,7 +57,7 @@ export class ProductDetailPage implements OnInit {
 	}
 
 	back() {
-		window.history.back();
+		this.router.navigate(["category"]);
 	}
 
 	init() {
@@ -59,14 +74,14 @@ export class ProductDetailPage implements OnInit {
 		if (this.producto.colores) {
 			if (this.colorSelected == '') {
 				return false;
-			} else {
-				return true;
 			}
 		}
+		return true;
 	}
 
 	adicionar() {
 		if (this.cantidad >= this.producto.cantidad) {
+			this.presentToast("La cantidad solicitada supera la cantidad en el inventario");
 		} else {
 			this.cantidad++
 		}
@@ -86,10 +101,9 @@ export class ProductDetailPage implements OnInit {
 
 	addCar() {
 		if (this.validation()) {
-			this.state.setData({ producto: this.producto });
-			this.state.setData({ cantidad: this.cantidad });
-			this.state.setData({ color: this.colorSelected });
-			// this.router.navigate(['/']);
+			this.pedido.push({producto: this.producto, cantidad: this.cantidad, color: this.colorSelected });
+			this.cartService.administrarProducto(this.pedido);
+			this.presentToast("Producto Agregado");
 		} else {
 			this.presentToast("Por favor elija un color");
 		}
