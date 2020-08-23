@@ -20,19 +20,23 @@ export class CartPage implements OnInit {
   user: UsuarioInterface;
   showModal: boolean;
   showDescuentos: boolean;
+  showFormaPago: boolean;
   obsequios: any;
   obsequiosShow: any[];
   obserquioSiempre: boolean;
   verificarDesceunto: any;
+  formapago: any[];
   constructor(
     private firebase: FirebaseService,
     private router: Router,
     private cartService: CartService
-  ) { 
+  ) {
     this.showModal = false;
     this.showDescuentos = false;
+    this.showFormaPago = false;
     this.obsequiosShow = [];
     this.obserquioSiempre = false;
+    this.formapago= [];
   }
 
   ngOnInit() {
@@ -44,9 +48,9 @@ export class CartPage implements OnInit {
     this.decuentoAplicado = "prod";
     this.discount = 0;
     this.user = JSON.parse(localStorage.getItem("APP_USER"));
-    const pedido = JSON.parse(localStorage.getItem("APP_PEDIDO"));
-		if(pedido){
-			this.productsGrl = pedido;
+    const prodPedido = JSON.parse(localStorage.getItem("APP_PEDIDO"));
+		if(prodPedido){
+			this.productsGrl = prodPedido;
 		} else {
 			this.productsGrl = [];
 		}
@@ -60,13 +64,16 @@ export class CartPage implements OnInit {
         this.obserquioSiempre = t[0].obsequioinicial;
         this.obtenerObssequios();
       }
+      if(t[0].opcionespago){
+        this.formapago = t[0].opcionespago;
+      }
     });
     this.verificarDescuentoProductos();
   }
 
   asignarProductos(){
-    this.products = JSON.parse(JSON.stringify(this.productsGrl))
-    this.productsTemp = JSON.parse(JSON.stringify(this.productsGrl))
+    this.products = JSON.parse(JSON.stringify(this.productsGrl));
+    // this.productsTemp = JSON.parse(JSON.stringify(this.productsGrl))
   }
 
   irAtras(){
@@ -163,12 +170,15 @@ export class CartPage implements OnInit {
 		this.showDescuentos = e;
 	}
 
+  closeModalFormaPAgo(e) {
+		this.showFormaPago = e;
+	}
+
   selecAdress(e) {
 		this.user.direccion = e;
   }
 
   quitarProducto(product){
-
     Swal.fire({
       title: '',
       text: 'Esta seguro de quitar el producto',
@@ -187,5 +197,76 @@ export class CartPage implements OnInit {
         this.obtenerObssequios();
       }
     });
+  }
+
+  finalizarPedido(){
+    Swal.fire({
+      title: '',
+      text: 'Esta seguro de confirmar el pedido?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.guardarPedido();
+        this.showFormaPago = true;
+      }
+    });
+  }
+
+  guardarPedido(){
+    var usuario: any = JSON.parse(localStorage.getItem("APP_USER"));
+    var hoy = new Date();
+    var dd: string | number = hoy.getDate();
+    var mm: string | number = hoy.getMonth()+1;
+    var yyyy: string | number = hoy.getFullYear();
+    var hora: string | number = hoy.getHours();
+    var minuto: string | number = hoy.getMinutes();
+
+    if(dd<10) {
+      dd='0'+dd;
+    }
+
+    if(mm<10) {
+      mm='0'+mm;
+    }
+
+    if(minuto<10) {
+      minuto='0'+minuto;
+    }
+    var fecha = dd+'/'+mm+'/'+yyyy;
+    console.log(this.products);
+
+    const pedido = {
+      productos: this.products, 
+      fecha: fecha, 
+      hora: hora+':'+ minuto, 
+      usuario: usuario, 
+      usuarioid: usuario.id,
+      descuento: this.decuentoAplicado,
+      subtotal: this.calcularPago(),
+      domicilio: this.domicilio(),
+      total: this.calcularPago()+ this.domicilio(),
+      estado: 1
+    };
+    this.firebase.guardarDatos('pedidos', pedido).then(()=> {
+      this.actualizarInventario();
+      this.cartService.vaciarCarrito();
+      this.productsGrl = [];
+      this.asignarProductos();
+      this.domicilio();
+      this.obtenerObssequios();
+      Swal.fire("", "El pedido se guardo correctamente.", "success");
+    }).catch(() =>{
+      Swal.fire("", "Ocurrio un error al crear el pedido, intentalo mas tarde", "error");
+    });
+    console.log(pedido);
+  }
+
+  actualizarInventario(){
+
   }
 }

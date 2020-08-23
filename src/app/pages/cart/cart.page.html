@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <div class="container">
+  <div class="container" *ngIf="productsGrl.length > 0">
     <div class="container__header">
 			<div class="container__header__back" (click)="irAtras()">
 				<ion-icon name="chevron-back-outline"></ion-icon>
@@ -81,7 +81,7 @@
           {{gift.obsequio}}
         </div>
       </div>
-      <div class="container__title">
+      <div class="container__title" (click)="finalizarPedido()">
         <div class="container__title__values">Subtotal: {{calcularPago()| currency: 'USD':true:'2.0'}}</div>
         <div class="container__title__values">Valor Domicilio: {{(domicilio()==0)?'$0': domicilio()| currency: 'USD':true:'2.0'}}</div>
         Total a pagar: {{calcularPago()+ domicilio()| currency: 'USD':true:'2.0'}}
@@ -90,7 +90,20 @@
       <div class="container__footer">&nbsp;</div>
     </div>
   </div>
+  <div class="container" *ngIf="productsGrl.length == 0">
+    <div class="container__header">
+			<div class="container__header__back" (click)="irAtras()">
+				<ion-icon name="chevron-back-outline"></ion-icon>
+			</div>
+    </div>
+    <div class="container__noproductos">
+      <ion-icon name="cart-outline"></ion-icon>      
+      No tienes Productos en el Carrito
+    </div>
+    
+  </div>
   <app-direcciones class="modal animate__animated animate__fadeIn animate__faster" [showAdd]="false" [usuario]="user" (showModal)="closeModal($event)" (direccionSelected)="selecAdress($event)" *ngIf="showModal"></app-direcciones>
   <app-descuentos class="modal animate__animated animate__fadeIn animate__faster" *ngIf="showDescuentos" [discountProd]="discountProd" [decuentoAplicado]="decuentoAplicado" [total]="total" (descuentoSelected)="seleccionarDescuento($event)" (showModal)="closeDescuento($event)" ></app-descuentos>
+  <app-confirmacion class="modal animate__animated animate__fadeIn animate__faster" [formaspago]="formapago" *ngIf="showFormaPago" (showModal)="closeModalFormaPAgo($event)"></app-confirmacion>
 </ion-content>
 <app-tags></app-tags>

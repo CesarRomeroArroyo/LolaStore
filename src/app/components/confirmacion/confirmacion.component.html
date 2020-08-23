@@ -1,0 +1,20 @@
+<div class="modal">
+	<div class="modal__info">
+		
+		<div class="modal__info__content">
+			<div class="modal__info__content__title">
+				Gracias por tu Compra
+      </div>
+			<div class="modal__info__content__subtitle">
+				Puedes usar estos metodos de pago
+      </div>
+
+			<div class="modal__info__content__item" *ngFor="let forma of formaspago">
+        {{forma.nombre}}
+        <small>#{{forma.numero}}</small>
+      </div>
+    </div>
+		<div class="modal__btnpago" (click)="show()"><a [href]="soporte"> <i class="fa fa-whatsapp" aria-hidden="true"></i> Enviar Soporte de Pago</a></div>
+		<div class="modal__btn" (click)="show()">Aceptar</div>
+	</div>
+</div>

@@ -14,4 +14,9 @@ export class CartService {
     this.state.setData({pedido: pedido});
     localStorage.setItem("APP_PEDIDO", JSON.stringify(pedido))
   }
+
+  vaciarCarrito(){
+    localStorage.removeItem("APP_PEDIDO");
+    this.state.setData({pedido: []});
+  }
 }
