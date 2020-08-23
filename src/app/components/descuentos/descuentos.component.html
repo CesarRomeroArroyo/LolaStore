@@ -7,8 +7,8 @@
 			<div class="modal__info__content__title">
 				Descuentos disponibles
 			</div>
-			<div class="modal__info__content__discount__item" (click)="seleccionarDescuento('prod')">
-				<div><i class="fa fa-gift" aria-hidden="true"></i>&nbsp; No aplicar Descuentos</div>	
+			<div class="modal__info__content__discount__item" *ngIf="!discountProd" (click)="seleccionarDescuento('prod')">
+				<div><i class="fa fa-gift" aria-hidden="true" *ngIf="decuentoAplicado == 'prod'"></i>&nbsp; No aplicar Descuentos</div>	
 				<small>En el momento no hay decuentos por aplicar</small>
 			</div>
 			<div class="modal__info__content__discount__item" *ngIf="!discountProd && discount==0">
