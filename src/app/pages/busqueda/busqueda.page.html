@@ -1,0 +1,44 @@
+<ion-content>
+	<div class="container">
+		<div class="container__search animate__animated animate__pulse">
+			<input class="container__search__input" type="text" placeholder="Buscar..." name="search"
+				[(ngModel)]="query" (keyup)="buscar()">
+			<span class="container__search__icon"><i class="fa fa-search" aria-hidden="true"></i></span>
+		</div>
+
+		<div *ngFor="let categoria of dataShow">
+			<div class="container__categorias" *ngIf="categoria.tiene">
+				<div class="container__categorias__title animate__animated animate__backInUp">
+					{{categoria.nombre}}
+				</div>
+				<div *ngFor="let subcategoria of categoria.subcategorias">
+					<div class="container__subcategorias" *ngIf="subcategoria.productos.length > 0">
+						<div class="container__subcategorias__title animate__animated animate__backInUp">
+							{{subcategoria.nombre}}
+						</div>
+						<div class="container__cards">
+							<div class="container__cards__card animate__animated animate__backInUp"
+								*ngFor="let producto of subcategoria.productos">
+								<div class="container__cards__card__title">
+									<i class="fa fa-heart" aria-hidden="true"></i>
+									<img [src]="producto['url']" alt="" *ngIf="!producto?.urls">
+									<img [src]="producto.urls[0]" alt="" *ngIf="producto?.urls">
+								</div>
+								<div class="container__cards__card__info">
+									<div class="container__cards__card__info__header">
+										<h6>{{producto.nombre}}</h6>
+									</div>
+									<div class="container__cards__card__info__price">
+										${{producto.precio|number}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ion-content>
+
+<app-tags></app-tags>
