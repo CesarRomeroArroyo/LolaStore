@@ -45,7 +45,7 @@ export class CategoryPage implements OnInit {
 				return prod.idunicoSubcategoria == sub.idunico;
 			});
 			this.productos.push(producto);
-			// console.log(this.productos);
+			console.log(this.productos);
 		});
 		this.productosSeleccionados = this.productos;
 		this.dataShow = this.productos;

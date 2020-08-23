@@ -32,8 +32,8 @@ export class FirebaseService {
 	data.forEach(info => {
 		var d = info.data();
 		d["id"] = info.id;
-		console.log(info.id);
-		console.log(info.data());
+		// console.log(info.id);
+		// console.log(info.data());
 		returnData.push(d);
 	});
 	return returnData;

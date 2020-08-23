@@ -23,10 +23,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/perfil/perfil.module').then(m => m.PerfilPageModule)
   },
   {
+    path: 'busqueda',
+    loadChildren: () => import('./pages/busqueda/busqueda.module').then( m => m.BusquedaPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
+
 ];
 
 @NgModule({
