@@ -36,33 +36,9 @@
 				<div class="container__products__product__title" *ngIf="producto.productos.length > 0">
 					{{producto.nombre}}
 				</div>
-
 				<div class="container__products__product__list" *ngIf="producto.productos.length > 0">
-					<div class="container__products__product__list__item" *ngFor="let prod of producto.productos">
-						<div class="container__products__product__list__item__like">
-							<div class="container__products__product__list__item__like__container">
-								<i class="fa fa-heart" aria-hidden="true"></i>
-							</div>
-						</div>
-
-						<div class="container__products__product__list__item__img" *ngIf="!prod.fotos">
-							<img src="{{prod.url}}" alt="" (click)="goToDetail(prod)">
-						</div>
-
-						<div class="container__products__product__list__item__img" *ngIf="prod.fotos">
-							<img src="{{prod.urls[0]}}" alt="" (click)="goToDetail(prod)">
-						</div>
-
-						<div class="container__products__product__list__item__title">
-							{{prod.nombre}}
-						</div>
-
-						<div class="container__products__product__list__item__price">
-							{{prod.precio | currency: 'USD':true:'2.0'}}
-						</div>
-					</div>
+					<app-tarjetas [array]="producto.productos"></app-tarjetas>
 				</div>
-
 			</div>
 		</div>
 	</div>

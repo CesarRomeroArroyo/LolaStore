@@ -57,7 +57,7 @@ export class ProductDetailPage implements OnInit {
 	}
 
 	back() {
-		this.router.navigate(["category"]);
+		window.history.back();
 	}
 
 	init() {
