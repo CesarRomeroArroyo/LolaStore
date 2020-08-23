@@ -11,6 +11,8 @@ import { UsuarioInterface } from '@interfaces/usuario.interface';
 export class DireccionesComponent implements OnInit {
 
 	@Input() usuario: UsuarioInterface;
+	@Input() showAdd: boolean;
+
 	@Output() showModal = new EventEmitter<boolean>();
 	@Output() direccionSelected = new EventEmitter<string>();
 	public adress: string = "";

@@ -1,0 +1,25 @@
+<div class="modal">
+	<div class="modal__info">
+		<div class="modal__close" (click)="show()">
+			<ion-icon name="close-circle-outline"></ion-icon>
+		</div>
+		<div class="modal__info__content">
+			<div class="modal__info__content__title">
+				Descuentos disponibles
+			</div>
+			<div class="modal__info__content__discount__item" *ngIf="!discountProd && discount==0" (click)="seleccionarDescuento('prod')">
+				<div><i class="fa fa-gift" aria-hidden="true"></i>&nbsp; No hay descuentos por aplicar</div>	
+				<small>En el momento no hay decuentos por aplicar</small>
+			</div>
+			<div class="modal__info__content__discount__item" *ngIf="discountProd" (click)="seleccionarDescuento('prod')">
+				<div><i class="fa fa-gift" aria-hidden="true" *ngIf="decuentoAplicado == 'prod'"></i>&nbsp; Descuento por producto</div>	
+				<small>El descuento se aplica por producto</small>
+			</div>
+			<div class="modal__info__content__discount__item" *ngIf="discount!=0" (click)="seleccionarDescuento('store')">
+				<div><i class="fa fa-gift" aria-hidden="true" *ngIf="decuentoAplicado == 'store'"></i>&nbsp; Descuento de la tienda</div> 
+				<small>El {{discount}}% descuento se aplica a todos los productos</small> 
+			</div>
+		</div>
+		<div class="modal__btn" (click)="show()">Asignar</div>
+	</div>
+</div>

@@ -7,7 +7,7 @@
 	</div>
 	<div class="tabs__tab" routerLinkActive="linkActive">
 		<div class="tabs__tab" [routerLink]="[ '/cart' ]">
-			<div class="tabs__tab__cart" *ngIf="numProd>=0">
+			<div class="tabs__tab__cart" *ngIf="numProd>0">
 				{{numProd}}
 			</div>
 			<ion-icon name="cart-outline"></ion-icon>

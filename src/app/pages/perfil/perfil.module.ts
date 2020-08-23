@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { PerfilPageRoutingModule } from './perfil-routing.module';
 import { ComponentsModule } from '@components/components.module';
-import { ModalsModule } from '@modals/modals.module';
 
 import { PerfilPage } from './perfil.page';
 
@@ -16,8 +15,7 @@ import { PerfilPage } from './perfil.page';
     FormsModule,
     IonicModule,
     PerfilPageRoutingModule,
-    ComponentsModule,
-    ModalsModule
+    ComponentsModule
   ],
   declarations: [PerfilPage]
 })

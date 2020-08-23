@@ -5,13 +5,28 @@
 				<ion-icon name="chevron-back-outline"></ion-icon>
 			</div>
     </div>
+    <div class="container__address">
+      <div class="container__address__title">
+        <i class="fa fa-map-marker" aria-hidden="true"></i> Entregar en:
+      </div>
+      <div class="container__address__info">
+        <div class="container__address__info__img">
+          <img src="../../../assets/map.png" alt="">
+        </div>
+        <div class="container__address__info__data" *ngIf="user" (click)="showModal = true">
+          {{user.direccion}} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          
+        </div>
+      </div>
+        
+    </div>
     <div class="container__list">
       <div class="container__list__title">
         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos en esta compra:
       </div>
-      <div class="container__list__item" *ngFor="let product of products">
+      <div class="container__list__item" *ngFor="let product of products; let i = index">
         <div class="container__list__item__img">
-          <img src="{{product.producto.url}}" alt="">
+          <img src="{{product.producto.urls[0]}}" alt="">
         </div>
         <div class="container__list__item__data">
           <div class="container__list__item__data__content">
@@ -22,7 +37,9 @@
               {{product.producto.nombreCategoria}} - {{product.producto.nombreSubcategoria}}
             </div>
             <div class="container__list__item__data__content__name">
-              <i class="fa fa-times"></i> {{product.cantidad}}
+              <i class="fa fa-times"></i> {{product.cantidad}} 
+              <div class="container__list__item__data__content__name__color" [style.background]="product.color">
+              </div>
             </div>
           </div>
           <div class="container__list__item__data__value">
@@ -33,21 +50,25 @@
               {{calcularDescuento(product) | currency: 'USD':true:'2.0'}}
             </div>
           </div>
-          <div class="container__list__item__data__option">
+          <div class="container__list__item__data__option" (click)="quitarProducto(i)">
             <i class="fa fa-times"></i>
           </div>
         </div>
       </div>
       <div class="container__discount">
         <div class="container__discount__title">
-          <i class="fa fa-percent" aria-hidden="true"></i> Descuento a aplicar:
+          <div class="container__discount__title__text">
+            <div class="container__discount__title__text__content">
+              <i class="fa fa-percent" aria-hidden="true"></i> Descuento a aplicar
+            </div>
+            <small>Conoce los descuentos que puedes aplicar a tu compra</small>
+          </div>
+          <div class="container__discount__title__option" (click)="showDescuentos= true">
+            <small>Ver</small> 
+          </div>
+            
         </div>
-        <div class="container__discount__item" *ngIf="discountProd" (click)="seleccionarDescuento('prod')">
-          <i class="fa fa-check" aria-hidden="true" *ngIf="decuentoAplicado == 'prod'"></i>&nbsp; Descuento por producto
-        </div>
-        <div class="container__discount__item" *ngIf="discount!=0" (click)="seleccionarDescuento('store')">
-          <i class="fa fa-check" aria-hidden="true" *ngIf="decuentoAplicado == 'store'"></i>&nbsp; Descuento de la tienda, -{{discount}}%
-        </div>
+        
       </div>
       <div class="container__gifts">
         <div class="container__gifts__title">
@@ -67,5 +88,7 @@
       <div class="container__footer">&nbsp;</div>
     </div>
   </div>
+  <app-direcciones class="modal animate__animated animate__fadeIn animate__faster" [showAdd]="false" [usuario]="user" (showModal)="closeModal($event)" (direccionSelected)="selecAdress($event)" *ngIf="showModal"></app-direcciones>
+  <app-descuentos class="modal animate__animated animate__fadeIn animate__faster" *ngIf="showDescuentos" [discountProd]="discountProd" [decuentoAplicado]="decuentoAplicado" (descuentoSelected)="seleccionarDescuento($event)" (showModal)="closeDescuento($event)" ></app-descuentos>
 </ion-content>
 <app-tags></app-tags>

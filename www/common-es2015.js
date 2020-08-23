@@ -293,185 +293,40 @@ const openURL = async (url, ev, direction) => {
 
 /***/ }),
 
-/***/ "./src/app/services/firebase.service.ts":
-/*!**********************************************!*\
-  !*** ./src/app/services/firebase.service.ts ***!
-  \**********************************************/
-/*! exports provided: FirebaseService */
+/***/ "./src/app/services/cart.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/cart.service.ts ***!
+  \******************************************/
+/*! exports provided: CartService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FirebaseService", function() { return FirebaseService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CartService", function() { return CartService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-firestore.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _state_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./state.service */ "./src/app/services/state.service.ts");
 
 
 
-
-let FirebaseService = class FirebaseService {
-    constructor(db) {
-        this.db = db;
+let CartService = class CartService {
+    constructor(state) {
+        this.state = state;
     }
-    obtener(tabla, show) {
-        this.itemsCollection = this.db.collection(tabla);
-        return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(data => {
-            return data.map(d => {
-                const retorno = d.payload.doc.data();
-                retorno['id'] = d.payload.doc.id;
-                return retorno;
-            });
-        }));
-    }
-    obtenerId(tabla, id, show) {
-        this.itemsCollection = this.db.collection(tabla, ref => ref.where('id', '==', id));
-        return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(data => {
-            return data.map(d => {
-                const retorno = d.payload.doc.data();
-                retorno['id'] = d.payload.doc.id;
-                return retorno;
-            });
-        }));
-    }
-    obtenerUniqueId(tabla, id) {
-        this.itemsCollection = this.db.collection(tabla, ref => ref.where('idunico', '==', id));
-        return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(data => {
-            return data.map(d => {
-                const retorno = d.payload.doc.data();
-                retorno['id'] = d.payload.doc.id;
-                return retorno;
-            });
-        }));
-    }
-    obtenerProductoCategoria(categoria) {
-        this.itemsCollection = this.db.collection('productos', ref => ref.where('idunicoCategoria', '==', categoria));
-        return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(data => {
-            return data.map(d => {
-                const retorno = d.payload.doc.data();
-                retorno['id'] = d.payload.doc.id;
-                return retorno;
-            });
-        }));
-    }
-    obtenerLogin(user, pass) {
-        this.itemsCollection = this.db.collection('usuarios', ref => ref.where('user', '==', user).where('pass', '==', pass));
-        return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(data => {
-            return data.map(d => {
-                const retorno = d.payload.doc.data();
-                retorno['id'] = d.payload.doc.id;
-                return retorno;
-            });
-        }));
-    }
-    obtenerChat(id) {
-        this.itemsCollection = this.db.collection('chat', ref => ref.where('uniqueId', '==', id));
-        return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(data => {
-            return data.map(d => {
-                const retorno = d.payload.doc.data();
-                retorno['id'] = d.payload.doc.id;
-                return retorno;
-            });
-        }));
-    }
-    obtenerChatReceptor(idReceptor) {
-        this.itemsCollection = this.db.collection('chat', ref => ref.where('receptor', '==', idReceptor));
-        return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(data => {
-            return data.map(d => {
-                const retorno = d.payload.doc.data();
-                retorno['id'] = d.payload.doc.id;
-                return retorno;
-            });
-        }));
-    }
-    obtenerChatEmisor(idEmisor) {
-        this.itemsCollection = this.db.collection('chat', ref => ref.where('emisor', '==', idEmisor));
-        return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(data => {
-            return data.map(d => {
-                const retorno = d.payload.doc.data();
-                retorno['id'] = d.payload.doc.id;
-                return retorno;
-            });
-        }));
-    }
-    guardarDatos(tabla, data) {
-        this.itemsCollection = this.db.collection(tabla);
-        return this.itemsCollection.add(JSON.parse(JSON.stringify(data))).then((resp) => {
-            return resp.id;
-        }).catch(() => {
-            return false;
-        });
-    }
-    actualizarDatos(tabla, data, id) {
-        this.itemsCollection = this.db.collection(tabla);
-        return this.itemsCollection.doc(id).update(JSON.parse(JSON.stringify(data))).then(() => {
-            return true;
-        }).catch(() => {
-            return false;
-        });
-    }
-    eliminarDatos(tabla, id) {
-        this.itemsCollection = this.db.collection(tabla);
-        this.itemsCollection.doc(id).delete().then(() => {
-            return true;
-        }).catch(() => {
-            return false;
-        });
+    administrarProducto(pedido) {
+        this.state.setData({ pedido: pedido });
+        localStorage.setItem("APP_PEDIDO", JSON.stringify(pedido));
     }
 };
-FirebaseService.ctorParameters = () => [
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"] }
+CartService.ctorParameters = () => [
+    { type: _state_service__WEBPACK_IMPORTED_MODULE_2__["StateApp"] }
 ];
-FirebaseService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+CartService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]])
-], FirebaseService);
-
-
-
-/***/ }),
-
-/***/ "./src/app/services/state.service.ts":
-/*!*******************************************!*\
-  !*** ./src/app/services/state.service.ts ***!
-  \*******************************************/
-/*! exports provided: StateApp */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateApp", function() { return StateApp; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-
-
-
-let StateApp = class StateApp {
-    constructor() {
-        this.subject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-        this.data = { state: [] };
-        this.data['state'] = [];
-    }
-    getObservable() {
-        return this.subject.asObservable();
-    }
-    setData(value) {
-        var keyValue = Object.keys(value);
-        this.data['state'][keyValue[0]] = value[keyValue[0]];
-        console.log("setData => ", this.data);
-        this.subject.next(this.data['state']);
-    }
-};
-StateApp = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])
-], StateApp);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_state_service__WEBPACK_IMPORTED_MODULE_2__["StateApp"]])
+], CartService);
 
 
 
