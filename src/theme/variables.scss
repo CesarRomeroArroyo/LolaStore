@@ -102,6 +102,14 @@ ion-content {
 	--background: linear-gradient(to bottom, #f7d8dd, #f4d2d9, #f0cdd5, #edc7d1, #e9c2ce);
 }
 
+ion-input {
+	font-family: "Montserrat", sans-serif !important;
+}
+
+ion-button {
+	font-family: "Montserrat", sans-serif !important;
+}
+
 .input {
 	border: 1px var(--ion-color-medium) solid;
 	border-radius: 20px;
