@@ -5,10 +5,12 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms'
 import { TagsComponent } from './tags/tags.component';
 import { DireccionesComponent } from './direcciones/direcciones.component';
+import { DescuentosComponent } from './descuentos/descuentos.component';
 
 const components = [
 	TagsComponent,
-	DireccionesComponent
+	DireccionesComponent,
+	DescuentosComponent
 ];
 
 @NgModule({

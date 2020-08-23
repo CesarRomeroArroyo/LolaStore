@@ -63,17 +63,12 @@
             </div>
             <small>Conoce los descuentos que puedes aplicar a tu compra</small>
           </div>
-          <div class="container__discount__title__option">
+          <div class="container__discount__title__option" (click)="showDescuentos= true">
             <small>Ver</small> 
           </div>
             
         </div>
-        <!-- <div class="container__discount__item" *ngIf="discountProd" (click)="seleccionarDescuento('prod')">
-          <i class="fa fa-check" aria-hidden="true" *ngIf="decuentoAplicado == 'prod'"></i>&nbsp; Descuento por producto
-        </div>
-        <div class="container__discount__item" *ngIf="discount!=0" (click)="seleccionarDescuento('store')">
-          <i class="fa fa-check" aria-hidden="true" *ngIf="decuentoAplicado == 'store'"></i>&nbsp; Descuento de la tienda, -{{discount}}%
-        </div> -->
+        
       </div>
       <div class="container__gifts">
         <div class="container__gifts__title">
@@ -94,5 +89,6 @@
     </div>
   </div>
   <app-direcciones class="modal animate__animated animate__fadeIn animate__faster" [showAdd]="false" [usuario]="user" (showModal)="closeModal($event)" (direccionSelected)="selecAdress($event)" *ngIf="showModal"></app-direcciones>
+  <app-descuentos class="modal animate__animated animate__fadeIn animate__faster" *ngIf="showDescuentos" [discountProd]="discountProd" [decuentoAplicado]="decuentoAplicado" (descuentoSelected)="seleccionarDescuento($event)" (showModal)="closeDescuento($event)" ></app-descuentos>
 </ion-content>
 <app-tags></app-tags>
