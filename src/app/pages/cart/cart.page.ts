@@ -1,27 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseService } from '@services/firebase.service';
-
+import { UsuarioInterface } from '@interfaces/usuario.interface';
+import Swal from 'sweetalert2';
+import { CartService } from '@services/cart.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-  products = [];
-  productsTemp = [];
-  productsGrl = [];
+  products: any[] = [];
+  productsTemp: any[] = [];
+  productsGrl: any[] = [];
   discount: number;
   discountProd: boolean;
   decuentoAplicado: string;
   total: number;
+  user: UsuarioInterface;
+  showModal: boolean;
+  showDescuentos: boolean;
   constructor(
     private firebase: FirebaseService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private cartService: CartService
+  ) { 
+    this.showModal = false;
+    this.showDescuentos = false;
+  }
 
   ngOnInit() {
-    
   }
 
   ionViewWillEnter() {
@@ -29,6 +37,7 @@ export class CartPage implements OnInit {
     this.discountProd = false;
     this.decuentoAplicado = "prod";
     this.discount = 0;
+    this.user = JSON.parse(localStorage.getItem("APP_USER"));
     const pedido = JSON.parse(localStorage.getItem("APP_PEDIDO"));
 		if(pedido){
 			this.productsGrl = pedido;
@@ -92,5 +101,33 @@ export class CartPage implements OnInit {
       }
     });
     return this.total;
+  }
+
+  closeModal(e) {
+		this.showModal = e;
+	}
+
+  selecAdress(e) {
+		this.user.direccion = e;
+  }
+
+  quitarProducto(product){
+
+    Swal.fire({
+      title: '',
+      text: 'Esta seguro de quitar el producto',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.productsGrl.splice(product, 1);
+        this.asignarProductos();
+        this.cartService.administrarProducto(this.productsGrl);
+      }
+    });
   }
 }

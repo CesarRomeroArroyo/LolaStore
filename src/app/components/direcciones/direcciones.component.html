@@ -7,7 +7,7 @@
 			<div class="modal__info__content__title">
 				Direcciones guardadas
 			</div>
-			<div class="modal__info__agregar">
+			<div class="modal__info__agregar" *ngIf="showAdd">
 				<ion-item>
 					<ion-input [(ngModel)]="adress" placeholder="Agregar direccion"></ion-input>
 					<ion-icon name="add-outline" slot="end" (click)="addAdress()"></ion-icon>

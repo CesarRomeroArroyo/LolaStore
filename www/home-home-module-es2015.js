@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content [fullscreen]=\"true\">\n\t<div class=\"container\">\n\t\t<div class=\"container__header\">\n\t\t\t<div class=\"container__header__search\">\n\t\t\t\t<ion-icon name=\"search-outline\"></ion-icon>\n\t\t\t</div>\n\n\t\t</div>\n\t\t<div class=\"container__image\">\n\t\t\t<img src=\"../../assets/logo.png\" alt=\"\">\n\t\t</div>\n\t\t<div class=\"container__categories\">\n\t\t\t<div (click)=\"irDetalle(cat)\"\n\t\t\t\t[ngClass]=\"{'fondo1': cat.fondo=='fondo1','fondo2': cat.fondo=='fondo2','fondo3': cat.fondo=='fondo3' }\"\n\t\t\t\t*ngFor=\"let cat of categorias;let index=index;\">\n\t\t\t\t<div class=\"container__categories__img\">\n\t\t\t\t\t<img src=\"{{cat.foto}}\" alt=\"\">\n\t\t\t\t</div>\n\t\t\t\t<div class=\"container__categories__text\">\n\t\t\t\t\t{{cat.nombre}}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</ion-content>\n\n<app-tags></app-tags>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content [fullscreen]=\"true\">\n\t<div class=\"container\">\n\t\t<div class=\"container__header\">\n\t\t\t<div class=\"container__header__search\">\n\t\t\t\t<ion-icon name=\"search-outline\"></ion-icon>\n\t\t\t</div>\n\n\t\t</div>\n\t\t<div class=\"container__image\">\n\t\t\t<img src=\"../../assets/logo.png\" alt=\"\">\n\t\t</div>\n\t\t<div class=\"container__categories\" *ngIf=\"categorias\">\n\t\t\t<div (click)=\"irDetalle(cat)\"\n\t\t\t\t[ngClass]=\"{'fondo1': cat.fondo=='fondo1','fondo2': cat.fondo=='fondo2','fondo3': cat.fondo=='fondo3' }\"\n\t\t\t\t*ngFor=\"let cat of categorias;let index=index;\">\n\t\t\t\t<div class=\"container__categories__img\">\n\t\t\t\t\t<img src=\"{{cat.foto}}\" alt=\"\">\n\t\t\t\t</div>\n\t\t\t\t<div class=\"container__categories__text\">\n\t\t\t\t\t{{cat.nombre}}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</ion-content>\n\n<app-tags></app-tags>");
 
 /***/ }),
 
@@ -136,8 +136,12 @@ let HomePage = class HomePage {
         this.iter = 1;
     }
     ngOnInit() {
-        this.firebase.obtener("categorias").subscribe((data) => {
-            this.categorias = data;
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+        });
+    }
+    ionViewWillEnter() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.categorias = yield this.firebase.obtenerPromise("categorias");
         });
     }
     obtenerColor(index) {

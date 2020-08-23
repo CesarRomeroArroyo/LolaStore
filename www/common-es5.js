@@ -463,23 +463,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
 
   /***/
-  "./src/app/services/firebase.service.ts":
-  /*!**********************************************!*\
-    !*** ./src/app/services/firebase.service.ts ***!
-    \**********************************************/
+  "./src/app/services/cart.service.ts":
+  /*!******************************************!*\
+    !*** ./src/app/services/cart.service.ts ***!
+    \******************************************/
 
-  /*! exports provided: FirebaseService */
+  /*! exports provided: CartService */
 
   /***/
-  function srcAppServicesFirebaseServiceTs(module, __webpack_exports__, __webpack_require__) {
+  function srcAppServicesCartServiceTs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "FirebaseService", function () {
-      return FirebaseService;
+    __webpack_require__.d(__webpack_exports__, "CartService", function () {
+      return CartService;
     });
     /* harmony import */
 
@@ -496,250 +496,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     /* harmony import */
 
 
-    var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @angular/fire/firestore */
-    "./node_modules/@angular/fire/__ivy_ngcc__/fesm2015/angular-fire-firestore.js");
-    /* harmony import */
+    var _state_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ./state.service */
+    "./src/app/services/state.service.ts");
 
+    var CartService = /*#__PURE__*/function () {
+      function CartService(state) {
+        _classCallCheck(this, CartService);
 
-    var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! rxjs/operators */
-    "./node_modules/rxjs/_esm2015/operators/index.js");
-
-    var FirebaseService = /*#__PURE__*/function () {
-      function FirebaseService(db) {
-        _classCallCheck(this, FirebaseService);
-
-        this.db = db;
+        this.state = state;
       }
 
-      _createClass(FirebaseService, [{
-        key: "obtener",
-        value: function obtener(tabla, show) {
-          this.itemsCollection = this.db.collection(tabla);
-          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
-            return data.map(function (d) {
-              var retorno = d.payload.doc.data();
-              retorno['id'] = d.payload.doc.id;
-              return retorno;
-            });
-          }));
-        }
-      }, {
-        key: "obtenerId",
-        value: function obtenerId(tabla, id, show) {
-          this.itemsCollection = this.db.collection(tabla, function (ref) {
-            return ref.where('id', '==', id);
+      _createClass(CartService, [{
+        key: "administrarProducto",
+        value: function administrarProducto(pedido) {
+          this.state.setData({
+            pedido: pedido
           });
-          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
-            return data.map(function (d) {
-              var retorno = d.payload.doc.data();
-              retorno['id'] = d.payload.doc.id;
-              return retorno;
-            });
-          }));
-        }
-      }, {
-        key: "obtenerUniqueId",
-        value: function obtenerUniqueId(tabla, id) {
-          this.itemsCollection = this.db.collection(tabla, function (ref) {
-            return ref.where('idunico', '==', id);
-          });
-          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
-            return data.map(function (d) {
-              var retorno = d.payload.doc.data();
-              retorno['id'] = d.payload.doc.id;
-              return retorno;
-            });
-          }));
-        }
-      }, {
-        key: "obtenerProductoCategoria",
-        value: function obtenerProductoCategoria(categoria) {
-          this.itemsCollection = this.db.collection('productos', function (ref) {
-            return ref.where('idunicoCategoria', '==', categoria);
-          });
-          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
-            return data.map(function (d) {
-              var retorno = d.payload.doc.data();
-              retorno['id'] = d.payload.doc.id;
-              return retorno;
-            });
-          }));
-        }
-      }, {
-        key: "obtenerLogin",
-        value: function obtenerLogin(user, pass) {
-          this.itemsCollection = this.db.collection('usuarios', function (ref) {
-            return ref.where('user', '==', user).where('pass', '==', pass);
-          });
-          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
-            return data.map(function (d) {
-              var retorno = d.payload.doc.data();
-              retorno['id'] = d.payload.doc.id;
-              return retorno;
-            });
-          }));
-        }
-      }, {
-        key: "obtenerChat",
-        value: function obtenerChat(id) {
-          this.itemsCollection = this.db.collection('chat', function (ref) {
-            return ref.where('uniqueId', '==', id);
-          });
-          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
-            return data.map(function (d) {
-              var retorno = d.payload.doc.data();
-              retorno['id'] = d.payload.doc.id;
-              return retorno;
-            });
-          }));
-        }
-      }, {
-        key: "obtenerChatReceptor",
-        value: function obtenerChatReceptor(idReceptor) {
-          this.itemsCollection = this.db.collection('chat', function (ref) {
-            return ref.where('receptor', '==', idReceptor);
-          });
-          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
-            return data.map(function (d) {
-              var retorno = d.payload.doc.data();
-              retorno['id'] = d.payload.doc.id;
-              return retorno;
-            });
-          }));
-        }
-      }, {
-        key: "obtenerChatEmisor",
-        value: function obtenerChatEmisor(idEmisor) {
-          this.itemsCollection = this.db.collection('chat', function (ref) {
-            return ref.where('emisor', '==', idEmisor);
-          });
-          return this.itemsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
-            return data.map(function (d) {
-              var retorno = d.payload.doc.data();
-              retorno['id'] = d.payload.doc.id;
-              return retorno;
-            });
-          }));
-        }
-      }, {
-        key: "guardarDatos",
-        value: function guardarDatos(tabla, data) {
-          this.itemsCollection = this.db.collection(tabla);
-          return this.itemsCollection.add(JSON.parse(JSON.stringify(data))).then(function (resp) {
-            return resp.id;
-          })["catch"](function () {
-            return false;
-          });
-        }
-      }, {
-        key: "actualizarDatos",
-        value: function actualizarDatos(tabla, data, id) {
-          this.itemsCollection = this.db.collection(tabla);
-          return this.itemsCollection.doc(id).update(JSON.parse(JSON.stringify(data))).then(function () {
-            return true;
-          })["catch"](function () {
-            return false;
-          });
-        }
-      }, {
-        key: "eliminarDatos",
-        value: function eliminarDatos(tabla, id) {
-          this.itemsCollection = this.db.collection(tabla);
-          this.itemsCollection.doc(id)["delete"]().then(function () {
-            return true;
-          })["catch"](function () {
-            return false;
-          });
+          localStorage.setItem("APP_PEDIDO", JSON.stringify(pedido));
         }
       }]);
 
-      return FirebaseService;
+      return CartService;
     }();
 
-    FirebaseService.ctorParameters = function () {
+    CartService.ctorParameters = function () {
       return [{
-        type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
+        type: _state_service__WEBPACK_IMPORTED_MODULE_2__["StateApp"]
       }];
     };
 
-    FirebaseService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+    CartService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]])], FirebaseService);
-    /***/
-  },
-
-  /***/
-  "./src/app/services/state.service.ts":
-  /*!*******************************************!*\
-    !*** ./src/app/services/state.service.ts ***!
-    \*******************************************/
-
-  /*! exports provided: StateApp */
-
-  /***/
-  function srcAppServicesStateServiceTs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "StateApp", function () {
-      return StateApp;
-    });
-    /* harmony import */
-
-
-    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! tslib */
-    "./node_modules/tslib/tslib.es6.js");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-    /* harmony import */
-
-
-    var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! rxjs */
-    "./node_modules/rxjs/_esm2015/index.js");
-
-    var StateApp = /*#__PURE__*/function () {
-      function StateApp() {
-        _classCallCheck(this, StateApp);
-
-        this.subject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]({});
-        this.data = {
-          state: []
-        };
-        this.data['state'] = [];
-      }
-
-      _createClass(StateApp, [{
-        key: "getObservable",
-        value: function getObservable() {
-          return this.subject.asObservable();
-        }
-      }, {
-        key: "setData",
-        value: function setData(value) {
-          var keyValue = Object.keys(value);
-          this.data['state'][keyValue[0]] = value[keyValue[0]];
-          console.log("setData => ", this.data);
-          this.subject.next(this.data['state']);
-        }
-      }]);
-
-      return StateApp;
-    }();
-
-    StateApp = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-      providedIn: 'root'
-    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])], StateApp);
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_state_service__WEBPACK_IMPORTED_MODULE_2__["StateApp"]])], CartService);
     /***/
   }
 }]);

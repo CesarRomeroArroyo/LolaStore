@@ -24,5 +24,5 @@
 	</div>
 </ion-content>
 
-<app-direcciones class="modal animate__animated animate__fadeIn animate__faster" [usuario]="usuario" (showModal)="closeModal($event)" (direccionSelected)="selecAdress($event)" *ngIf="showModal"></app-direcciones>
+<app-direcciones class="modal animate__animated animate__fadeIn animate__faster" [showAdd]="true" [usuario]="usuario" (showModal)="closeModal($event)" (direccionSelected)="selecAdress($event)" *ngIf="showModal"></app-direcciones>
 <app-tags></app-tags>
