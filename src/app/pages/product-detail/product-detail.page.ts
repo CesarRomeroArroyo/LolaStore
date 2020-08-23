@@ -50,7 +50,7 @@ export class ProductDetailPage implements OnInit {
 	async presentToast(message, color?) {
 		const toast = await this.toastController.create({
 			message: message,
-			duration: 2000,
+			duration: 1000,
 			color: color,
 		});
 		toast.present();

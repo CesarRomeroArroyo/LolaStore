@@ -74,13 +74,16 @@
         <div class="container__gifts__title">
           <i class="fa fa-gift" aria-hidden="true"></i> Por tu compra te regalamos:
         </div>
-        <div class="container__discount__item" >
+        <div class="container__discount__item" *ngIf="obserquioSiempre">
           Dulce + Boleta
+        </div>
+        <div class="container__discount__item" *ngFor="let gift of obsequiosShow">
+          {{gift.obsequio}}
         </div>
       </div>
       <div class="container__title">
         <div class="container__title__values">Subtotal: {{calcularPago()| currency: 'USD':true:'2.0'}}</div>
-        <div class="container__title__values">Valor Domicilio: {{domicilio()| currency: 'USD':true:'2.0'}}</div>
+        <div class="container__title__values">Valor Domicilio: {{(domicilio()==0)?'$0': domicilio()| currency: 'USD':true:'2.0'}}</div>
         Total a pagar: {{calcularPago()+ domicilio()| currency: 'USD':true:'2.0'}}
         <div class="container__title__sub">Toca para realizar el pedido</div>
       </div>

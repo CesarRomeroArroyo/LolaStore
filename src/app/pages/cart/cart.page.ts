@@ -20,6 +20,9 @@ export class CartPage implements OnInit {
   user: UsuarioInterface;
   showModal: boolean;
   showDescuentos: boolean;
+  obsequios: any;
+  obsequiosShow: any[];
+  obserquioSiempre: boolean;
   constructor(
     private firebase: FirebaseService,
     private router: Router,
@@ -27,6 +30,8 @@ export class CartPage implements OnInit {
   ) { 
     this.showModal = false;
     this.showDescuentos = false;
+    this.obsequiosShow = [];
+    this.obserquioSiempre = false;
   }
 
   ngOnInit() {
@@ -48,6 +53,11 @@ export class CartPage implements OnInit {
     this.firebase.obtener("transversal").subscribe((t) => {
       if(t[0].descuento>0){
         this.discount = t[0].descuento;
+      }
+      if(t[0].obsequios){
+        this.obsequios = t[0].obsequios;
+        this.obserquioSiempre = t[0].obsequioinicial;
+        this.obtenerObssequios();
       }
     });
     this.verificarDescuentoProductos();
@@ -103,7 +113,28 @@ export class CartPage implements OnInit {
     return this.total;
   }
 
+  obtenerObssequios(){
+    this.calcularPago();
+    this.obsequiosShow = [];
+    //this.obsequiosShow.push(this.obsequios[0]);
+    const index = this.obsequios.findIndex((data)=> {
+      return this.total >= data.desde && this.total <= data.hasta && data.hasta != 999999999;
+    });
+    console.log(index);
+    for (let i = 0; i <= index; i++) {
+      this.obsequiosShow.push(this.obsequios[i]);
+    }
+    console.log(this.obsequiosShow);
+  }
+
   domicilio(){
+    const verificar = this.obsequiosShow.filter((o) => {
+      return o.domicilio == true;
+    });
+
+    if(verificar){
+      return 0;
+    }
     return 4000;
   }
 
@@ -135,6 +166,7 @@ export class CartPage implements OnInit {
         this.productsGrl.splice(product, 1);
         this.asignarProductos();
         this.cartService.administrarProducto(this.productsGrl);
+        this.obtenerObssequios();
       }
     });
   }
