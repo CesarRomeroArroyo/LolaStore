@@ -26,7 +26,7 @@ export class CartPage implements OnInit {
     private cartService: CartService
   ) { 
     this.showModal = false;
-    this.showDescuentos = true;
+    this.showDescuentos = false;
   }
 
   ngOnInit() {
@@ -101,6 +101,10 @@ export class CartPage implements OnInit {
       }
     });
     return this.total;
+  }
+
+  domicilio(){
+    return 4000;
   }
 
   closeModal(e) {
