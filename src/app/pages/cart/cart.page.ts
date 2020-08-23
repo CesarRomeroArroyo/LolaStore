@@ -99,6 +99,9 @@ export class CartPage implements OnInit {
     } else {
       this.asignarProductos();
     }
+    this.calcularPago();
+    this.obtenerObssequios();
+    this.domicilio();
   }
 
   calcularPago(){
@@ -116,7 +119,6 @@ export class CartPage implements OnInit {
   obtenerObssequios(){
     this.calcularPago();
     this.obsequiosShow = [];
-    //this.obsequiosShow.push(this.obsequios[0]);
     const index = this.obsequios.findIndex((data)=> {
       return this.total >= data.desde && this.total <= data.hasta && data.hasta != 999999999;
     });
@@ -132,7 +134,7 @@ export class CartPage implements OnInit {
       return o.domicilio == true;
     });
 
-    if(verificar){
+    if(verificar.length > 0){
       return 0;
     }
     return 4000;
@@ -165,6 +167,7 @@ export class CartPage implements OnInit {
       if (result.value) {
         this.productsGrl.splice(product, 1);
         this.asignarProductos();
+        this.domicilio();
         this.cartService.administrarProducto(this.productsGrl);
         this.obtenerObssequios();
       }
