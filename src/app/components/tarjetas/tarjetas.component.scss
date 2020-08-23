@@ -1,0 +1,58 @@
+.cards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 0 0 4%;
+    &__card {
+        display: flex;
+        flex-direction: column;
+        background: white;
+        overflow: hidden;
+        border-radius: 20px;
+        flex-basis: 46%;
+        margin: 0 4% 4% 0;
+        box-shadow: 0px 0px 4px 0px var(--ion-color-dark);
+        &__title {
+            height: 15vh;
+            overflow: hidden;
+            > i {
+                display: flex;
+                justify-content: flex-end;
+                position: relative;
+                right: 2vh;
+                z-index: 10;
+                top: 1vh;
+                font-size: 2.2vh;
+            }
+            > img {
+                position: relative;
+                object-fit: cover;
+                object-position: center;
+                height: 100%;
+                width: 100%;
+                top: -3vh;
+            }
+        }
+        &__info {
+            padding: 3%;
+            &__header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 2%;
+                > h6 {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 2.2vh;
+                }
+            }
+            &__price {
+                display: flex;
+                justify-content: center;
+                font-weight: bold;
+                color: var(--ion-color-primary);
+            }
+        }
+    }
+}

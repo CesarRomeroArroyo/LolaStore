@@ -66,7 +66,6 @@ export class BusquedaPage implements OnInit {
 					subcategorias: subcategoria
 				});
 			});
-			console.log(data);
 			data.forEach((cat, index) => {
 				cat.subcategorias.forEach((sub, index) => {
 					if (sub.productos.length > 0) {
