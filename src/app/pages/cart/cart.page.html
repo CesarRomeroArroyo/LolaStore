@@ -79,12 +79,11 @@
         </div>
       </div>
       <div class="container__title">
-        Total a pagar: {{calcularPago()| currency: 'USD':true:'2.0'}}
+        <div class="container__title__values">Subtotal: {{calcularPago()| currency: 'USD':true:'2.0'}}</div>
+        <div class="container__title__values">Valor Domicilio: {{domicilio()| currency: 'USD':true:'2.0'}}</div>
+        Total a pagar: {{calcularPago()+ domicilio()| currency: 'USD':true:'2.0'}}
         <div class="container__title__sub">Toca para realizar el pedido</div>
       </div>
-      <!-- <div class="container__btn">
-        <ion-button color="primary" shape="round" expand="block" (click)="save()">Confirmar Compra</ion-button>
-      </div> -->
       <div class="container__footer">&nbsp;</div>
     </div>
   </div>
