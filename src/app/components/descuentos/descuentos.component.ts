@@ -10,13 +10,18 @@ import { FirebaseService } from '@services/firebase.service';
 export class DescuentosComponent implements OnInit {
   @Input() discountProd: boolean;
   @Input() decuentoAplicado: string;
+  @Input() total: number;
   @Output() descuentoSelected = new EventEmitter<string>();
   @Output() showModal = new EventEmitter<boolean>();
-
+  obsequios: any;
+  obsequiosShow: any[];
   discount: number = 0;
+  verificarDesceunto: any;
   constructor(
     private firebase: FirebaseService
-  ) { }
+  ) { 
+    this.verificarDesceunto = [];
+  }
 
   ngOnInit() {
     this.discount = 0;
@@ -25,6 +30,25 @@ export class DescuentosComponent implements OnInit {
         this.discount = t[0].descuento;
         console.log(this.discount);
       }
+      if(t[0].obsequios){
+        this.obsequios = t[0].obsequios;
+        this.obtenerObssequios();
+      }
+    });
+  }
+
+  obtenerObssequios(){
+    this.obsequiosShow = [];
+    const index = this.obsequios.findIndex((data)=> {
+      return this.total >= data.desde && this.total <= data.hasta && data.hasta != 999999999;
+    });
+    console.log(index);
+    for (let i = 0; i <= index; i++) {
+      this.obsequiosShow.push(this.obsequios[i]);
+    }
+    console.log(this.obsequiosShow);
+    this.verificarDesceunto = this.obsequiosShow.filter((o) => {
+      return o.descuento == true;
     });
   }
 

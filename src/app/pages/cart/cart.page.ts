@@ -23,6 +23,7 @@ export class CartPage implements OnInit {
   obsequios: any;
   obsequiosShow: any[];
   obserquioSiempre: boolean;
+  verificarDesceunto: any;
   constructor(
     private firebase: FirebaseService,
     private router: Router,
@@ -92,12 +93,22 @@ export class CartPage implements OnInit {
     });
   }
 
+  aplicarDesctuentoTransversal(){
+    this.products.forEach((prod) => {
+      prod.producto.descuento = this.verificarDesceunto[0].valor;
+    });
+  }
+
   seleccionarDescuento(desc){
     this.decuentoAplicado=desc;
     if(desc=="store"){
       this.aplicarDesctuentoTienda();
-    } else {
+    }
+    if(desc=="prod") {
       this.asignarProductos();
+    }
+    if(desc=="transv") {
+      this.aplicarDesctuentoTransversal();
     }
     this.calcularPago();
     this.obtenerObssequios();
@@ -132,6 +143,10 @@ export class CartPage implements OnInit {
   domicilio(){
     const verificar = this.obsequiosShow.filter((o) => {
       return o.domicilio == true;
+    });
+
+    this.verificarDesceunto = this.obsequiosShow.filter((o) => {
+      return o.descuento == true;
     });
 
     if(verificar.length > 0){

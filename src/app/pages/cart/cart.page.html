@@ -91,6 +91,6 @@
     </div>
   </div>
   <app-direcciones class="modal animate__animated animate__fadeIn animate__faster" [showAdd]="false" [usuario]="user" (showModal)="closeModal($event)" (direccionSelected)="selecAdress($event)" *ngIf="showModal"></app-direcciones>
-  <app-descuentos class="modal animate__animated animate__fadeIn animate__faster" *ngIf="showDescuentos" [discountProd]="discountProd" [decuentoAplicado]="decuentoAplicado" (descuentoSelected)="seleccionarDescuento($event)" (showModal)="closeDescuento($event)" ></app-descuentos>
+  <app-descuentos class="modal animate__animated animate__fadeIn animate__faster" *ngIf="showDescuentos" [discountProd]="discountProd" [decuentoAplicado]="decuentoAplicado" [total]="total" (descuentoSelected)="seleccionarDescuento($event)" (showModal)="closeDescuento($event)" ></app-descuentos>
 </ion-content>
 <app-tags></app-tags>
