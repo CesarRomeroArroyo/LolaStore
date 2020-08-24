@@ -6,8 +6,8 @@
 			</div>
 			<div class="container__header__search">
 				<ion-icon name="search-outline" (click)="search = !search"></ion-icon>
-				<ion-input #buscarText class="container__header__search__input animate__animated animate__fadeIn"
-					placeholder="Buscar..." *ngIf="search" (keyup)="buscar(buscarText.value)"></ion-input>
+				<ion-input [(ngModel)]="buscarText" type="text" class="container__header__search__input animate__animated animate__fadeIn"
+					placeholder="Buscar..." *ngIf="search" (keyup)="buscar()"></ion-input>
 			</div>
 		</div>
 

@@ -6,7 +6,7 @@ export const environment = {
 	production: false,
 	firebase: {
 		/* Produccion */
-		 /* apiKey: "AIzaSyBQSEIiRZQWcgPCV39Ngww-_DKdYcnYXwg",
+		/*  apiKey: "AIzaSyBQSEIiRZQWcgPCV39Ngww-_DKdYcnYXwg",
 		authDomain: "lolastore-b2e58.firebaseapp.com",
 		databaseURL: "https://lolastore-b2e58.firebaseio.com",
 		projectId: "lolastore-b2e58",

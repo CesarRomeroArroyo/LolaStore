@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 	styleUrls: ['./category.page.scss'],
 })
 export class CategoryPage implements OnInit {
-
+	buscarText: string;
 	category: any;
 	categorySel: any;
 	productosCategoria: any = [];
@@ -23,7 +23,9 @@ export class CategoryPage implements OnInit {
 		private firebase: FirebaseService,
 		private state: StateApp,
 		private router: Router
-	) { }
+	) { 
+		this.buscarText  ="";
+	}
 
 	ngOnInit() {
 		this.categorySel = 'all';
@@ -67,19 +69,19 @@ export class CategoryPage implements OnInit {
 		this.router.navigate(['home']);
 	}
 
-	buscar(query: string) {
-		if (query == '') {
+	buscar() {
+		if (this.buscarText == '') {
 			this.dataShow = this.productosSeleccionados;
 			console.log(this.dataShow);
 			return;
 		} else {
 			let data: any[] = [];
-			query = query.toUpperCase();
+			this.buscarText = this.buscarText.toUpperCase();
 			this.productosSeleccionados.forEach(element => {
 				data.push({
 					nombre: element.nombre,
 					productos: element.productos.filter(prod => {
-						return prod.nombre.toUpperCase().indexOf(query.toUpperCase()) >= 0;
+						return prod.nombre.toUpperCase().indexOf(this.buscarText.toUpperCase()) >= 0;
 					})
 				})
 			});
