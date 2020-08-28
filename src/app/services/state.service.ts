@@ -20,7 +20,8 @@ export class StateApp {
         var keyValue = Object.keys(value);
         keyValue.forEach((key) => {
             this.data['state'][key] = value[key];
-        })
+        });
+        console.log(this.data['state']);
         this.subject.next(this.data['state']);
     }
 

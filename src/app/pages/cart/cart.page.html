@@ -63,7 +63,7 @@
             </div>
             <small>Conoce los descuentos que puedes aplicar a tu compra</small>
           </div>
-          <div class="container__discount__title__option" (click)="showDescuentos= true">
+          <div class="container__discount__title__option" (click)="mostrarDesceuntos()">
             <small>Ver</small> 
           </div>
             
@@ -103,7 +103,7 @@
     
   </div>
   <app-direcciones class="modal animate__animated animate__fadeIn animate__faster" [showAdd]="false" [usuario]="user" (showModal)="closeModal($event)" (direccionSelected)="selecAdress($event)" *ngIf="showModal"></app-direcciones>
-  <app-descuentos class="modal animate__animated animate__fadeIn animate__faster" *ngIf="showDescuentos" [discountProd]="discountProd" [decuentoAplicado]="decuentoAplicado" [total]="total" (descuentoSelected)="seleccionarDescuento($event)" (showModal)="closeDescuento($event)" ></app-descuentos>
+  <app-descuentos class="modal animate__animated animate__fadeIn animate__faster" [discountProd]="discountProd" [decuentoAplicado]="decuentoAplicado" [total]="total" (descuentoSelected)="seleccionarDescuento($event)" (showModal)="closeDescuento($event)" ></app-descuentos>
   <app-confirmacion class="modal animate__animated animate__fadeIn animate__faster" [formaspago]="formapago" *ngIf="showFormaPago" (showModal)="closeModalFormaPAgo($event)"></app-confirmacion>
 </ion-content>
 <app-tags></app-tags>

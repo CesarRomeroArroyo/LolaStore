@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from '@services/firebase.service';
+import { StateApp } from '@services/state.service';
 
 
 @Component({
@@ -17,14 +18,22 @@ export class DescuentosComponent implements OnInit {
   obsequiosShow: any[];
   discount: number = 0;
   verificarDesceunto: any;
+  showDescuento: boolean;
   constructor(
-    private firebase: FirebaseService
+    private firebase: FirebaseService,
+    private state: StateApp
   ) { 
     this.verificarDesceunto = [];
+    this.showDescuento = false;
   }
 
   ngOnInit() {
     this.discount = 0;
+    this.state.getObservable().subscribe((data) => {
+      
+        this.showDescuento = data.showDescuento;
+      
+    });
     this.firebase.obtener("transversal").subscribe((t) => {
       if(t[0].descuento>0){
         this.discount = t[0].descuento;
@@ -53,7 +62,8 @@ export class DescuentosComponent implements OnInit {
   }
 
   show() {
-		this.showModal.emit(false);
+    //this.showModal.emit(false);
+    this.state.setData({showDescuento: false});
 	}
 
   seleccionarDescuento(desc){

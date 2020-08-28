@@ -4,6 +4,8 @@ import { FirebaseService } from '@services/firebase.service';
 import { UsuarioInterface } from '@interfaces/usuario.interface';
 import Swal from 'sweetalert2';
 import { CartService } from '@services/cart.service';
+import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
+import { StateApp } from '@services/state.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
@@ -29,7 +31,8 @@ export class CartPage implements OnInit {
   constructor(
     private firebase: FirebaseService,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private state: StateApp
   ) {
     this.showModal = false;
     this.showDescuentos = false;
@@ -268,5 +271,9 @@ export class CartPage implements OnInit {
 
   actualizarInventario(){
 
+  }
+
+  mostrarDesceuntos(){
+    this.state.setData({showDescuento: true});
   }
 }
