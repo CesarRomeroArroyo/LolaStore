@@ -5,7 +5,7 @@ import { UsuarioInterface } from '@interfaces/usuario.interface';
 import Swal from 'sweetalert2';
 import { CartService } from '@services/cart.service';
 import { Plugins } from '@capacitor/core';
-import { DistanceService } from '@services/distance.service';
+import { UtilsService } from '@services/utils.service';
 
 const { Geolocation } = Plugins;
 
@@ -38,7 +38,7 @@ export class CartPage implements OnInit {
     private firebase: FirebaseService,
     private router: Router,
     private cartService: CartService,
-    private distanceService: DistanceService
+    private distanceService: UtilsService
   ) {
     this.showModal = false;
     this.showDescuentos = false;
