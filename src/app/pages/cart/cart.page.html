@@ -83,7 +83,11 @@
       </div>
       <div class="container__title" (click)="finalizarPedido()">
         <div class="container__title__values">Subtotal: {{calcularPago()| currency: 'USD':true:'2.0'}}</div>
-        <div class="container__title__values">Valor Domicilio: {{(domicilio()==0)?'$0': domicilio()| currency: 'USD':true:'2.0'}}</div>
+        
+        <div class="container__title__values" *ngIf="domicilio()==0">Valor Domicilio: <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>Calculando Domicilio...</div>
+        <div class="container__title__values" *ngIf="domicilio()!=0">Valor Domicilio: {{domicilio()| currency: 'USD':true:'2.0'}}</div>
+        
+        
         Total a pagar: {{calcularPago()+ domicilio()| currency: 'USD':true:'2.0'}}
         <div class="container__title__sub">Toca para realizar el pedido</div>
       </div>

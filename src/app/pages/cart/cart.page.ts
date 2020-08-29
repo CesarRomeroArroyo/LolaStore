@@ -4,6 +4,11 @@ import { FirebaseService } from '@services/firebase.service';
 import { UsuarioInterface } from '@interfaces/usuario.interface';
 import Swal from 'sweetalert2';
 import { CartService } from '@services/cart.service';
+import { Plugins } from '@capacitor/core';
+import { DistanceService } from '@services/distance.service';
+
+const { Geolocation } = Plugins;
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
@@ -26,10 +31,14 @@ export class CartPage implements OnInit {
   obserquioSiempre: boolean;
   verificarDesceunto: any;
   formapago: any[];
+  gps: any = {lon: 0, lat:0};
+  domicilios: [];
+  store: any;
   constructor(
     private firebase: FirebaseService,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private distanceService: DistanceService
   ) {
     this.showModal = false;
     this.showDescuentos = false;
@@ -37,18 +46,25 @@ export class CartPage implements OnInit {
     this.obsequiosShow = [];
     this.obserquioSiempre = false;
     this.formapago= [];
+    this.domicilios = [];
+    this.store = {};
   }
 
   ngOnInit() {
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
+    const coordinates = await Geolocation.getCurrentPosition();
+    console.log('Current', coordinates);
+    this.gps.lon = coordinates.coords.longitude;
+    this.gps.lat = coordinates.coords.latitude;
     this.total = 0;
     this.discountProd = false;
     this.decuentoAplicado = "prod";
     this.discount = 0;
     this.user = JSON.parse(localStorage.getItem("APP_USER"));
     const prodPedido = JSON.parse(localStorage.getItem("APP_PEDIDO"));
+    console.log(prodPedido);
 		if(prodPedido){
 			this.productsGrl = prodPedido;
 		} else {
@@ -67,8 +83,15 @@ export class CartPage implements OnInit {
       if(t[0].opcionespago){
         this.formapago = t[0].opcionespago;
       }
+      if(t[0].domicilios){
+        this.domicilios = t[0].domicilios;
+      }
+    });
+    this.firebase.obtener('usuarios').subscribe((user) =>{
+      this.store = user[0];
     });
     this.verificarDescuentoProductos();
+    //this.actualizarInventario();
   }
 
   asignarProductos(){
@@ -140,11 +163,9 @@ export class CartPage implements OnInit {
     const index = this.obsequios.findIndex((data)=> {
       return this.total >= data.desde && this.total <= data.hasta && data.hasta != 999999999;
     });
-    console.log(index);
     for (let i = 0; i <= index; i++) {
       this.obsequiosShow.push(this.obsequios[i]);
     }
-    console.log(this.obsequiosShow);
   }
 
   domicilio(){
@@ -159,7 +180,20 @@ export class CartPage implements OnInit {
     if(verificar.length > 0){
       return 0;
     }
-    return 4000;
+    return this.calcularDomicilio();
+  }
+
+  calcularDomicilio(){
+    var valorRetorno = 0;
+    let distancia = this.distanceService.difereciaEntreDosPuntos(this.store.lon, this.store.lat, this.gps.lon, this.gps.lat);
+    //let distancia = this.distanceService.difereciaEntreDosPuntos(-73.2857307, 10.494702, -73.2295297, 10.444309);
+    let distanciaMetros =  parseFloat(distancia)*1000;    
+    this.domicilios.forEach((dom: any) =>  {
+      if(distanciaMetros >= dom.desde && distanciaMetros <= dom.hasta){
+        valorRetorno = dom.domicilio;
+      }
+    });
+    return valorRetorno;
   }
 
   closeModal(e) {
@@ -238,6 +272,7 @@ export class CartPage implements OnInit {
       minuto='0'+minuto;
     }
     var fecha = dd+'/'+mm+'/'+yyyy;
+    
     console.log(this.products);
 
     const pedido = {
@@ -266,7 +301,20 @@ export class CartPage implements OnInit {
     console.log(pedido);
   }
 
-  actualizarInventario(){
+  cargandoDomicilio(){
+    return 'Calculando Valor de Domicilio...';
+  }
 
+  async actualizarInventario(){
+    var fecha = this.distanceService.fechaActual();
+    var usuario: any = JSON.parse(localStorage.getItem("APP_USER"));
+    this.products.forEach(async (product) => {
+      var prod = await this.firebase.obtenerIdPromise("productos", product.producto.id);
+      console.log(product.producto.cantidad);
+      prod[0].cantidad =  prod[0].cantidad - product.cantidad;
+      console.log(prod[0]);
+      await this.firebase.actualizarDatos("productos", prod[0], prod[0].id);
+      await this.firebase.guardarDatos("movimientos", {producto: prod[0], movimiento:"SALIDA", fecha: fecha, usuario: usuario, cantidad: product.cantidad})
+    });
   }
 }
