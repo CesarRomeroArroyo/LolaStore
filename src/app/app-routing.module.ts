@@ -27,10 +27,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/busqueda/busqueda.module').then( m => m.BusquedaPageModule)
   },
   {
+    path: 'favoritos',
+    loadChildren: () => import('./pages/favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  
 
 ];
 
