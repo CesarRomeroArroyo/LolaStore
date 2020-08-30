@@ -1,15 +1,16 @@
 <ion-content>
-	<div class="container">
+
+	<div class="container" >
 		<div *ngFor="let categoria of dataShow">
 			<div class="container__categorias" *ngIf="categoria.tiene">
-				<div class="container__categorias__title animate__animated animate__backInUp">
+				<div class="container__categorias__title ">
 					<div class="container__categorias__title__text">
 						{{categoria.nombre}}
 					</div>
 				</div>
 				<div *ngFor="let subcategoria of categoria.subcategorias">
 					<div class="container__subcategorias" *ngIf="subcategoria.productos.length > 0">
-						<div class="container__subcategorias__title animate__animated animate__backInUp">
+						<div class="container__subcategorias__title ">
 							{{subcategoria.nombre}}
 						</div>
 						<div class="container__cards">
@@ -17,9 +18,14 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+      </div>      
+    </div>
+    <div class="container__noproductos" *ngIf="user?.favoritos.length == 0">
+      <ion-icon name="heart-outline"></ion-icon>      
+      No tienes Favoritos aun
+    </div>
+    <div class="container__footer">&nbsp;<br><br></div>
+  </div>
 </ion-content>
 
 <app-tags></app-tags>

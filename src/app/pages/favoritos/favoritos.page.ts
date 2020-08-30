@@ -24,7 +24,7 @@ export class FavoritosPage implements OnInit {
 	async ionViewWillEnter() {
 
 		var usuario: any = JSON.parse(localStorage.getItem("APP_USER"));
-		this.firebaseSvc.obtenerId("clientes", usuario.id).subscribe((user) => {
+		this.firebaseSvc.obtenerUniqueId("clientes", usuario.idunico).subscribe((user) => {
 			this.user = {};
 			this.user = user[0];
 			this.init();
@@ -35,7 +35,9 @@ export class FavoritosPage implements OnInit {
 		this.data = [];
 		this.dataShow = [];
 		this.productos = [];
-		this.productos = this.user.favoritos;
+		if(this.user['favoritos']){
+			this.productos = this.user.favoritos;
+		}
 		this.categorias = await this.firebaseSvc.obtenerPromise('categorias');
 		this.categorias.forEach(element => {
 			const data = { nombre: element.nombre, subcategorias: element.subcategorias };

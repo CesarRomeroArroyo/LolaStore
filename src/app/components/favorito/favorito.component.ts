@@ -17,7 +17,7 @@ export class FavoritoComponent implements OnInit {
 
   async ngOnInit() {
     var usuario: any = JSON.parse(localStorage.getItem("APP_USER"));
-    var userWeb = await this.firebase.obtenerIdPromise("clientes", usuario.id);
+    var userWeb = await this.firebase.obtenerUniqueIdPromise("clientes", usuario.idunico);
     if(userWeb[0].favoritos){
       var verificarFavorito = userWeb[0].favoritos.filter((fa) => {
         return fa.id == this.producto.id;
@@ -30,7 +30,7 @@ export class FavoritoComponent implements OnInit {
 
   async administrarFavorito(){
     var usuario: any = JSON.parse(localStorage.getItem("APP_USER"));
-    var userWeb = await this.firebase.obtenerIdPromise("clientes", usuario.id);
+    var userWeb = await this.firebase.obtenerUniqueIdPromise("clientes", usuario.idunico);
     if(userWeb[0].favoritos){
       if(!this.incluido){
         this.incluido = true;

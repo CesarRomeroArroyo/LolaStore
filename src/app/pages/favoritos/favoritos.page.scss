@@ -1,39 +1,28 @@
 .container {
-    min-height: 100%;
     width: 100%;
-    padding: 5px 0px 22% 0px;
-    &__search {
-        background: #f7d8dd;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    &__footer {
+        height: 55px;
+    }
+    &__noproductos{
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
-        position: fixed;
-        box-shadow: 0px 0px 3px 1px var(--ion-color-primary);
-        padding: 4% 0;
-        width: 100%;
-        z-index: 10;
-        top: 0;
-        &__input {
-            position: relative;
-            right: -20px;
-            padding: 6px 12px;
-            line-height: 1.42857143;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            border: 1px solid var(--ion-color-primary);
-            box-shadow: 0px 0px 3px 1px var(--ion-color-primary);
-        }
-        &__icon {
-            padding: 9px 12px;
-            color: var(--ion-color-light);
-            background-color: var(--ion-color-gray-light);
-            border: 1px solid var(--ion-color-gray-light);
-            border-radius: 20px;
-            position: relative;
-            right: 8px;
+        flex-direction: column;
+        ion-icon{
+            font-size: 70px;
         }
     }
     &__categorias {
+        position: relative;
+        width: 100%;
+        height: 100%;
         &__title {
             font-size: 3.8vh;
             font-weight: bold;

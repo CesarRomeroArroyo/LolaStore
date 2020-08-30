@@ -6,7 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { FirebaseService } from '@services/firebase.service';
 import { StateApp } from '@services/state.service';
 import { CartService } from '@services/cart.service';
-
+import Swal from 'sweetalert2';
 @Component({
 	selector: 'app-product-detail',
 	templateUrl: './product-detail.page.html',
@@ -102,12 +102,19 @@ export class ProductDetailPage implements OnInit {
 	}
 
 	addCar() {
-		if (this.validation()) {
-			this.pedido.push({producto: this.producto, cantidad: this.cantidad, color: this.colorSelected });
-			this.cartService.administrarProducto(this.pedido);
-			this.presentToast("Producto Agregado");
+		var usuario: any = JSON.parse(localStorage.getItem("APP_USER"));
+		if(usuario){
+			if (this.validation()) {
+				this.pedido.push({producto: this.producto, cantidad: this.cantidad, color: this.colorSelected });
+				this.cartService.administrarProducto(this.pedido);
+				this.presentToast("Producto Agregado");
+			} else {
+				this.presentToast("Por favor elija un color");
+			}
 		} else {
-			this.presentToast("Por favor elija un color");
+			Swal.fire("", "Antes de agregare el producto al carrito, necesitamoms tus datos para realizar el pedido", "info");
+			this.router.navigate(["/perfil"]);
 		}
+		
 	}
 }
