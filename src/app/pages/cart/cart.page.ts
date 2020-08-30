@@ -34,6 +34,7 @@ export class CartPage implements OnInit {
   gps: any = {lon: 0, lat:0};
   domicilios: [];
   store: any;
+  verificarDomicilio: any;
   constructor(
     private firebase: FirebaseService,
     private router: Router,
@@ -48,16 +49,14 @@ export class CartPage implements OnInit {
     this.formapago= [];
     this.domicilios = [];
     this.store = {};
+    this.verificarDomicilio=[];
   }
 
   ngOnInit() {
+    
   }
 
   async ionViewWillEnter() {
-    const coordinates = await Geolocation.getCurrentPosition();
-    console.log('Current', coordinates);
-    this.gps.lon = coordinates.coords.longitude;
-    this.gps.lat = coordinates.coords.latitude;
     this.total = 0;
     this.discountProd = false;
     this.decuentoAplicado = "prod";
@@ -92,6 +91,10 @@ export class CartPage implements OnInit {
     });
     this.verificarDescuentoProductos();
     //this.actualizarInventario();
+    const coordinates = await Geolocation.getCurrentPosition();
+    console.log('Current', coordinates);
+    this.gps.lon = coordinates.coords.longitude;
+    this.gps.lat = coordinates.coords.latitude;
   }
 
   asignarProductos(){
@@ -169,15 +172,15 @@ export class CartPage implements OnInit {
   }
 
   domicilio(){
-    const verificar = this.obsequiosShow.filter((o) => {
-      return o.domicilio == true;
+    this.verificarDomicilio = this.obsequiosShow.filter((o) => {
+      return o.domicilio == "true";
     });
 
     this.verificarDesceunto = this.obsequiosShow.filter((o) => {
-      return o.descuento == true;
+      return o.descuento == "true";
     });
 
-    if(verificar.length > 0){
+    if(this.verificarDomicilio.length > 0 && this.mismaCiudad()){
       return 0;
     }
     return this.calcularDomicilio();
@@ -193,6 +196,7 @@ export class CartPage implements OnInit {
         valorRetorno = dom.domicilio;
       }
     });
+    console.log(valorRetorno);
     return valorRetorno;
   }
 
@@ -316,5 +320,10 @@ export class CartPage implements OnInit {
       await this.firebase.actualizarDatos("productos", prod[0], prod[0].id);
       await this.firebase.guardarDatos("movimientos", {producto: prod[0], movimiento:"SALIDA", fecha: fecha, usuario: usuario, cantidad: product.cantidad})
     });
+  }
+
+  mismaCiudad(){
+    var verifica = this.user.ciudad == this.store.ciudad;
+    return verifica;
   }
 }

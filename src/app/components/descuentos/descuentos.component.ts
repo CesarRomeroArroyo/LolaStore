@@ -48,7 +48,7 @@ export class DescuentosComponent implements OnInit {
     }
     console.log(this.obsequiosShow);
     this.verificarDesceunto = this.obsequiosShow.filter((o) => {
-      return o.descuento == true;
+      return o.descuento == "true";
     });
   }
 
