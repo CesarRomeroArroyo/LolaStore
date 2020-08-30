@@ -78,6 +78,20 @@ export class FirebaseService {
 		);
   }
 
+
+  async obtenerUniqueIdPromise(tabla, id) {
+	let returnData = [];
+	var data = await this.db.collection(tabla, ref => ref.where('idunico', '==', id)).get().toPromise();
+	data.forEach(info => {
+		var d = info.data();
+		d["id"] = info.id;
+		// console.log(info.id);
+		// console.log(info.data());
+		returnData.push(d);
+	});
+	return returnData;
+  }
+
   obtenerProductoCategoria(categoria): Observable<any> {
 		this.itemsCollection = this.db.collection('productos', ref => ref.where('idunicoCategoria', '==', categoria));
 		return this.itemsCollection.snapshotChanges().pipe(

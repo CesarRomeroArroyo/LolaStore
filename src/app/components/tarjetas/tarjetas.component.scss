@@ -16,7 +16,7 @@
         &__title {
             height: 15vh;
             overflow: hidden;
-            > i {
+            app-favorito {
                 display: flex;
                 justify-content: flex-end;
                 position: relative;

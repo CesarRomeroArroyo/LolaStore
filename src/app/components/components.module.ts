@@ -8,13 +8,15 @@ import { DireccionesComponent } from './direcciones/direcciones.component';
 import { DescuentosComponent } from './descuentos/descuentos.component';
 import { TarjetasComponent } from './tarjetas/tarjetas.component';
 import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
+import { FavoritoComponent } from './favorito/favorito.component';
 
 const components = [
 	TagsComponent,
 	DireccionesComponent,
 	DescuentosComponent,
 	TarjetasComponent,
-	ConfirmacionComponent
+	ConfirmacionComponent,
+	FavoritoComponent
 ];
 
 @NgModule({

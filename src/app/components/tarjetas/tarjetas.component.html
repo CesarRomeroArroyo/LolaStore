@@ -1,11 +1,11 @@
 <div class="cards">
 	<div class="cards__card animate__animated animate__backInUp" *ngFor="let producto of array">
 		<div class="cards__card__title">
-			<i class="fa fa-heart" aria-hidden="true"></i>
-			<img [src]="producto['url']" alt="" (click)="goToDetail(producto)" *ngIf="!producto?.urls">
-			<img [src]="producto.urls[0]" alt="" (click)="goToDetail(producto)" *ngIf="producto?.urls">
+			<app-favorito [producto]="producto"></app-favorito>
+			<img [src]="producto['url']" alt=""  *ngIf="!producto?.urls">
+			<img [src]="producto.urls[0]" alt="" *ngIf="producto?.urls">
 		</div>
-		<div class="cards__card__info">
+		<div class="cards__card__info" (click)="goToDetail(producto)">
 			<div class="cards__card__info__header">
 				<h6>{{producto.nombre}}</h6>
 			</div>
