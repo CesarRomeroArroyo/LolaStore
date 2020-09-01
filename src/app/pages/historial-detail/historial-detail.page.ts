@@ -1,3 +1,5 @@
+import { ProductoInterface } from './../../models/producto.interface';
+import { UsuarioInterface } from './../../models/usuario.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,11 +14,14 @@ import Swal from 'sweetalert2';
 })
 export class HistorialDetailPage implements OnInit {
 
-	public pedido: any;
-	public usuario: any;
-	public productos: any;
+	public pedido: PedidoInterface;
+	public usuario: UsuarioInterface;
+	public productos: ProductoInterface;
 	public showModal: boolean = false;
 	public mediopago: any;
+	public star: number[] = [5, 4, 3, 2, 1];
+	public stars: number = null;
+
 	constructor(
 		private firebase: FirebaseService,
 		private route: ActivatedRoute
@@ -39,6 +44,7 @@ export class HistorialDetailPage implements OnInit {
 			this.pedido = data[0];
 			this.usuario = this.pedido.usuario;
 			this.productos = this.pedido.productos;
+			this.stars = this.pedido.estrellas;
 			console.log(this.pedido);
 		});
 	}
@@ -82,10 +88,10 @@ export class HistorialDetailPage implements OnInit {
 			cancelButtonColor: '#d33',
 			confirmButtonText: 'Si',
 			cancelButtonText: 'No'
-		  }).then((result) => {
+		}).then((result) => {
 			if (result.value) {
-			  this.showModal = true;
+				this.showModal = true;
 			}
-		  });
+		});
 	}
 }

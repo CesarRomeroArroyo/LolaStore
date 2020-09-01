@@ -232,6 +232,22 @@
         height: 55px;
         background: white;
     }
+    &__calificacion {
+        padding: 4%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        &__star {
+            color: black;
+            > ion-icon {
+                font-size: 36px;
+            }
+        }
+        &__description {
+            width: 100%;
+        }
+    }
 }
 
 .descuento {
@@ -254,4 +270,8 @@ ion-content {
     height: 100%;
     width: 100%;
     z-index: 100;
+}
+
+.color {
+    color: var(--ion-color-primary);
 }

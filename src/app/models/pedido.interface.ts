@@ -8,5 +8,8 @@ export interface PedidoInterface {
     total: number,
     usuarioid: string,
     productos: any,
-    usuario: any
+    usuario: any,
+    estrellas?: number,
+    comentario: string,
+    atencion: string
 }

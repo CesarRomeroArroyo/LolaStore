@@ -76,7 +76,7 @@
 				<div class="container__discount__item">
 					Dulce + Boleta
 				</div>
-				<div class="container__discount__item" *ngFor="let obsequio of pedido.obsequios">
+				<div class="container__discount__item" *ngFor="let obsequio of pedido['obsequios']">
 					{{obsequio.obsequio}}
 				</div>
 			</div>
@@ -87,7 +87,7 @@
 				<div class="container__discount__item" *ngFor="let mp of mediopago">
 					{{mp.nombre}}, {{mp.numero}}
 				</div>
-				
+
 			</div>
 			<div class="container__title">
 				<div class="container__title__values">
@@ -100,6 +100,17 @@
 			</div>
 			<div class="content-calificar" *ngIf="pedido.estado === 1">
 				<ion-button (click)="calificarPedido()">¿Ya entregaron tu pedido?</ion-button>
+			</div>
+			<div class="container__calificacion" *ngIf="pedido.estado === 2">
+				<H3>Calificacion del servicio</H3>
+				<div class="container__calificacion__star">
+					<ion-icon name="star" [class.color]="i <= stars - 1" *ngFor="let item of star; let i = index">
+					</ion-icon>
+				</div>
+				<h5> {{pedido.atencion}} </h5>
+				<div class="container__calificacion__description" *ngIf="pedido.comentario">
+					{{pedido.comentario}}
+				</div>
 			</div>
 		</div>
 	</div>
