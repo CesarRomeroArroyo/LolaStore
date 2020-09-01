@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { FirebaseService } from '@services/firebase.service';
 import Swal from 'sweetalert2';
 
@@ -16,7 +18,10 @@ export class CalificarComponent implements OnInit {
 	public comentario: string = null;
 	public atencion: string = "Califica nuestro servicio";
 
-	constructor(private firebaseSvc: FirebaseService) { }
+	constructor(
+		private firebaseSvc: FirebaseService,
+		private router: Router
+		) { }
 
 	ngOnInit() { }
 
@@ -72,7 +77,8 @@ export class CalificarComponent implements OnInit {
 			this.pedido['estado'] = 2;
 			this.firebaseSvc.actualizarDatos('pedidos', this.pedido, this.pedido.id).then(() => {
 				Swal.fire("", "¡Gracias por elegirnos!", "success");
-				this.close()
+				this.router.navigate(['/historial']);
+				this.close();
 			})
 		} else {
 			Swal.fire("", "Por favor califica nuestro servicio", "info");
