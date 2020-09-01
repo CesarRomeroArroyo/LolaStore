@@ -1,0 +1,24 @@
+<div class="modal">
+	<div class="modal__info">
+		<div class="modal__close" (click)="close()">
+			<ion-icon name="close-circle-outline"></ion-icon>
+		</div>
+		<div class="modal__info__content">
+			<div class="modal__info__content__title">
+				Calificar Pedido
+			</div>
+			<div class="modal__info__content__stars">
+				<div class="modal__info__content__star">
+					<ion-icon name="star" [class.color]="stars <= i" *ngFor="let item of star; let i = index" (click)="selectStart(i)"></ion-icon>
+				</div>
+				<h5> {{atencion}} </h5>
+			</div>
+			<div class="modal__info__content__description">
+				<ion-textarea class="input" [(ngModel)]="comentario"></ion-textarea>
+			</div>
+		</div>
+		<div class="modal__info__footer" (click)="calificar()">
+			<ion-button expand="full"> Calificar </ion-button>
+		</div>
+	</div>
+</div>
