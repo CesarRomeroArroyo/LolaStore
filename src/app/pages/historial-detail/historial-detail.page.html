@@ -80,6 +80,15 @@
 					{{obsequio.obsequio}}
 				</div>
 			</div>
+			<div class="container__gifts">
+				<div class="container__gifts__title">
+					<i class="fa fa-dollar" aria-hidden="true"></i> Formas de Pago:
+				</div>
+				<div class="container__discount__item" *ngFor="let mp of mediopago">
+					{{mp.nombre}}, # Cuenta: {{mp.numero}}
+				</div>
+				
+			</div>
 			<div class="container__title">
 				<div class="container__title__values">
 					Subtotal: {{pedido.subtotal | currency: 'USD':true:'2.0'}}

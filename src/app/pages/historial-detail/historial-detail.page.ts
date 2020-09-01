@@ -16,7 +16,7 @@ export class HistorialDetailPage implements OnInit {
 	public usuario: any;
 	public productos: any;
 	public showModal: boolean = false;
-
+	public mediopago: any;
 	constructor(
 		private firebase: FirebaseService,
 		private route: ActivatedRoute
@@ -30,7 +30,9 @@ export class HistorialDetailPage implements OnInit {
 		this.init();
 	}
 
-	init() {
+	async init() {
+		var trasnversal = await this.firebase.obtenerPromise("transversal");
+		this.mediopago = trasnversal[0].opcionespago;
 		this.route.paramMap.subscribe(async (param) => {
 			let id = param.get('id');
 			let data = await this.firebase.obtenerUniqueIdPromise('pedidos', id);
