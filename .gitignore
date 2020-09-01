@@ -4,7 +4,9 @@ dist/
 tmp/
 app/**/*.js
 app/**/*.js.map
-
+www/
+android/
+ios/
 # dependencies
 node_modules/
 bower_components/
