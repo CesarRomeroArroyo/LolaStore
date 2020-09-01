@@ -2,7 +2,7 @@
 	<div class="tabs__tab" routerLinkActive="linkActive">
 		<div class="tabs__tab" [routerLink]="[ '/home' ]">
 			<ion-icon name="home-outline"></ion-icon>
-			
+
 		</div>
 	</div>
 	<div class="tabs__tab" routerLinkActive="linkActive">
@@ -11,24 +11,27 @@
 				{{numProd}}
 			</div>
 			<ion-icon name="cart-outline"></ion-icon>
-			
+
 		</div>
 	</div>
 	<div class="tabs__tab" routerLinkActive="linkActive">
 		<div class="tabs__tab" [routerLink]="[ '/historial']">
+			<div class="tabs__tab__cart" *ngIf="pendientes > 0">
+				{{pendientes}}
+			</div>
 			<ion-icon name="star-outline"></ion-icon>
 		</div>
 	</div>
 	<div class="tabs__tab" routerLinkActive="linkActive">
 		<div class="tabs__tab" [routerLink]="[ '/favoritos' ]">
 			<ion-icon name="heart-outline"></ion-icon>
-			
+
 		</div>
 	</div>
 	<div class="tabs__tab" routerLinkActive="linkActive">
 		<div class="tabs__tab" [routerLink]="[ '/perfil' ]">
 			<ion-icon name="person-outline"></ion-icon>
-			
+
 		</div>
 	</div>
 </div>
