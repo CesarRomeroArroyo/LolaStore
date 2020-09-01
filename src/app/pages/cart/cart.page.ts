@@ -321,7 +321,7 @@ export class CartPage implements OnInit {
     var fecha = this.distanceService.fechaActual();
     var usuario: any = JSON.parse(localStorage.getItem("APP_USER"));
     this.products.forEach(async (product) => {
-      var prod = await this.firebase.obtenerIdPromise("productos", product.producto.id);
+      var prod = await this.firebase.obtenerUniqueIdPromise("productos", product.producto.idunico);
       console.log(product.producto.cantidad);
       prod[0].cantidad =  prod[0].cantidad - product.cantidad;
       console.log(prod[0]);

@@ -2,18 +2,34 @@
 	<ion-content>
 		<div class="container">
 			<div class="container__header">
-				Pedidos
+				Historial de Pedidos
 			</div>
 			<div class="container__items">
-				<ion-item [detail]="true" *ngFor="let pedido of pedidos" (click)="redirectTo(pedido)">
-					<ion-label>{{pedido.fecha}}</ion-label>
-					<div>|</div>
-					<ion-label>{{pedido.hora}}</ion-label>
-					<div>|</div>
-					<ion-badge color="warning" *ngIf="pedido.estado == 1">Pendiente</ion-badge>
-					<ion-badge color="success" *ngIf="pedido.estado == 2">Entregado</ion-badge>
-					<span>numero de productos: {{pedido.productos.length}} </span>
-				</ion-item>
+				<div class="container__items__item" *ngFor="let pedido of pedidos" (click)="redirectTo(pedido)">
+					<div class="container__items__item__estado">
+						<ion-badge color="warning" *ngIf="pedido.estado == 1">Pendiente</ion-badge>
+						<ion-badge color="success" *ngIf="pedido.estado == 2">Entregado</ion-badge>
+					</div>	
+					<div class="container__items__item__fechahora">
+						<div class="container__items__item__fechahora__fecha">
+							Fechas del pedido: {{pedido.fecha}},&nbsp;
+						</div>
+						<div class="container__items__item__fechahora__hora">
+							{{pedido.hora}}
+						</div>
+					</div>
+					
+					<div class="container__items__item__numtotal">
+						<div class="container__items__item__numtotal__num">
+							#Productos: {{pedido.productos.length}}
+						</div>
+						<div class="container__items__item__numtotal__total">
+							Total: ${{pedido.total | number}}
+						</div>
+					</div>
+				</div>
+				
+
 			</div>
 		</div>
 	</ion-content>

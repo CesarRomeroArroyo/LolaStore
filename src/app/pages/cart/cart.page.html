@@ -1,10 +1,10 @@
 <ion-content [fullscreen]="true">
   <div class="container" *ngIf="productsGrl.length > 0">
-    <div class="container__header">
+    <!-- <div class="container__header">
 			<div class="container__header__back" (click)="irAtras()">
 				<ion-icon name="chevron-back-outline"></ion-icon>
 			</div>
-    </div>
+    </div> -->
     <div class="container__address">
       <div class="container__address__title">
         <i class="fa fa-map-marker" aria-hidden="true"></i> Entregar en:
@@ -97,9 +97,9 @@
   </div>
   <div class="container" *ngIf="productsGrl.length == 0">
     <div class="container__header">
-			<div class="container__header__back" (click)="irAtras()">
+		<!-- 	<div class="container__header__back" (click)="irAtras()">
 				<ion-icon name="chevron-back-outline"></ion-icon>
-			</div>
+			</div> -->
     </div>
     <div class="container__noproductos">
       <ion-icon name="cart-outline"></ion-icon>      

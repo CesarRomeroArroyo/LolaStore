@@ -3,6 +3,7 @@
 		<div class="container__header">
 			<div class="container__header__back">
 				<ion-icon name="chevron-back-outline" [routerLink]="['/historial']"></ion-icon>
+				Detalle del pedido
 			</div>
 		</div>
 		<div class="container__address">
@@ -64,7 +65,7 @@
 					</div>
 				</div>
 				<div class="container__discount__info">
-					<small>{{descuentoAplicado()}}</small>
+					<ion-badge color="success">{{descuentoAplicado()}}</ion-badge>
 				</div>
 
 			</div>
