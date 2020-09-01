@@ -22,13 +22,14 @@ export class FavoritosPage implements OnInit {
 	}
 
 	async ionViewWillEnter() {
-
 		var usuario: any = JSON.parse(localStorage.getItem("APP_USER"));
-		this.firebaseSvc.obtenerUniqueId("clientes", usuario.idunico).subscribe((user) => {
-			this.user = {};
-			this.user = user[0];
-			this.init();
-		});
+		if(usuario){
+			this.firebaseSvc.obtenerUniqueId("clientes", usuario.idunico).subscribe((user) => {
+				this.user = {};
+				this.user = user[0];
+				this.init();
+			});
+		}	
 	}
 
 	async init() {
