@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+    loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartPageModule)
   },
   {
     path: 'perfil',
@@ -24,19 +24,25 @@ const routes: Routes = [
   },
   {
     path: 'busqueda',
-    loadChildren: () => import('./pages/busqueda/busqueda.module').then( m => m.BusquedaPageModule)
+    loadChildren: () => import('./pages/busqueda/busqueda.module').then(m => m.BusquedaPageModule)
   },
   {
     path: 'favoritos',
-    loadChildren: () => import('./pages/favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+    loadChildren: () => import('./pages/favoritos/favoritos.module').then(m => m.FavoritosPageModule)
+  },
+  {
+    path: 'historial',
+    loadChildren: () => import('./pages/historial/historial.module').then(m => m.HistorialPageModule)
+  },
+  {
+    path: 'historial-detail/:id',
+    loadChildren: () => import('./pages/historial-detail/historial-detail.module').then( m => m.HistorialDetailPageModule)
   },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  
-
 ];
 
 @NgModule({

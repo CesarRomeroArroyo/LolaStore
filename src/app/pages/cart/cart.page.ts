@@ -7,6 +7,8 @@ import { CartService } from '@services/cart.service';
 import { Plugins } from '@capacitor/core';
 import { UtilsService } from '@services/utils.service';
 
+import { UniqueService } from '@services/unique.service';
+
 const { Geolocation } = Plugins;
 
 @Component({
@@ -39,7 +41,8 @@ export class CartPage implements OnInit {
     private firebase: FirebaseService,
     private router: Router,
     private cartService: CartService,
-    private distanceService: UtilsService
+    private distanceService: UtilsService,
+    private idunico: UniqueService
   ) {
     this.showModal = false;
     this.showDescuentos = false;
@@ -99,6 +102,7 @@ export class CartPage implements OnInit {
 
   asignarProductos(){
     this.products = JSON.parse(JSON.stringify(this.productsGrl));
+    console.log(this.products);
     // this.productsTemp = JSON.parse(JSON.stringify(this.productsGrl))
   }
 
@@ -168,6 +172,7 @@ export class CartPage implements OnInit {
     });
     for (let i = 0; i <= index; i++) {
       this.obsequiosShow.push(this.obsequios[i]);
+      console.log(this.obsequiosShow);
     }
   }
 
@@ -196,7 +201,7 @@ export class CartPage implements OnInit {
         valorRetorno = dom.domicilio;
       }
     });
-    console.log(valorRetorno);
+    // console.log(valorRetorno);
     return valorRetorno;
   }
 
@@ -277,7 +282,8 @@ export class CartPage implements OnInit {
     }
     var fecha = dd+'/'+mm+'/'+yyyy;
     
-    console.log(this.products);
+    // console.log(this.products);
+
 
     const pedido = {
       productos: this.products, 
@@ -289,7 +295,9 @@ export class CartPage implements OnInit {
       subtotal: this.calcularPago(),
       domicilio: this.domicilio(),
       total: this.calcularPago()+ this.domicilio(),
-      estado: 1
+      estado: 1,
+      idunico: this.idunico.uniqueId(),
+      obsequios: this.obsequiosShow,
     };
     this.firebase.guardarDatos('pedidos', pedido).then(()=> {
       this.actualizarInventario();
