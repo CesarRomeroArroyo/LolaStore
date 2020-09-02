@@ -82,6 +82,7 @@ export class PerfilPage implements OnInit {
 			if (element.cedula === this.usuario.cedula && element.email === this.usuario.email) {
 				this.usuario = element;
 				localStorage.setItem("APP_USER", JSON.stringify(this.usuario));
+				this.presentToast('Ya estabas registrado en el sistema, Bienvenido Nuevamente!!!', 'success');
 			}
 		})
 	}

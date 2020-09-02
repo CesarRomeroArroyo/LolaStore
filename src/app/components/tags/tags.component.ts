@@ -36,9 +36,14 @@ export class TagsComponent implements OnInit {
 		this.firebaseSvc.obtener('pedidos').subscribe((pedidos) => {
 			const PEDIDOS = pedidos;
 			this.user = JSON.parse(localStorage.getItem("APP_USER"));
-			this.pedidos = PEDIDOS.filter(element => {
-				return element.usuario.idunico === this.user.idunico;
-			});
+			if(this.user){
+				this.pedidos = PEDIDOS.filter(element => {
+					return element.usuario.idunico === this.user.idunico;
+				});
+			} else {
+				this.pedidos = [];
+			}
+				
 			let data = this.pedidos.filter(element => element.estado === 1);
 			this.pendientes = data.length;
 		});
