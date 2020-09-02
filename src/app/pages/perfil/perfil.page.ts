@@ -34,6 +34,10 @@ export class PerfilPage implements OnInit {
 		this.init();
 	}
 
+	ionViewWillEnter() {
+		this.init();
+	}
+
 	init() {
 		this.getCities();
 	}
@@ -70,6 +74,16 @@ export class PerfilPage implements OnInit {
 		} else {
 			return false;
 		}
+	}
+
+	async checkOutUser() {
+		let usuarios = await this.firebaseSvc.obtenerPromise('clientes');
+		usuarios.forEach(element => {
+			if (element.cedula === this.usuario.cedula && element.email === this.usuario.email) {
+				this.usuario = element;
+				localStorage.setItem("APP_USER", JSON.stringify(this.usuario));
+			}
+		})
 	}
 
 	save() {
