@@ -8,6 +8,7 @@ import { Plugins } from '@capacitor/core';
 import { UtilsService } from '@services/utils.service';
 
 import { UniqueService } from '@services/unique.service';
+import { OneSignalService } from '@services/one-signal.service';
 
 const { Geolocation } = Plugins;
 
@@ -42,7 +43,8 @@ export class CartPage implements OnInit {
     private router: Router,
     private cartService: CartService,
     private distanceService: UtilsService,
-    private idunico: UniqueService
+    private idunico: UniqueService,
+    private oneSignal: OneSignalService
   ) {
     this.showModal = false;
     this.showDescuentos = false;
@@ -300,6 +302,7 @@ export class CartPage implements OnInit {
       obsequios: this.obsequiosShow,
     };
     this.firebase.guardarDatos('pedidos', pedido).then(()=> {
+      this.oneSignal.sendDirectMessage('Hola, tienes un nuevo pedido por atender.')
       this.actualizarInventario();
       this.cartService.vaciarCarrito();
       this.productsGrl = [];

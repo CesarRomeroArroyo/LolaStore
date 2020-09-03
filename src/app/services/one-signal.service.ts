@@ -9,17 +9,17 @@ export class OneSignalService {
 
 	constructor(private http: HttpClient) { }
 
-	sendDirectMessage(id, message) {
+	sendDirectMessage(message) {
 		const headers = new HttpHeaders({
 			'Content-Type': 'application/json',
-			'Authorization': 'Basic MWU2ZTBiMjgtYmEzNy00ZDJmLTliNDUtYzc2MGRhMWUzMzk0'
+			'Authorization': 'Basic MTk2NmFlMTYtNjhjMS00ZDg0LWIyYWEtNjE3MjZmYWY4MjI1'
 		});
 
 		const options = { headers: headers };
 		const dataSend = JSON.stringify({
-			app_id: "70a34cfc-2a6d-4924-aab0-299477cc31d9",
+			app_id: "b6c7c986-8af5-4939-a6fe-8a7fe0458689",
 			contents: { "en": message },
-			include_player_ids: [id],
+			included_segments: ["Active Users"],
 			data: {text: 'esto es ua prueba'}
 		});
 
