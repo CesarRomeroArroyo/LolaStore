@@ -10,17 +10,21 @@ import { StateApp } from '../services/state.service';
 	styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
 	public categorias: any;
+	public store: any;
 	public iter = 1;
 	public user: UsuarioInterface;
 	public promociones;
+	public facebook = '';
+	public twitter = '';
+	public instagram = '';
 	public slideOpts = {
 		initialSlide: 0,
 		speed: 400
 	};
 	public MejoresDescuentos: any[] = [];
 	public loading: boolean = false;
+	public soporte: string;
 
 	constructor(
 		private firebase: FirebaseService,
@@ -38,12 +42,18 @@ export class HomePage implements OnInit {
 		if (user) {
 			this.user = user;
 		}
+		this.store = await this.firebase.obtenerPromise("usuarios");
+		this.soporte = `https://api.whatsapp.com/send?phone=+57${this.store[0].contacto}`;
 		this.categorias = await this.firebase.obtenerPromise("categorias");
 		let transversal = await this.firebase.obtenerPromise('transversal');
 		this.getMejoresDescuentos();
 		this.promociones = transversal[0].promociones;
 		console.log(this.promociones);
 		this.loading = true;
+		this.facebook = transversal[0].facebook;
+		this.twitter = transversal[0].twitter;
+		this.instagram = transversal[0].instagram;
+		console.log(transversal);
 	}
 
 	async getMejoresDescuentos() {
