@@ -10,6 +10,7 @@ import { StateApp } from '../services/state.service';
 	styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+	
 	public categorias: any;
 	public store: any;
 	public iter = 1;
