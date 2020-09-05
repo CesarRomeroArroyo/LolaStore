@@ -1,3 +1,4 @@
+import { UsuarioInterface } from './../models/usuario.interface';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
@@ -9,19 +10,38 @@ import { StateApp } from '../services/state.service';
 	styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-	categorias: any;
-	iter = 1;
+
+	public categorias: any;
+	public iter = 1;
+	public user: UsuarioInterface;
+	public promociones;
+	public slideOpts = {
+		initialSlide: 0,
+		speed: 400
+	};
+
 	constructor(
 		private firebase: FirebaseService,
 		private router: Router,
 		private state: StateApp
 	) { }
 
-	async ngOnInit() {
+	ngOnInit() {
 	}
 
-	async ionViewWillEnter(){
+	async ionViewWillEnter() {
+		this.init();
+	}
+
+	async init() {
+		let user = JSON.parse(localStorage.getItem('APP_USER'));
+		if (user) {
+			this.user = user;
+		}
 		this.categorias = await this.firebase.obtenerPromise("categorias");
+		let transversal = await this.firebase.obtenerPromise('transversal');
+		this.promociones = transversal[0].promociones;
+		console.log(this.promociones);
 	}
 
 
