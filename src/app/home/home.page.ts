@@ -15,6 +15,9 @@ export class HomePage implements OnInit {
 	public iter = 1;
 	public user: UsuarioInterface;
 	public promociones;
+	public facebook = '';
+	public twitter = '';
+	public instagram = '';
 	public slideOpts = {
 		initialSlide: 0,
 		speed: 400
@@ -43,6 +46,9 @@ export class HomePage implements OnInit {
 		this.categorias = await this.firebase.obtenerPromise("categorias");
 		let transversal = await this.firebase.obtenerPromise('transversal');
 		this.promociones = transversal[0].promociones;
+		this.facebook = transversal[0].facebook; 
+		this.twitter = transversal[0].twitter; 
+		this.instagram = transversal[0].instagram; 
 		console.log(transversal);
 	}
 
