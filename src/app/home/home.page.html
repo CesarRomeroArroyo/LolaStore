@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="loading">
 	<div class="container">
 		<div class="container__header">
 			<div class="container__header__content">
@@ -9,7 +9,7 @@
 			</div>
 		</div>
 
-		<div class="banner ion-margin-bottom" *ngIf="promociones">
+		<div class="banner ion-margin-bottom" *ngIf="promociones.length > 0 else noBanner">
 			<ion-slides class="banner__content" pager="true" [options]="slideOpts">
 				<ion-slide *ngFor="let promocion of promociones">
 					<img class="banner__content__img" [src]="promocion.url" alt="">
@@ -17,11 +17,17 @@
 			</ion-slides>
 		</div>
 
+		<ng-template #noBanner>
+			<br>
+		</ng-template>
+
 		<div class="title">
-			<div class="title__text"> {{'mejores promociones'|uppercase}} </div>
+			<div class="title__text"> {{'mejores descuentos'|uppercase}} </div>
 		</div>
 
-
+		<div class="container__descuentos" *ngIf="MejoresDescuentos">
+			<app-tarjetas [array]="MejoresDescuentos" [wrap]="false"></app-tarjetas>
+		</div>
 
 		<div class="title">
 			<div class="title__text"> {{'categorias'|uppercase}} </div>

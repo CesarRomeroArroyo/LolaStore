@@ -1,5 +1,5 @@
-<div class="cards">
-	<div class="cards__card animate__animated animate__backInUp" *ngFor="let producto of array">
+<div class="cards" [class.scroll-x]="!wrap">
+	<div class="cards__card animate__animated animate__backInUp" [class.card]="!wrap" *ngFor="let producto of array">
 		<div class="cards__card__title">
 			<app-favorito [producto]="producto"></app-favorito>
 			<img [src]="producto['url']" alt=""  *ngIf="!producto?.urls">

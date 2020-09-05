@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class TarjetasComponent implements OnInit {
 
-	@Input() array: Array<ProductoInterface> = [];
+	@Input() public array: Array<ProductoInterface> = [];
+	@Input() public wrap: boolean = true;
 
 	constructor(private router: Router) { }
 

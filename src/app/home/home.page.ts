@@ -19,6 +19,8 @@ export class HomePage implements OnInit {
 		initialSlide: 0,
 		speed: 400
 	};
+	public MejoresDescuentos: any[] = [];
+	public loading: boolean = false;
 
 	constructor(
 		private firebase: FirebaseService,
@@ -27,26 +29,39 @@ export class HomePage implements OnInit {
 	) { }
 
 	ngOnInit() {
-	}
-
-	async ionViewWillEnter() {
 		this.init();
 	}
 
 	async init() {
+		this.loading = false;
 		let user = JSON.parse(localStorage.getItem('APP_USER'));
 		if (user) {
 			this.user = user;
 		}
 		this.categorias = await this.firebase.obtenerPromise("categorias");
 		let transversal = await this.firebase.obtenerPromise('transversal');
+		this.getMejoresDescuentos();
 		this.promociones = transversal[0].promociones;
 		console.log(this.promociones);
+		this.loading = true;
 	}
 
+	async getMejoresDescuentos() {
+		let productos = await this.firebase.obtenerPromise('productos');
+		productos.sort(function (prev, next) {
+			if (prev.descuento < next.descuento) {
+				return 1;
+			}
+			if (prev.descuento > next.descuento) {
+				return -1
+			}
+			return 0;
+		});
+		productos.slice(0, 20);
+		this.MejoresDescuentos = productos;
+	}
 
 	obtenerColor(index) {
-		// console.log(index);
 		if (index % 2 == 0) {
 			return 2;
 		} else {
