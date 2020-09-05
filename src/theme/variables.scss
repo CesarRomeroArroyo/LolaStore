@@ -141,3 +141,9 @@ app-product-detail {
 		position: relative;
 	}
 }
+
+app-home {
+	.swiper-pagination-bullet {
+		opacity: 0.5;
+	}
+}

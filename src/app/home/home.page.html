@@ -1,52 +1,43 @@
 <ion-content [fullscreen]="true">
-	<!-- <div class="container">
-		<div class="container__header">
-			<div class="container__header__search">
-				<ion-icon name="search-outline" routerLink="/busqueda"></ion-icon>
-			</div>
-
-		</div>
-		<div class="container__image">
-			<img src="../../assets/logo.png" alt="">
-		</div>
-		<div class="container__categories" *ngIf="categorias">
-			<div (click)="irDetalle(cat)"
-				[ngClass]="{'fondo1': cat.fondo=='fondo1','fondo2': cat.fondo=='fondo2','fondo3': cat.fondo=='fondo3' }"
-				*ngFor="let cat of categorias;let index=index;">
-				<div class="container__categories__img">
-					<img src="{{cat.foto}}" alt="">
-				</div>
-				<div class="container__categories__text">
-					{{cat.nombre}}
-				</div>
-			</div>
-		</div>
-	</div> -->
 	<div class="container">
-		<div class="container__header ion-margin-bottom">
+		<div class="container__header">
 			<div class="container__header__content">
-				<div class="ion-margin-end">
-					<ion-icon name="person-outline" routerLink="/perfil"></ion-icon>
-				</div>
-				<div class="container__header__info" *ngIf="user else registrate">
-					<span> {{user.nombre}} </span>
-					<span> {{user.direccion}} </span>
-				</div>
-				<ng-template #registrate>
-					<span> Por favor registrate para poder solicitar nuestros productos </span>
-				</ng-template>
+				<img src="../../assets/logo.png" alt="">
 			</div>
 			<div>
 				<ion-icon name="search-outline" routerLink="/busqueda"></ion-icon>
 			</div>
 		</div>
 
-		<div class="banner" *ngIf="promociones">
+		<div class="banner ion-margin-bottom" *ngIf="promociones">
 			<ion-slides class="banner__content" pager="true" [options]="slideOpts">
 				<ion-slide *ngFor="let promocion of promociones">
 					<img class="banner__content__img" [src]="promocion.url" alt="">
 				</ion-slide>
 			</ion-slides>
+		</div>
+
+		<div class="title">
+			<div class="title__text"> {{'mejores promociones'|uppercase}} </div>
+		</div>
+
+
+
+		<div class="title">
+			<div class="title__text"> {{'categorias'|uppercase}} </div>
+		</div>
+
+		<div class="container__categories" *ngIf="categorias">
+			<div (click)="irDetalle(cat)"
+				[ngClass]="{'fondo1': cat.fondo=='fondo1','fondo2': cat.fondo=='fondo2','fondo3': cat.fondo=='fondo3' }"
+				*ngFor="let cat of categorias;let index=index;">
+				<div class="container__categories__img">
+					<img [src]="cat.foto" alt="">
+				</div>
+				<div class="container__categories__text">
+					{{cat.nombre}}
+				</div>
+			</div>
 		</div>
 	</div>
 </ion-content>
