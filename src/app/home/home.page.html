@@ -32,15 +32,6 @@
 			</a>
 		</div>
 
-		<div class="title">
-			<div class="title__text"> {{'Redes sociales'|uppercase}} </div>
-		</div>
-
-		<div class="redes">
-			<div class="redes__red" *ngIf="facebook"><a [href]="facebook" target="_BLANK"><i class="fa fa-facebook"></i></a></div>
-			<div class="redes__red" *ngIf="twitter"><a [href]="twitter" target="_BLANK"><i class="fa fa-twitter"></i></a></div>
-			<div class="redes__red" *ngIf="instagram"><a [href]="instagram" target="_BLANK"><i class="fa fa-instagram"></i></a></div>
-		</div>
 
 		<div class="title">
 			<div class="title__text"> {{'Recien llegados'|uppercase}} </div>
@@ -61,6 +52,17 @@
 					{{cat.nombre}}
 				</div>
 			</div>
+		</div>
+
+
+		<div class="title">
+			<div class="title__text"> {{'Redes sociales'|uppercase}} </div>
+		</div>
+
+		<div class="redes">
+			<div class="redes__red" *ngIf="facebook"><a [href]="facebook" target="_BLANK"><i class="fa fa-facebook"></i></a></div>
+			<div class="redes__red" *ngIf="twitter"><a [href]="twitter" target="_BLANK"><i class="fa fa-twitter"></i></a></div>
+			<div class="redes__red" *ngIf="instagram"><a [href]="instagram" target="_BLANK"><i class="fa fa-instagram"></i></a></div>
 		</div>
 		
 	</div>
