@@ -10,8 +10,8 @@ import { StateApp } from '../services/state.service';
 	styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
 	public categorias: any;
+	public store: any;
 	public iter = 1;
 	public user: UsuarioInterface;
 	public promociones;
@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
 		initialSlide: 0,
 		speed: 400
 	};
-
+	public soporte: string;
 	constructor(
 		private firebase: FirebaseService,
 		private router: Router,
@@ -38,10 +38,12 @@ export class HomePage implements OnInit {
 		if (user) {
 			this.user = user;
 		}
+		this.store = await this.firebase.obtenerPromise("usuarios");
+		this.soporte = `https://api.whatsapp.com/send?phone=+57${this.store[0].contacto}`;
 		this.categorias = await this.firebase.obtenerPromise("categorias");
 		let transversal = await this.firebase.obtenerPromise('transversal');
 		this.promociones = transversal[0].promociones;
-		console.log(this.promociones);
+		console.log(transversal);
 	}
 
 
