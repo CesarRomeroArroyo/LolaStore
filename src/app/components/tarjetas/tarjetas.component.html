@@ -14,10 +14,13 @@
 			</div>
 
 			<ng-template #descuento>
+				<div class="cards__card__info__price__descuento">
+					{{producto.descuento}}%
+				</div>
 				<div class="cards__card__info__price">
-					<div class="">${{producto.precio|number}}</div>
-					<div class="">→</div>
-					<div class="">${{calculoDescuento(producto)|number}}</div>
+					<div>${{producto.precio|number}}</div>
+					<div>→</div>
+					<div>${{calculoDescuento(producto)|number}}</div>
 				</div>
 			</ng-template>
 		</div>

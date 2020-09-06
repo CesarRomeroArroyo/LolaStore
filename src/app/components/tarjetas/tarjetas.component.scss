@@ -56,6 +56,11 @@
                 > div:first-child {
                     text-decoration: line-through;
                 }
+                &__descuento {
+                    display: flex;
+                    font-size: 2vh;
+                    color: var(--ion-color-dark);
+                }
             }
         }
     }
