@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { StateApp } from '../services/state.service';
-
+import * as moment from 'moment';
 @Component({
 	selector: 'app-home',
 	templateUrl: 'home.page.html',
@@ -26,7 +26,8 @@ export class HomePage implements OnInit {
 	public MejoresDescuentos: any[] = [];
 	public loading: boolean = false;
 	public soporte: string;
-
+	public fechas: any;
+	public movmientoData: any[] = [];
 	constructor(
 		private firebase: FirebaseService,
 		private router: Router,
@@ -47,6 +48,7 @@ export class HomePage implements OnInit {
 		this.soporte = `https://api.whatsapp.com/send?phone=+57${this.store[0].contacto}`;
 		this.categorias = await this.firebase.obtenerPromise("categorias");
 		let transversal = await this.firebase.obtenerPromise('transversal');
+		this.obtenerFechas();
 		this.getMejoresDescuentos();
 		this.promociones = transversal[0].promociones;
 		console.log(this.promociones);
@@ -55,6 +57,29 @@ export class HomePage implements OnInit {
 		this.twitter = transversal[0].twitter;
 		this.instagram = transversal[0].instagram;
 		console.log(transversal);
+	}
+
+
+	async obtenerFechas(){
+		var movimientos = await this.firebase.obtenerPromise("movimientos");
+		this.fechas = movimientos.map((ped)=>{
+			return ped.fecha;
+		});
+		this.fechas = [...new Set(this.fechas)];
+		this.fechas = this.fechas.map(date => moment(date, "DD/MM/YYYY"));
+		this.fechas.sort(function (left, right) {
+			return right-left;
+		});
+		console.log(this.fechas[0]);
+		console.log(this.fechas[1]);
+		console.log(this.fechas[2]);
+
+		this.fechas.forEach(async fec => {
+			var productos = await this.firebase.obtenerXFechaPromise("movimientos", fec.format("DD/MM/YYYY") .toString());
+			this.movmientoData = this.movmientoData.concat(productos);
+			console.log(this.movmientoData);
+		});
+		
 	}
 
 	async getMejoresDescuentos() {
