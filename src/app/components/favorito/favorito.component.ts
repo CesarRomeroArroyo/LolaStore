@@ -36,6 +36,7 @@ export class FavoritoComponent implements OnInit {
 
   async administrarFavorito(){
     var usuario: any = JSON.parse(localStorage.getItem("APP_USER"));
+    console.log(usuario);
     if(usuario){
       var userWeb = await this.firebase.obtenerUniqueIdPromise("clientes", usuario.idunico);
       if(userWeb.length > 0){

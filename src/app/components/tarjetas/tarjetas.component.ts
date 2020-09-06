@@ -15,7 +15,11 @@ export class TarjetasComponent implements OnInit {
 
 	constructor(private router: Router) { }
 
-	ngOnInit() { }
+	ngOnInit() {
+		setTimeout(() => {
+			console.log(this.array);
+		}, 1000);
+	}
 
 	goToDetail(producto) {
 		this.router.navigate(['/product-detail', producto.idunico]);

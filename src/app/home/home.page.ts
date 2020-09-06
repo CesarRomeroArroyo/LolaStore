@@ -49,12 +49,10 @@ export class HomePage implements OnInit {
 		let transversal = await this.firebase.obtenerPromise('transversal');
 		this.getMejoresDescuentos();
 		this.promociones = transversal[0].promociones;
-		console.log(this.promociones);
 		this.loading = true;
 		this.facebook = transversal[0].facebook;
 		this.twitter = transversal[0].twitter;
 		this.instagram = transversal[0].instagram;
-		console.log(transversal);
 	}
 
 	async getMejoresDescuentos() {
@@ -68,8 +66,7 @@ export class HomePage implements OnInit {
 			}
 			return 0;
 		});
-		productos.slice(0, 20);
-		this.MejoresDescuentos = productos;
+		this.MejoresDescuentos = productos.splice(0, 20);;
 	}
 
 	obtenerColor(index) {

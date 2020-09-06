@@ -47,6 +47,20 @@ export class ProductDetailPage implements OnInit {
 
 	}
 
+	init() {
+		this.route.paramMap.subscribe((params: any) => {
+			let id = params.get('id');
+			this.firebaseSvc.obtenerUniqueId("productos", id).subscribe((prod: any) => {
+				this.producto = prod[0];
+				if(!this.producto['fotos']) {
+					this.producto.fotos = [];
+					this.producto.urls = [];
+				}
+				console.log(this.producto);
+			})
+		})
+	}
+
 	async presentToast(message, color?) {
 		const toast = await this.toastController.create({
 			message: message,
@@ -58,16 +72,6 @@ export class ProductDetailPage implements OnInit {
 
 	back() {
 		window.history.back();
-	}
-
-	init() {
-		this.route.paramMap.subscribe((params: any) => {
-			let id = params.get('id');
-			this.firebaseSvc.obtenerUniqueId("productos", id).subscribe((prod: any) => {
-				this.producto = prod[0];
-				console.log(this.producto);
-			})
-		})
 	}
 
 	validation() {

@@ -1,9 +1,9 @@
-<div class="cards" [class.scroll-x]="!wrap">
+<div class="cards" [class.scroll-x]="!wrap" *ngIf="array">
 	<div class="cards__card animate__animated animate__backInUp" [class.card]="!wrap" *ngFor="let producto of array">
 		<div class="cards__card__title">
 			<app-favorito [producto]="producto"></app-favorito>
-			<img [src]="producto['url']" alt=""  *ngIf="!producto?.urls">
-			<img [src]="producto.urls[0]" alt="" *ngIf="producto?.urls">
+			<img [src]="producto['url']" alt="" *ngIf="producto['foto'].length > 0">
+			<img [src]="producto.urls[0]" alt="" *ngIf="producto['foto'].length === 0">
 		</div>
 		<div class="cards__card__info" (click)="goToDetail(producto)">
 			<div class="cards__card__info__header">

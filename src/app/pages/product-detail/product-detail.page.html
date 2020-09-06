@@ -1,8 +1,8 @@
 <ion-content>
 	<div class="container" *ngIf="producto">
 		<div class="container__header">
-			<img [src]="producto['url']" *ngIf="!producto.fotos">
-			<ion-slides style="--bullet-background: black;" pager="true" [options]="slideOpts">
+			<img [src]="producto['url']" *ngIf="producto.fotos.length === 0">
+			<ion-slides pager="true" [options]="slideOpts" *ngIf="producto.fotos.length > 0">
 				<ion-slide *ngFor="let url of producto.urls">
 					<img [src]="url">
 				</ion-slide>
