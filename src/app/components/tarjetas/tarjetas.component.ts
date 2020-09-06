@@ -1,7 +1,7 @@
-import { ProductoInterface } from '@interfaces/producto.interface';
 import { Component, OnInit, Input } from '@angular/core';
-
 import { Router } from '@angular/router';
+
+import { ProductoInterface } from '@interfaces/producto.interface';
 
 @Component({
 	selector: 'app-tarjetas',
@@ -19,6 +19,12 @@ export class TarjetasComponent implements OnInit {
 		setTimeout(() => {
 			console.log(this.array);
 		}, 1000);
+	}
+
+	calculoDescuento(producto: ProductoInterface): number {
+		let descuento = producto.precio * (producto.descuento / 1000);
+		let resultado = producto.precio - descuento
+		return resultado;
 	}
 
 	goToDetail(producto) {

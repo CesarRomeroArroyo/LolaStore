@@ -9,9 +9,17 @@
 			<div class="cards__card__info__header">
 				<h6>{{producto.nombre}}</h6>
 			</div>
-			<div class="cards__card__info__price">
+			<div class="cards__card__info__price" *ngIf="producto.descuento === 0 else descuento">
 				${{producto.precio|number}}
 			</div>
+
+			<ng-template #descuento>
+				<div class="cards__card__info__price">
+					<div class="">${{producto.precio|number}}</div>
+					<div class="">→</div>
+					<div class="">${{calculoDescuento(producto)|number}}</div>
+				</div>
+			</ng-template>
 		</div>
 	</div>
 </div>

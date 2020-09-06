@@ -1,3 +1,4 @@
+import { ProductoInterface } from './../models/producto.interface';
 import { UsuarioInterface } from './../models/usuario.interface';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
@@ -10,7 +11,7 @@ import * as moment from 'moment';
 	styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-	
+
 	public categorias: any;
 	public store: any;
 	public iter = 1;
@@ -58,30 +59,26 @@ export class HomePage implements OnInit {
 	}
 
 
-	async obtenerFechas(){
+	async obtenerFechas() {
 		var movimientos = await this.firebase.obtenerPromise("movimientos");
-		this.fechas = movimientos.map((ped)=>{
+		this.fechas = movimientos.map((ped) => {
 			return ped.fecha;
 		});
 		this.fechas = [...new Set(this.fechas)];
 		this.fechas = this.fechas.map(date => moment(date, "DD/MM/YYYY"));
 		this.fechas.sort(function (left, right) {
-			return right-left;
+			return right - left;
 		});
-		console.log(this.fechas[0]);
-		console.log(this.fechas[1]);
-		console.log(this.fechas[2]);
 
 		this.fechas.forEach(async fec => {
-			var productos = await this.firebase.obtenerXFechaPromise("movimientos", fec.format("DD/MM/YYYY") .toString());
+			var productos = await this.firebase.obtenerXFechaPromise("movimientos", fec.format("DD/MM/YYYY").toString());
 			this.movmientoData = this.movmientoData.concat(productos);
-			console.log(this.movmientoData);
 		});
-		
+
 	}
 
 	async getMejoresDescuentos() {
-		let productos = await this.firebase.obtenerPromise('productos');
+		let productos: ProductoInterface[] = await this.firebase.obtenerPromise('productos');
 		productos.sort(function (prev, next) {
 			if (prev.descuento < next.descuento) {
 				return 1;
@@ -91,7 +88,13 @@ export class HomePage implements OnInit {
 			}
 			return 0;
 		});
-		this.MejoresDescuentos = productos.splice(0, 20);;
+		productos.forEach(element => {
+			if (!element['foto']) {
+				element['foto'] = "";
+				element['url'] = "";
+			}
+		})
+		this.MejoresDescuentos = productos.splice(0, 20);
 	}
 
 	obtenerColor(index) {

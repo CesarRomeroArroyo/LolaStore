@@ -23,8 +23,8 @@ export class CategoryPage implements OnInit {
 		private firebase: FirebaseService,
 		private state: StateApp,
 		private router: Router
-	) { 
-		this.buscarText  ="";
+	) {
+		this.buscarText = "";
 	}
 
 	ngOnInit() {
@@ -33,6 +33,13 @@ export class CategoryPage implements OnInit {
 			this.firebase.obtenerUniqueId("categorias", data.idcategoria).subscribe((cat) => {
 				this.category = cat[0];
 				this.firebase.obtenerProductoCategoria(this.category.idunico).subscribe((prod) => {
+					prod.forEach(element => {
+						if (!element['foto']) {
+							element.foto = "";
+							element.url = "";
+						}
+					});
+					console.log(prod);
 					this.productosCategoria = prod;
 					this.ordenarProductosSubCategoria();
 				});
