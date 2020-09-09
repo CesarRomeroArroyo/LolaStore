@@ -105,7 +105,7 @@
 }
 
 .banner {
-  height: 25vh;
+  height: 30vh;
   > ion-slides {
     --bullet-background: var(--ion-color-dark);
   }
@@ -138,11 +138,10 @@
 }
 
 .contacto{
-  width: 100%;
-  padding: 0 4%;
-  width: 100%;
+  width: 98%;
+  padding: 0 4%;  
   height: 50px;
-  margin: 20px 0px;
+  margin: 20px 10px 30px 10px;
   position: relative;
   
   &__img{
@@ -170,7 +169,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 5%;
     text-decoration: none;
   }
 }
