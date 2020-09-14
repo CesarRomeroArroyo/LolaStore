@@ -1,6 +1,6 @@
 {
   "appId": "com.lolastore.app",
-  "appName": "LolaStore",
+  "appName": "Lola Store",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
