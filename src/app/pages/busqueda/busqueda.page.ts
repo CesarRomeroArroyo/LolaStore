@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProductoInterface } from '@interfaces/producto.interface';
 import { FirebaseService } from '@services/firebase.service';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
 	selector: 'app-busqueda',
@@ -36,41 +37,68 @@ export class BusquedaPage implements OnInit {
 	}
 
 	definirSub(categoria) {
+		var arrayQuery = this.query.split(' ');
 		let dataReturn: Array<any> = [];
 		let subcategoria;
 		categoria.subcategorias.forEach(sub => {
-			subcategoria = {
-				nombre: sub.nombre,
-				productos: sub.productos.filter(prod => {
-					return prod.nombre.toUpperCase().indexOf(this.query.toUpperCase()) >= 0;
-				})
+			if(arrayQuery.length == 1){
+				subcategoria = {
+					nombre: sub.nombre,
+					productos: sub.productos.filter(prod => {
+						return prod.nombre.toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0;
+					})
+				}
+				if (subcategoria.productos.length > 0) {
+					dataReturn.push(subcategoria);
+				}
 			}
-			if (subcategoria.productos.length > 0) {
-				dataReturn.push(subcategoria);
+			if(arrayQuery.length == 2){
+				subcategoria = {
+					nombre: sub.nombre,
+					productos: sub.productos.filter(prod => {
+						return prod.nombre.toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0;
+					})
+				}
+				subcategoria.productos = subcategoria.productos.filter(prod => {
+					return prod.nombre.toUpperCase().indexOf(arrayQuery[1].toUpperCase()) >= 0;
+				})
+				if (subcategoria.productos.length > 0) {
+					dataReturn.push(subcategoria);
+				}
+			}
+			if(arrayQuery.length >= 3){
+				subcategoria = {
+					nombre: sub.nombre,
+					productos: sub.productos.filter(prod => {
+						return prod.nombre.toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0;
+					})
+				}
+				subcategoria.productos = subcategoria.productos.filter(prod => {
+					return prod.nombre.toUpperCase().indexOf(arrayQuery[1].toUpperCase()) >= 0;
+				})
+				subcategoria.productos = subcategoria.productos.filter(prod => {
+					return prod.nombre.toUpperCase().indexOf(arrayQuery[2].toUpperCase()) >= 0;
+				})
+				if (subcategoria.productos.length > 0) {
+					dataReturn.push(subcategoria);
+				}
 			}
 		})
 		return dataReturn;
 	}
 
 	buscar() {
-		if (this.query == '') {
+		if (this.query == '' || this.query.length <= 2) {
 			this.dataShow = [];
 		} else {
 			this.dataShow = [];
-			let data: Array<any> = [];
+			var data: Array<any> = [];
 			this.data.forEach(cat => {
 				let subcategoria = this.definirSub(cat);
-				this.definirSub(cat);
+				
 				data.push({
 					nombre: cat.nombre,
 					subcategorias: subcategoria
-				});
-			});
-			data.forEach((cat, index) => {
-				cat.subcategorias.forEach((sub, index) => {
-					if (sub.productos.length > 0) {
-						cat['tiene'] = true;
-					}
 				});
 			});
 			this.dataShow = data;
