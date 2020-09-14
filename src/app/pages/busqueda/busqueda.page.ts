@@ -87,6 +87,69 @@ export class BusquedaPage implements OnInit {
 		return dataReturn;
 	}
 
+	definirSubSubtitle(categoria) {
+		var arrayQuery = this.query.split(' ');
+		let dataReturn: Array<any> = [];
+		let subcategoria;
+		categoria.subcategorias.forEach(sub => {
+			if(arrayQuery.length == 1){
+				subcategoria = {
+					nombre: sub.nombre,
+					productos: sub.productos.filter(prod => {
+						if(prod.subtitulo){
+							return prod.subtitulo.toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0 || null;
+						}
+					})
+				}
+				if (subcategoria.productos.length > 0) {
+					dataReturn.push(subcategoria);
+				}
+			}
+			if(arrayQuery.length == 2){
+				subcategoria = {
+					nombre: sub.nombre,
+					productos: sub.productos.filter(prod => {
+						if(prod.subtitulo){
+							return prod.subtitulo.toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0 || null;
+						}
+					})
+				}
+				subcategoria.productos = subcategoria.productos.filter(prod => {
+					if(prod.subtitulo){
+						return prod.subtitulo.toUpperCase().indexOf(arrayQuery[1].toUpperCase()) >= 0 || null;
+					}
+				})
+				if (subcategoria.productos.length > 0) {
+					dataReturn.push(subcategoria);
+				}
+			}
+			if(arrayQuery.length >= 3){
+				subcategoria = {
+					nombre: sub.nombre,
+					productos: sub.productos.filter(prod => {
+						if(prod.subtitulo){
+							return prod.subtitulo.toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0 || null;
+						}
+					})
+				}
+				subcategoria.productos = subcategoria.productos.filter(prod => {
+					if(prod.subtitulo){
+						return prod.subtitulo.toUpperCase().indexOf(arrayQuery[1].toUpperCase()) >= 0 || null;
+					}
+				})
+				subcategoria.productos = subcategoria.productos.filter(prod => {
+					if(prod.subtitulo){
+						return prod.subtitulo.toUpperCase().indexOf(arrayQuery[2].toUpperCase()) >= 0 || null;
+					}
+				})
+				if (subcategoria.productos.length > 0) {
+					dataReturn.push(subcategoria);
+				}
+			}
+		})
+		return dataReturn;
+	}
+
 	buscar() {
 		if (this.query == '' || this.query.length <= 2) {
 			this.dataShow = [];
@@ -95,7 +158,13 @@ export class BusquedaPage implements OnInit {
 			var data: Array<any> = [];
 			this.data.forEach(cat => {
 				let subcategoria = this.definirSub(cat);
-				
+				data.push({
+					nombre: cat.nombre,
+					subcategorias: subcategoria
+				});
+			});
+			this.data.forEach(cat => {
+				let subcategoria = this.definirSubSubtitle(cat);
 				data.push({
 					nombre: cat.nombre,
 					subcategorias: subcategoria
