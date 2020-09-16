@@ -13,15 +13,18 @@
         padding: 20px 16px 0px 16px;
         position: relative;
         font-size: 20px;
+
         &__back {
             display: flex;
             align-items: center;
         }
+
         &__search {
             display: flex;
             flex-direction: row-reverse;
             align-items: center;
             width: 90%;
+
             &__input {
                 background-color: var(--ion-color-light);
                 border-radius: 20px;
@@ -33,12 +36,14 @@
             }
         }
     }
+
     &__img {
         width: 100%;
         display: flex;
         justify-content: center;
         position: relative;
         height: 300px;
+
         &__nombre {
             position: absolute;
             bottom: 30px;
@@ -56,22 +61,26 @@
             font-size: 25px;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         }
+
         img {
             width: 100%;
         }
     }
+
     &__categories {
         width: 100%;
         display: flex;
         height: 44px;
         margin-top: 20px;
         position: relative;
+
         &__category {
             width: 95%;
             display: flex;
             overflow: scroll;
             padding-bottom: 3px;
             margin-left: 5px;
+
             &__option {
                 background-color: rgba($color: #ffffff, $alpha: 0.4);
                 padding: 7px 20px;
@@ -86,6 +95,7 @@
             }
         }
     }
+
     &__products {
         width: 100%;
         height: auto;
@@ -95,6 +105,7 @@
         flex-direction: column;
         position: relative;
         margin-bottom: 63px;
+
         &__product {
             &__title {
                 font-weight: bold;
@@ -102,6 +113,7 @@
                 margin-bottom: 20px;
                 padding: 0% 5%;
             }
+
             &__list {
                 width: 100%;
                 overflow-x: unset;
@@ -109,6 +121,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
+
                 &__item {
                     background-color: white;
                     width: 43%;
@@ -118,10 +131,12 @@
                     margin-bottom: 20px;
                     padding: 10px 9px;
                     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
                     &__like {
                         width: 100%;
                         display: flex;
                         justify-content: flex-end;
+
                         &__container {
                             display: flex;
                             justify-content: center;
@@ -135,6 +150,7 @@
                             color: #c5c7c6;
                         }
                     }
+
                     &__img {
                         width: 100%;
                         height: 60%;
@@ -142,14 +158,17 @@
                         justify-content: center;
                         margin-top: 5px;
                         margin-bottom: 5px;
+
                         img {
                             width: 80%;
                         }
                     }
+
                     &__title {
                         font-size: 12px;
                         font-weight: bold;
                     }
+
                     &__price {
                         font-size: 14px;
                         font-weight: bold;
@@ -169,4 +188,9 @@ ion-content {
 
 .subselected {
     background-color: white !important;
+}
+
+.tarjeta {
+    width: 100%;
+    padding: 0 0 0 2%;
 }

@@ -11,7 +11,7 @@ import { ProductoInterface } from '@interfaces/producto.interface';
 export class TarjetasComponent implements OnInit {
 
 	@Input() public array: Array<ProductoInterface> = [];
-	@Input() public wrap: boolean = true;
+	@Input() public wrap = true;
 
 	constructor(private router: Router) { }
 
@@ -22,8 +22,8 @@ export class TarjetasComponent implements OnInit {
 	}
 
 	calculoDescuento(producto: ProductoInterface): number {
-		let descuento = producto.precio * (producto.descuento / 1000);
-		let resultado = producto.precio - descuento
+		const descuento = producto.precio * (producto.descuento / 1000);
+		const resultado = producto.precio - descuento
 		return resultado;
 	}
 

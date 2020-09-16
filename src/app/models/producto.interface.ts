@@ -15,4 +15,7 @@ export interface ProductoInterface {
     cantidad: number,
     colores: string[],
     ingredientes: string[],
+    subtitulo: string,
+    foto?: string
+    url?: string
 }

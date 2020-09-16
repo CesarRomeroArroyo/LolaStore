@@ -2,22 +2,33 @@
 	<div class="cards__card animate__animated animate__backInUp" [class.card]="!wrap" *ngFor="let producto of array">
 		<div class="cards__card__title">
 			<app-favorito [producto]="producto"></app-favorito>
-			<img [src]="producto['url']" alt="" *ngIf="producto['foto'].length > 0">
-			<img [src]="producto.urls[0]" alt="" *ngIf="producto['foto'].length === 0">
+			<img [src]="producto['url']" *ngIf="producto['foto'].length > 0" (click)="goToDetail(producto)">
+			<img [src]="producto.urls[0]" *ngIf="producto['foto'].length === 0" (click)="goToDetail(producto)">
 		</div>
-		<div class="cards__card__info" (click)="goToDetail(producto)">
-			<div class="cards__card__info__header">
-				<h6>{{producto.nombre}}</h6>
+		<div class="cards__card__info__price__ticked" *ngIf="producto.descuento > 0">
+			<div class="cards__card__info__price__triangulo"></div>
+			<div class="cards__card__info__price__desc">
+				{{producto.descuento}}%
 			</div>
-			<div class="cards__card__info__price" *ngIf="producto.descuento === 0 else descuento">
+		</div>
+		<div class="cards__card__info">
+			<div class="cards__card__info__header" (click)="goToDetail(producto)">
+				<span>
+					<h6>{{producto.nombre|uppercase}}</h6>
+				</span>
+				<span class="cards__card__info__header__subtitulo">
+					<h6>{{producto?.subtitulo|uppercase}}</h6>
+				</span>
+			</div>
+			<div class="cards__card__info__price" *ngIf="producto.descuento === 0 else descuento" (click)="goToDetail(producto)">
 				${{producto.precio|number}}
+			</div>
+			<div class="button">
+				<ion-button class="button__btn">Agregar</ion-button>
 			</div>
 
 			<ng-template #descuento>
-				<div class="cards__card__info__price__descuento">
-					{{producto.descuento}}%
-				</div>
-				<div class="cards__card__info__price">
+				<div class="cards__card__info__price" (click)="goToDetail(producto)">
 					<div>${{producto.precio|number}}</div>
 					<div>→</div>
 					<div>${{calculoDescuento(producto)|number}}</div>
