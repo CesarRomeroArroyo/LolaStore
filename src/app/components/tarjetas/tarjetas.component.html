@@ -20,9 +20,11 @@
 					<h6>{{producto?.subtitulo|uppercase}}</h6>
 				</span>
 			</div>
+
 			<div class="cards__card__info__price" *ngIf="producto.descuento === 0 else descuento" (click)="goToDetail(producto)">
 				${{producto.precio|number}}
 			</div>
+			
 			<div class="button">
 				<ion-button class="button__btn">Agregar</ion-button>
 			</div>
