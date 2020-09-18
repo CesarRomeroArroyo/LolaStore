@@ -2,12 +2,12 @@
 	<div class="container">
 		<div class="container__search animate__animated animate__pulse">
 			<input class="container__search__input" type="text" placeholder="Buscar..." name="search"
-				[(ngModel)]="query" (keyup)="buscar()">
+				[(ngModel)]="query" (input)="buscar()">
 			<span class="container__search__icon"><i class="fa fa-search" aria-hidden="true"></i></span>
 		</div>
 
 		<div *ngFor="let categoria of dataShow">
-			<div class="container__categorias" *ngIf="categoria.tiene">
+			<div class="container__categorias" *ngIf="categoria.subcategorias.length > 0">
 				<div class="container__categorias__title animate__animated animate__backInUp">
 					<div class="container__categorias__title__text">
 						{{categoria.nombre}}

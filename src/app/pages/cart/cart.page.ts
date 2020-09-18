@@ -90,11 +90,16 @@ export class CartPage implements OnInit {
       if(t[0].domicilios){
         this.domicilios = t[0].domicilios;
       }
+      if(this.discount > 0){
+        this.aplicarDesctuentoTienda()
+      } else {
+        this.verificarDescuentoProductos();
+      }
     });
     this.firebase.obtener('usuarios').subscribe((user) =>{
       this.store = user[0];
     });
-    this.verificarDescuentoProductos();
+    
     //this.actualizarInventario();
     const coordinates = await Geolocation.getCurrentPosition();
     console.log('Current', coordinates);

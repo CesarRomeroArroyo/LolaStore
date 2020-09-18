@@ -77,23 +77,96 @@ export class CategoryPage implements OnInit {
 	}
 
 	buscar() {
-		if (this.buscarText == '') {
+		if (this.buscarText == ''  || this.buscarText.length <= 2) {
 			this.dataShow = this.productosSeleccionados;
 			console.log(this.dataShow);
 			return;
 		} else {
 			let data: any[] = [];
-			this.buscarText = this.buscarText.toUpperCase();
 			this.productosSeleccionados.forEach(element => {
 				data.push({
 					nombre: element.nombre,
-					productos: element.productos.filter(prod => {
-						return prod.nombre.toUpperCase().indexOf(this.buscarText.toUpperCase()) >= 0;
-					})
-				})
+					productos: this.busqueda(element.productos)
+				});
+				data.push({
+					nombre: element.nombre,
+					productos: this.busquedaSubtitulo(element.productos)
+				});
 			});
 			this.dataShow = data;
 		}
+	}
+
+	busqueda(productos){
+		var retorno = [];
+		var arrayBusqueda = this.buscarText.split(" ");
+		if(arrayBusqueda.length == 1){
+			retorno = productos.filter(prod => {
+				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+			})
+		}
+		if(arrayBusqueda.length == 2){
+			retorno = productos.filter(prod => {
+				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+			})
+			retorno = retorno.filter(prod => {
+				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[1].toUpperCase()) >= 0;
+			})
+		}
+		if(arrayBusqueda.length == 3){
+			retorno = productos.filter(prod => {
+				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+			})
+			retorno = retorno.filter(prod => {
+				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[1].toUpperCase()) >= 0;
+			})
+			retorno = retorno.filter(prod => {
+				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[2].toUpperCase()) >= 0;
+			})
+		}
+		return retorno;
+	}
+
+	busquedaSubtitulo(productos){
+		var retorno = [];
+		var arrayBusqueda = this.buscarText.split(" ");
+		if(arrayBusqueda.length == 1){
+			retorno = productos.filter(prod => {
+				if(prod.subtitulo){
+					return prod.subtitulo.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+				}
+			})
+		}
+		if(arrayBusqueda.length == 2){
+			retorno = productos.filter(prod => {
+				if(prod.subtitulo){
+					return prod.subtitulo.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+				}
+			})
+			retorno = retorno.filter(prod => {
+				if(prod.subtitulo){
+					return prod.subtitulo.toUpperCase().indexOf(arrayBusqueda[1].toUpperCase()) >= 0;
+				}
+			})
+		}
+		if(arrayBusqueda.length == 3){
+			retorno = productos.filter(prod => {
+				if(prod.subtitulo){
+					return prod.subtitulo.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+				}
+			})
+			retorno = retorno.filter(prod => {
+				if(prod.subtitulo){
+					return prod.subtitulo.toUpperCase().indexOf(arrayBusqueda[1].toUpperCase()) >= 0;
+				}
+			})
+			retorno = retorno.filter(prod => {
+				if(prod.subtitulo){
+					return prod.subtitulo.toUpperCase().indexOf(arrayBusqueda[2].toUpperCase()) >= 0;
+				}
+			})
+		}
+		return retorno;
 	}
 
 	goToDetail(producto) {

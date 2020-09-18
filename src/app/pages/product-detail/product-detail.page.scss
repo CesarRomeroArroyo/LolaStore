@@ -113,7 +113,18 @@ ion-content {
 				color: var(--ion-color-medium);
 			}
 		}
-
+		&__subtitle {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			> h5 {
+				color: var(--ion-color-medium-tint);
+			}
+			> ion-icon {
+				margin: 16px 0 10px 0;
+				color: var(--ion-color-medium-tint);
+			}
+		}
 		&__info {
 			&__title {
 				font-weight: bold;
