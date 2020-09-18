@@ -20,8 +20,6 @@
 		</div>
 		<div class="container__details">
 			<div class="container__details__title">
-				<!-- <h5>Detalles</h5> -->
-				<!-- <ion-icon name="heart-outline"></ion-icon> -->
 			</div>
 			<div class="container__details__info">
 				<div class="container__details__info__title">
@@ -33,20 +31,17 @@
 				<div class="container__details__info__text">
 					{{producto.descripcion}}
 				</div>
-				<div class="container__details__info__arrays" *ngIf="producto.ingredientes.length > 0">
+				<div class="container__details__info__arrays" *ngIf="producto.ingredientes?.length > 0">
 					<h6>Ingredientes</h6>
 					{{producto.ingredientes}}
-					<!-- <div class="container__details__info__arrays__value">
-						<p *ngFor="let ingrediente of producto.ingredientes">{{ingrediente}}</p>
-					</div> -->
 				</div>
 				<div class="container__details__info__precio">
 					${{producto.precio | number}}
 				</div>
-				<div class="container__details__info__arrays" *ngIf="producto.colores.length > 0">
+				<div class="container__details__info__arrays" *ngIf="producto.colores?.length > 0">
 					<ion-item>
 						<ion-label color="primary">Colores</ion-label>
-						<ion-select value="brown" okText="Seleccionar" cancelText="Cancelar" [(ngModel)]="colorSelected">
+						<ion-select okText="Seleccionar" cancelText="Cancelar" [(ngModel)]="colorSelected">
 							<ion-select-option [value]="color" *ngFor="let color of producto.colores">
 								{{color}}
 							</ion-select-option>
@@ -55,13 +50,10 @@
 				</div>
 			</div>
 			<div class="container__details__cantidad">
-				<!-- <div class="container__details__cantidad__title">
-					<h5>Cantidad</h5>
-				</div> -->
 				<div class="container__details__cantidad__inputs">
-					<ion-icon name="add-outline" (click)="adicionar()"></ion-icon>
-					<ion-input [(ngModel)]="cantidad" [disabled]="true" type="number" class="input"></ion-input>
 					<ion-icon name="remove-outline" (click)="restar()"></ion-icon>
+					<ion-input [(ngModel)]="cantidad" [disabled]="true" type="number" class="input"></ion-input>
+					<ion-icon name="add-outline" (click)="adicionar()"></ion-icon>
 				</div>
 			</div>
 			<div class="container__details__buttom">

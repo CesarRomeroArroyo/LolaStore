@@ -10,6 +10,7 @@ import { DescuentosComponent } from './descuentos/descuentos.component';
 import { TarjetasComponent } from './tarjetas/tarjetas.component';
 import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
 import { FavoritoComponent } from './favorito/favorito.component';
+import { AddCarComponent } from './add-car/add-car.component';
 
 const components = [
 	TagsComponent,
@@ -18,7 +19,8 @@ const components = [
 	TarjetasComponent,
 	ConfirmacionComponent,
 	FavoritoComponent,
-	CalificarComponent
+	CalificarComponent,
+	AddCarComponent
 ];
 
 @NgModule({

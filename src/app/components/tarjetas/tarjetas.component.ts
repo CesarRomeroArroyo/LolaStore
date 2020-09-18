@@ -12,6 +12,8 @@ export class TarjetasComponent implements OnInit {
 
   @Input() public array: Array<ProductoInterface> = [];
   @Input() public wrap = true;
+  public producto: ProductoInterface;
+  public show = false;
 
   constructor(private router: Router) { }
 
@@ -29,5 +31,14 @@ export class TarjetasComponent implements OnInit {
 
   public goToDetail(producto: ProductoInterface): void {
     this.router.navigate(['/product-detail', producto.idunico]);
+  }
+
+  public addCar(producto: ProductoInterface): void {
+    this.producto = producto;
+    this.show = true;
+  }
+
+  public showModal(e): void {
+    this.show = e;
   }
 }

@@ -11,12 +11,12 @@
         overflow: hidden;
         border-radius: 20px;
         flex-basis: 46%;
-        margin: 0 3% 4% 1%;
-        box-shadow: 0px 0px 4px 0px var(--ion-color-dark);
-        height: 34vh;
+        margin: 0 2% 4% 2%;
+        box-shadow: 0px 2px 4px var(--ion-color-medium);
+        height: 42vh;
 
         &__title {
-            height: 15vh;
+            height: 23vh;
             overflow: hidden;
 
             app-favorito {
@@ -152,7 +152,6 @@
     flex-wrap: nowrap;
     justify-content: stretch;
     overflow-x: auto;
-    margin: 0 4%;
 }
 
 .card {
@@ -170,4 +169,12 @@
         height: 100%;
         width: 96%;
     }
+}
+
+.modal {
+    top: 0;
+    min-height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
 }

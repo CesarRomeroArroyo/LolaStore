@@ -1,0 +1,125 @@
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    min-height: 100%;
+    width: 100%;
+    z-index: 10;
+
+    &__close {
+        position: relative;
+        color: black;
+        display: flex;
+        justify-content: flex-end;
+        top: -2vh;
+        right: -2.5vh;
+        font-size: 5vh;
+    }
+
+    &__info {
+        background: white;
+        display: flex;
+        flex-direction: column;
+        width: 40vh;
+        z-index: 100;
+        box-shadow: 0 0px 5px 0px var(--ion-color-dark);
+        padding: 1%;
+        border-radius: 20px;
+
+        &__agregar {
+            color: black;
+            margin-bottom: 2%;
+
+            >ion-item {
+                border-radius: 20px;
+                --inner-padding-start: 10px;
+                --padding-start: 0px;
+                --background: var(--ion-color-light);
+                box-shadow: 0px 1px 4px var(--ion-color-medium);
+                margin: 10px;
+            }
+        }
+
+        &__content {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            justify-content: center;
+            top: -3vh;
+
+            &__title {
+                color: black;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            &__text {
+                height: 34vh;
+                overflow-y: auto;
+
+                &::-webkit-scrollbar {
+                    width: 8px;
+                    height: 8px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: #ccc;
+                    border-radius: 4px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: #e1e1e1;
+                    border-radius: 4px;
+                }
+            }
+        }
+
+        &__cantidad {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin-bottom: 5px;
+
+            &__title {
+                color: var(--ion-color-medium);
+            }
+
+            &__inputs {
+                display: flex;
+                align-items: center;
+                width: 12vh;
+
+                >ion-input {
+                    text-align: center;
+                    height: 5vh;
+                    --padding-start: 0;
+                    --padding-end: 0;
+                }
+
+                >ion-icon {
+                    font-size: 4vh;
+                }
+            }
+        }
+    }
+
+    &__terminar {
+        display: flex;
+        justify-content: center;
+
+        >ion-button {
+            height: 25px;
+            width: 60%;
+        }
+    }
+}
+
+.fondo {
+    min-height: 100%;
+    width: 100%;
+    background: var(--ion-color-dark);
+    z-index: 5;
+    opacity: 0.8;
+    position: absolute;
+}

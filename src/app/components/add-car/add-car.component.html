@@ -1,3 +1,35 @@
-<p>
-  add-car works!
-</p>
+<div class="modal">
+	<div class="modal__info">
+		<div class="modal__close" (click)="closeModal()">
+			<ion-icon name="close-circle"></ion-icon>
+		</div>
+		<div class="modal__info__content">
+			<div class="modal__info__content__title">
+				{{'Adicionar color'|uppercase}}
+			</div>
+			<div class="modal__info__agregar">
+				<ion-item>
+					<ion-label color="primary">Colores</ion-label>
+					<ion-select okText="Seleccionar" cancelText="Cancelar" [(ngModel)]="color">
+						<ion-select-option [value]="color" *ngFor="let color of producto.colores">
+							{{color}}
+						</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</div>
+			<div class="modal__info__cantidad">
+				<div class="modal__info__cantidad__inputs">
+					<ion-icon name="remove-outline" (click)="restar()"></ion-icon>
+					<ion-input [(ngModel)]="cantidad" [disabled]="true" type="number" class="input"></ion-input>
+					<ion-icon name="add-outline" (click)="adicionar()"></ion-icon>
+				</div>
+			</div>
+
+			<div class="modal__terminar">
+				<ion-button (click)="addCar()">Terminar</ion-button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="fondo"></div>

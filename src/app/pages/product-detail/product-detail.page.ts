@@ -7,6 +7,7 @@ import { FirebaseService } from '@services/firebase.service';
 import { StateApp } from '@services/state.service';
 import { CartService } from '@services/cart.service';
 import Swal from 'sweetalert2';
+
 @Component({
 	selector: 'app-product-detail',
 	templateUrl: './product-detail.page.html',
@@ -15,8 +16,8 @@ import Swal from 'sweetalert2';
 export class ProductDetailPage implements OnInit {
 	pedido: any[];
 	producto: ProductoInterface;
-	cantidad: number = 1;
-	colorSelected: string = "";
+	cantidad = 1;
+	colorSelected = '';
 
 	slideOpts = {
 		initialSlide: 0,
@@ -29,30 +30,26 @@ export class ProductDetailPage implements OnInit {
 		private firebaseSvc: FirebaseService,
 		private state: StateApp,
 		public toastController: ToastController,
-		private cartService: CartService) { 
-			this.pedido = [];
-		}
+		private cartService: CartService) {
+		this.pedido = [];
+	}
 
 	ngOnInit() {
 		this.init();
 	}
 
-	ionViewWillEnter(){
-		const pedido = JSON.parse(localStorage.getItem("APP_PEDIDO"));
-		if(pedido){
+	init() {
+		const pedido = JSON.parse(localStorage.getItem('APP_PEDIDO'));
+		if (pedido) {
 			this.pedido = pedido;
 		} else {
 			this.pedido = [];
 		}
-
-	}
-
-	init() {
 		this.route.paramMap.subscribe((params: any) => {
-			let id = params.get('id');
-			this.firebaseSvc.obtenerUniqueId("productos", id).subscribe((prod: any) => {
+			const id = params.get('id');
+			this.firebaseSvc.obtenerUniqueId('productos', id).subscribe((prod: any) => {
 				this.producto = prod[0];
-				if(!this.producto['fotos']) {
+				if (!this.producto.fotos) {
 					this.producto.fotos = [];
 					this.producto.urls = [];
 				}
@@ -63,9 +60,9 @@ export class ProductDetailPage implements OnInit {
 
 	async presentToast(message, color?) {
 		const toast = await this.toastController.create({
-			message: message,
+			message,
 			duration: 1000,
-			color: color,
+			color,
 		});
 		toast.present();
 	}
@@ -76,7 +73,7 @@ export class ProductDetailPage implements OnInit {
 
 	validation() {
 		if (this.producto.colores) {
-			if(this.producto.colores.length > 0){
+			if (this.producto.colores.length > 0) {
 				if (this.colorSelected === '') {
 					return false;
 				}
@@ -103,13 +100,13 @@ export class ProductDetailPage implements OnInit {
 
 	public addCar(): void {
 		const usuario: any = JSON.parse(localStorage.getItem('APP_USER'));
-		if(usuario){
+		if (usuario) {
 			if (this.validation()) {
 				if (this.cantidad > this.producto.cantidad) {
-					this.presentToast('La cantidad solicitada supera la cantidad en el inventario' , 'danger');
+					this.presentToast('La cantidad solicitada supera la cantidad en el inventario', 'danger');
 					return;
 				} else {
-					this.pedido.push({producto: this.producto, cantidad: this.cantidad, color: this.colorSelected });
+					this.pedido.push({ producto: this.producto, cantidad: this.cantidad, color: this.colorSelected });
 					this.cartService.administrarProducto(this.pedido);
 					this.presentToast('Producto Agregado', 'success');
 				}

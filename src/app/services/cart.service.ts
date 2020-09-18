@@ -11,12 +11,12 @@ export class CartService {
   ) { }
 
   administrarProducto(pedido: any){
-    this.state.setData({pedido: pedido});
-    localStorage.setItem("APP_PEDIDO", JSON.stringify(pedido))
+    this.state.setData({pedido});
+    localStorage.setItem('APP_PEDIDO', JSON.stringify(pedido))
   }
 
   vaciarCarrito(){
-    localStorage.removeItem("APP_PEDIDO");
+    localStorage.removeItem('APP_PEDIDO');
     this.state.setData({pedido: []});
   }
 }
