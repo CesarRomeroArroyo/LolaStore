@@ -4,31 +4,30 @@ import { Router } from '@angular/router';
 import { ProductoInterface } from '@interfaces/producto.interface';
 
 @Component({
-	selector: 'app-tarjetas',
-	templateUrl: './tarjetas.component.html',
-	styleUrls: ['./tarjetas.component.scss'],
+  selector: 'app-tarjetas',
+  templateUrl: './tarjetas.component.html',
+  styleUrls: ['./tarjetas.component.scss'],
 })
 export class TarjetasComponent implements OnInit {
 
-	@Input() public array: Array<ProductoInterface> = [];
-	@Input() public wrap = true;
+  @Input() public array: Array<ProductoInterface> = [];
+  @Input() public wrap = true;
 
-	constructor(private router: Router) { }
+  constructor(private router: Router) { }
 
-	ngOnInit() {
-		setTimeout(() => {
-			console.log(this.array);
-		}, 1000);
-	}
+  ngOnInit() {
+    setTimeout(() => {
+      console.log(this.array);
+    }, 1000);
+  }
 
-	calculoDescuento(producto: ProductoInterface): number {
-		const descuento = producto.precio * (producto.descuento / 1000);
-		const resultado = producto.precio - descuento
-		return resultado;
-	}
+  public calculoDescuento(producto: ProductoInterface): number {
+    const descuento = producto.precio * (producto.descuento / 100);
+    const resultado = producto.precio - descuento;
+    return resultado;
+  }
 
-	goToDetail(producto) {
-		this.router.navigate(['/product-detail', producto.idunico]);
-	}
-
+  public goToDetail(producto: ProductoInterface): void {
+    this.router.navigate(['/product-detail', producto.idunico]);
+  }
 }

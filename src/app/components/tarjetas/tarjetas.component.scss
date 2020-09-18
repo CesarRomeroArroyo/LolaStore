@@ -93,8 +93,6 @@
                     border-top: 10px solid transparent;
                     position: relative;
                     z-index: 1;
-                    width: 0;
-                    height: 0;
                     right: -1px;
                 }
 
@@ -120,7 +118,7 @@
                     font-size: 2.2vh;
                     position: absolute;
                     top: 30px;
-                    left: 105px;
+                    left: 75%;
 
                     &__descuento {
                         display: flex;
@@ -141,6 +139,13 @@
             }
         }
     }
+}
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    padding: 0 3%;
 }
 
 .scroll-x {

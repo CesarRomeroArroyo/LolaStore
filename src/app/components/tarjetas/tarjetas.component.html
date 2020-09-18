@@ -24,11 +24,6 @@
 			<div class="cards__card__info__price" *ngIf="producto.descuento === 0 else descuento" (click)="goToDetail(producto)">
 				${{producto.precio|number}}
 			</div>
-			
-			<div class="button">
-				<ion-button class="button__btn">Agregar</ion-button>
-			</div>
-
 			<ng-template #descuento>
 				<div class="cards__card__info__price" (click)="goToDetail(producto)">
 					<div>${{producto.precio|number}}</div>
@@ -36,6 +31,11 @@
 					<div>${{calculoDescuento(producto)|number}}</div>
 				</div>
 			</ng-template>
+		</div>
+		<div class="footer">
+			<div class="button">
+				<ion-button class="button__btn">Agregar</ion-button>
+			</div>
 		</div>
 	</div>
 </div>

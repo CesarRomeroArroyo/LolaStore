@@ -30,7 +30,7 @@
 				<div class="container__details__info__text">
 					{{producto.descripcion}}
 				</div>
-				<div class="container__details__info__arrays" *ngIf="producto.ingredientes">
+				<div class="container__details__info__arrays" *ngIf="producto.ingredientes.length > 0">
 					<h6>Ingredientes</h6>
 					{{producto.ingredientes}}
 					<!-- <div class="container__details__info__arrays__value">
@@ -40,12 +40,15 @@
 				<div class="container__details__info__precio">
 					${{producto.precio | number}}
 				</div>
-				<div class="container__details__info__arrays" *ngIf="producto.colores">
-					<h6>Colores</h6>
-					<div class="container__details__info__arrays__value">
-						<div class="container__details__info__arrays__color" [style.background]="color"
-							*ngFor="let color of producto.colores" [ngClass]="{'container__details__info__arrays__colorSelected ': colorSelected != '' && colorSelected == color}" (click)="selectColor(color)"></div>
-					</div>
+				<div class="container__details__info__arrays" *ngIf="producto.colores.length > 0">
+					<ion-item>
+						<ion-label color="primary">Colores</ion-label>
+						<ion-select value="brown" okText="Seleccionar" cancelText="Cancelar" [(ngModel)]="colorSelected">
+							<ion-select-option [value]="color" *ngFor="let color of producto.colores">
+								{{color}}
+							</ion-select-option>
+						</ion-select>
+					</ion-item>
 				</div>
 			</div>
 			<div class="container__details__cantidad">
