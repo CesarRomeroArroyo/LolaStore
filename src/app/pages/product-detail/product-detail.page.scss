@@ -4,9 +4,10 @@ ion-content {
 
 .container {
 	display: flex;
-	background-color: #ccc;
+	background-color: var(--ion-color-light);
 	min-height: 100vh;
 	width: 100%;
+
 	&__header {
 		display: flex;
 		position: relative;
@@ -14,32 +15,38 @@ ion-content {
 		font-size: 4vh;
 		height: 60vh;
 		width: 100%;
-		> ion-slides {
+
+		>ion-slides {
 			--bullet-background: black;
 		}
-		> img {
+
+		>img {
 			position: absolute;
 			object-fit: cover;
 			object-position: top;
 			width: 100%;
 			height: 100%;
 		}
-		> ion-slides {
+
+		>ion-slides {
 			position: absolute;
 			height: 100%;
 			width: 100%;
-			ion-slide > img {
+
+			ion-slide>img {
 				object-fit: cover;
 				object-position: center;
 				height: 100%;
 				width: 100%;
 			}
 		}
+
 		&__ticked {
 			display: flex;
 			position: relative;
 			z-index: 1;
 			right: -18px;
+
 			&__triangulo {
 				border-right: 20px solid var(--ion-color-primary);
 				border-bottom: 20px solid transparent;
@@ -51,6 +58,7 @@ ion-content {
 				right: -1px;
 			}
 		}
+
 		&__icon {
 			display: flex;
 			justify-content: space-between;
@@ -60,6 +68,7 @@ ion-content {
 			padding: 16px;
 			font-size: 20px;
 			z-index: 10;
+
 			&__desc {
 				background-color: var(--ion-color-primary);
 				display: flex;
@@ -76,73 +85,99 @@ ion-content {
 			}
 		}
 	}
+
 	&__details {
 		position: absolute;
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		height: 55%;
+		height: 44%;
 		bottom: 0px;
 		background-color: var(--ion-color-light);
 		border-radius: 50px 50px 0 0;
 		box-shadow: 0px -2px 2px var(--ion-color-gray-light);
 		padding: 16px 28px;
 		z-index: 10;
+
 		&__title {
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
-			> h5 {
+
+			>h5 {
 				color: var(--ion-color-medium);
 			}
-			> ion-icon {
+
+			>ion-icon {
 				margin: 16px 0 10px 0;
 				color: var(--ion-color-medium);
 			}
 		}
+
 		&__subtitle {
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
-			> h5 {
+
+			>h5 {
 				color: var(--ion-color-medium-tint);
 			}
-			> ion-icon {
+
+			>ion-icon {
 				margin: 16px 0 10px 0;
 				color: var(--ion-color-medium-tint);
 			}
 		}
+
 		&__info {
 			&__title {
 				font-weight: bold;
 				font-size: 16px;
 				margin-bottom: 2%;
 			}
+
 			&__text {
 				font-size: 2.2vh;
 				margin-bottom: 2%;
 			}
+
 			&__arrays {
 				display: flex;
 				justify-content: center;
 				flex-direction: column;
 				font-size: 2.2vh;
-				> h6 {
+
+				>h6 {
 					font-size: 2.2vh;
 					margin: 0 0 2% 0;
 					padding: 0;
 					color: var(--ion-color-primary);
 				}
+
+				>ion-item {
+					>ion-label {
+						font-weight: 500;
+					}
+
+					border-radius: 20px;
+					--inner-padding-start: 10px;
+					--padding-start: 0px;
+					box-shadow: 0px 1px 4px var(--ion-color-medium);
+					margin-bottom: 10px;
+				}
+
 				&__value {
 					width: 100%;
 					display: flex;
 					flex-wrap: wrap;
 					align-items: center;
-					> p {
+
+					>p {
 						margin: 2% 2% 2% 0;
 						font-size: 2.2vh;
 					}
 				}
+
 				&__color {
 					width: 25px;
 					height: 25px;
@@ -150,6 +185,7 @@ ion-content {
 					border-radius: 15px;
 					opacity: 0.7;
 				}
+
 				&__colorSelected {
 					opacity: 1;
 					padding: 1%;
@@ -157,6 +193,7 @@ ion-content {
 					border: 1.2px var(--ion-color-primary) solid;
 				}
 			}
+
 			&__precio {
 				font-weight: bold;
 				display: flex;
@@ -166,28 +203,34 @@ ion-content {
 				margin-bottom: 2%;
 			}
 		}
+
 		&__cantidad {
 			display: flex;
 			align-items: center;
 			justify-content: space-evenly;
+
 			&__title {
 				color: var(--ion-color-medium);
 			}
+
 			&__inputs {
 				display: flex;
 				align-items: center;
 				width: 12vh;
-				> ion-input {
+
+				>ion-input {
 					text-align: center;
 					height: 5vh;
 					--padding-start: 0;
 					--padding-end: 0;
 				}
-				> ion-icon {
+
+				>ion-icon {
 					font-size: 4vh;
 				}
 			}
 		}
+
 		&__buttom {
 			display: flex;
 			justify-content: center;

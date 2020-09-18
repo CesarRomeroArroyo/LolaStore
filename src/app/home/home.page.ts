@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
 		speed: 400
 	};
 	public MejoresDescuentos: any[] = [];
-	public loading: boolean = false;
+	public loading = false;
 	public soporte: string;
 	public fechas: any;
 	public movmientoData: any[] = [];
@@ -41,14 +41,14 @@ export class HomePage implements OnInit {
 
 	async init() {
 		this.loading = false;
-		let user = JSON.parse(localStorage.getItem('APP_USER'));
+		const user = JSON.parse(localStorage.getItem('APP_USER'));
 		if (user) {
 			this.user = user;
 		}
-		this.store = await this.firebase.obtenerPromise("usuarios");
+		this.store = await this.firebase.obtenerPromise('usuarios');
 		this.soporte = `https://api.whatsapp.com/send?phone=+57${this.store[0].contacto}`;
-		this.categorias = await this.firebase.obtenerPromise("categorias");
-		let transversal = await this.firebase.obtenerPromise('transversal');
+		this.categorias = await this.firebase.obtenerPromise('categorias');
+		const transversal = await this.firebase.obtenerPromise('transversal');
 		this.obtenerFechas();
 		this.getMejoresDescuentos();
 		this.promociones = transversal[0].promociones;
@@ -60,26 +60,26 @@ export class HomePage implements OnInit {
 
 
 	async obtenerFechas() {
-		var movimientos = await this.firebase.obtenerPromise("movimientos");
+		const movimientos = await this.firebase.obtenerPromise('movimientos');
 		this.fechas = movimientos.map((ped) => {
 			return ped.fecha;
 		});
 		this.fechas = [...new Set(this.fechas)];
-		this.fechas = this.fechas.map(date => moment(date, "DD/MM/YYYY"));
-		this.fechas.sort(function (left, right) {
+		this.fechas = this.fechas.map(date => moment(date, 'DD/MM/YYYY'));
+		this.fechas.sort((left, right) => {
 			return right - left;
 		});
 
 		this.fechas.forEach(async fec => {
-			var productos = await this.firebase.obtenerXFechaPromise("movimientos", fec.format("DD/MM/YYYY").toString());
+			const productos = await this.firebase.obtenerXFechaPromise('movimientos', fec.format('DD/MM/YYYY').toString());
 			this.movmientoData = this.movmientoData.concat(productos);
 		});
 
 	}
 
 	async getMejoresDescuentos() {
-		let productos: ProductoInterface[] = await this.firebase.obtenerPromise('productos');
-		productos.sort(function (prev, next) {
+		const productos: ProductoInterface[] = await this.firebase.obtenerPromise('productos');
+		productos.sort((prev, next) => {
 			if (prev.descuento < next.descuento) {
 				return 1;
 			}
@@ -88,20 +88,24 @@ export class HomePage implements OnInit {
 			}
 			return 0;
 		});
+		const data = [];
 		productos.forEach(element => {
-			if (!element['foto']) {
-				element['foto'] = "";
-				element['url'] = "";
+			if (!element.foto) {
+				element.foto = '';
+				element.url = '';
+			}
+			if (element.descuento > 0) {
+				data.push(element);
 			}
 		})
-		this.MejoresDescuentos = productos.splice(0, 20);
+		this.MejoresDescuentos = data.slice(0, 10);
 	}
 
 	obtenerColor(index) {
-		if (index % 2 == 0) {
+		if (index % 2 === 0) {
 			return 2;
 		} else {
-			if (index % 3 == 0) {
+			if (index % 3 === 0) {
 				return 3;
 			}
 			return 1;
