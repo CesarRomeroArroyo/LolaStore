@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-
+import { LoadingController } from '@ionic/angular';
 @Injectable({
 	providedIn: 'root'
 })
@@ -11,7 +11,8 @@ export class FileManagerService {
 	uploadURL: Observable<string>;
 	estado = new BehaviorSubject({});
 	fileReference: AngularFireStorageReference;
-	constructor(private storage: AngularFireStorage) {
+	constructor(private storage: AngularFireStorage, 
+		public loadingController: LoadingController) {
 		//this.estado.next(true);
 	}
 
@@ -34,6 +35,31 @@ export class FileManagerService {
 				this.estado.next(false);
 			})
 		).subscribe();
+	}
+
+	async upload2(file, filepath): Promise<any> {
+		// Get input file
+		//const file = event.target.files[0];
+		this.estado.next(true);
+		const fileRef = this.storage.ref(filepath);
+		const loading = await this.loadingController.create({
+			message: 'Espere por favor, Cargando la Imagen...'
+		  });
+		await loading.present();
+		// Upload image
+		const task = this.storage.upload(filepath, file);
+
+		// Observe percentage changes
+		this.uploadProgress = task.percentageChanges();
+
+		// Get notified when the download URL is available
+		return task.snapshotChanges().pipe(
+			finalize(() => {
+				this.uploadURL = fileRef.getDownloadURL();
+				this.estado.next(false);
+				loading.dismiss();
+			})
+		).toPromise();
 	}
 
 	deleteFilesFolder(path) {

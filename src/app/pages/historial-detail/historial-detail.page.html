@@ -39,9 +39,7 @@
 						</div>
 						<div class="container__list__item__data__content__name">
 							<i class="fa fa-times"></i> {{producto.cantidad}}
-							<div class="container__list__item__data__content__name__color"
-								[style.background]="producto.color">
-							</div>
+							{{producto.color}}
 						</div>
 					</div>
 					<div class="container__list__item__data__value">
@@ -55,7 +53,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="container__discount">
+			<!-- <div class="container__discount">
 				<div class="container__discount__title">
 					<div class="container__discount__title__text">
 						<div class="container__discount__title__text__content">
@@ -68,7 +66,7 @@
 					<ion-badge color="success">{{descuentoAplicado()}}</ion-badge>
 				</div>
 
-			</div>
+			</div> -->
 			<div class="container__gifts">
 				<div class="container__gifts__title">
 					<i class="fa fa-gift" aria-hidden="true"></i> Por tu compra te regalamos:
@@ -101,7 +99,14 @@
 			<div class="content-calificar" *ngIf="pedido.estado === 1">
 				<ion-button (click)="calificarPedido()">¿Ya entregaron tu pedido?</ion-button>
 			</div>
+			<div class="content-calificar" *ngIf="pedido.estado === 1">
+				<b>Si hiciste consignacion o giro</b>
+				<input type="file" class="custom-file-input" 
+				 (change)="fileChangeEvent($event.target.files)">
+				 <img src="{{pedido.url}}" alt="" *ngIf="pedido.url">
+			</div>
 			<div class="container__calificacion" *ngIf="pedido.estado === 2">
+				<img src="{{pedido.url}}" alt="" *ngIf="pedido.url">
 				<H3>Calificacion del servicio</H3>
 				<div class="container__calificacion__star">
 					<ion-icon name="star" [class.color]="i <= stars - 1" *ngFor="let item of star; let i = index">

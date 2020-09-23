@@ -11,5 +11,8 @@ export interface PedidoInterface {
     usuario: any,
     estrellas?: number,
     comentario: string,
-    atencion: string
+    atencion: string,
+    idunico?: string;
+    url?: string;
+    id?: string;
 }

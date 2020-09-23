@@ -75,6 +75,19 @@ export class CartPage implements OnInit {
 			this.productsGrl = [];
 		}
     this.asignarProductos();
+    this.verficarData();
+    this.firebase.obtener('usuarios').subscribe((user) =>{
+      this.store = user[0];
+    });
+    
+    //this.actualizarInventario();
+    const coordinates = await Geolocation.getCurrentPosition();
+    console.log('Current', coordinates);
+    this.gps.lon = coordinates.coords.longitude;
+    this.gps.lat = coordinates.coords.latitude;
+  }
+
+  verficarData() {
     this.firebase.obtener("transversal").subscribe((t) => {
       if(t[0].descuento>0){
         this.discount = t[0].descuento;
@@ -93,18 +106,21 @@ export class CartPage implements OnInit {
       if(this.discount > 0){
         this.aplicarDesctuentoTienda()
       } else {
-        this.verificarDescuentoProductos();
+        this.verificarDesceunto = this.obsequios.filter((o) => {
+          return o.descuento == true;
+        });
+        var total = this.calcularPago();
+        if(this.verificarDesceunto.length > 0){
+          if(total >= this.verificarDesceunto[0].desde && total <= this.verificarDesceunto[0].hasta){
+            this.aplicarDesctuentoTransversal();
+          } else {
+            this.verificarDescuentoProductos();
+          } 
+        } else {
+          this.verificarDescuentoProductos();
+        }
       }
     });
-    this.firebase.obtener('usuarios').subscribe((user) =>{
-      this.store = user[0];
-    });
-    
-    //this.actualizarInventario();
-    const coordinates = await Geolocation.getCurrentPosition();
-    console.log('Current', coordinates);
-    this.gps.lon = coordinates.coords.longitude;
-    this.gps.lat = coordinates.coords.latitude;
   }
 
   asignarProductos(){
@@ -199,17 +215,22 @@ export class CartPage implements OnInit {
   }
 
   calcularDomicilio(){
-    var valorRetorno = 0;
-    let distancia = this.distanceService.difereciaEntreDosPuntos(this.store.lon, this.store.lat, this.gps.lon, this.gps.lat);
-    //let distancia = this.distanceService.difereciaEntreDosPuntos(-73.2857307, 10.494702, -73.2295297, 10.444309);
-    let distanciaMetros =  parseFloat(distancia)*1000;    
-    this.domicilios.forEach((dom: any) =>  {
-      if(distanciaMetros >= dom.desde && distanciaMetros <= dom.hasta){
-        valorRetorno = dom.domicilio;
-      }
-    });
-    // console.log(valorRetorno);
-    return valorRetorno;
+    if(this.mismaCiudad()){
+      var valorRetorno = 0;
+      let distancia = this.distanceService.difereciaEntreDosPuntos(this.store.lon, this.store.lat, this.gps.lon, this.gps.lat);
+      //let distancia = this.distanceService.difereciaEntreDosPuntos(-73.2857307, 10.494702, -73.2295297, 10.444309);
+      let distanciaMetros =  parseFloat(distancia)*1000;    
+      this.domicilios.forEach((dom: any) =>  {
+        if(distanciaMetros >= dom.desde && distanciaMetros <= dom.hasta){
+          valorRetorno = dom.domicilio;
+        }
+      });
+      // console.log(valorRetorno);
+      return valorRetorno;
+    } else {
+      return 0;
+    }
+      
   }
 
   closeModal(e) {
@@ -245,6 +266,7 @@ export class CartPage implements OnInit {
         this.domicilio();
         this.cartService.administrarProducto(this.productsGrl);
         this.obtenerObssequios();
+        this.verficarData();
       }
     });
   }

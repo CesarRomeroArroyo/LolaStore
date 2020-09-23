@@ -36,10 +36,9 @@
             <div class="container__list__item__data__content__cat">
               {{product.producto.nombreCategoria}} - {{product.producto.nombreSubcategoria}}
             </div>
-            <div class="container__list__item__data__content__name">
+            <div class="container__list__item__data__content__name" *ngIf="product">
               <i class="fa fa-times"></i> {{product.cantidad}} 
-              <div class="container__list__item__data__content__name__color" [style.background]="product.color">
-              </div>
+              {{(product.color)? product.color : ''}}
             </div>
           </div>
           <div class="container__list__item__data__value">
@@ -84,9 +83,9 @@
       <div class="container__title" (click)="finalizarPedido()">
         <div class="container__title__values">Subtotal: {{calcularPago()| currency: 'USD':true:'2.0'}}</div>
         
-        <div class="container__title__values" *ngIf="domicilio()==0 && verificarDomicilio.length == 0">Valor Domicilio: <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>Calculando Domicilio...</div>
-        <div class="container__title__values" *ngIf="domicilio()==0 && verificarDomicilio.length > 0">Valor Domicilio: $0</div>
-        <div class="container__title__values" *ngIf="domicilio()!=0">Valor Domicilio: {{domicilio()| currency: 'USD':true:'2.0'}}</div>
+        <div class="container__title__values" *ngIf="domicilio()==0 && verificarDomicilio.length == 0 && mismaCiudad()==true">Valor Domicilio: <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>Calculando Domicilio...</div>
+        <div class="container__title__values" *ngIf="domicilio()==0 && verificarDomicilio.length > 0 && mismaCiudad()==true">Valor Domicilio: $0</div>
+        <div class="container__title__values" *ngIf="domicilio()!=0 && mismaCiudad()==true">Valor Domicilio: {{domicilio()| currency: 'USD':true:'2.0'}}</div>
         
         
         Total a pagar: {{calcularPago()+ domicilio()| currency: 'USD':true:'2.0'}}

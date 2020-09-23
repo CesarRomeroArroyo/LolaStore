@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '@services/firebase.service';
 import { PedidoInterface } from '@models/pedido.interface';
 import Swal from 'sweetalert2';
+import { FileManagerService } from '@services/file-manager.service';
 
 @Component({
 	selector: 'app-historial-detail',
@@ -24,7 +25,8 @@ export class HistorialDetailPage implements OnInit {
 
 	constructor(
 		private firebase: FirebaseService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private fileManager: FileManagerService
 	) { }
 
 	ngOnInit() {
@@ -94,4 +96,25 @@ export class HistorialDetailPage implements OnInit {
 			}
 		});
 	}
+
+	async fileChangeEvent(e: any){
+		var fileName = e[0];
+		var fileType = fileName.type;
+		await this.fileManager.upload2(fileName, 'pedidos/'+this.pedido.idunico+'/'+fileName.name);
+		this.fileManager.uploadURL.subscribe((data) => {
+			this.pedido.url = data;
+			console.log(this.pedido.url);
+			this.actualizarPedido();
+		});
+	}
+
+	actualizarPedido(){
+		this.firebase.actualizarDatos('pedidos', this.pedido, this.pedido.id).then(() =>{
+			Swal.fire('', 'Se ha actualizado el pedido con la informacion del pago', 'success');
+		}).catch(() =>{
+			Swal.fire('', 'Ocurrio un error al momento de subir el comprobante de pago, ponte en contacto con la tienda', 'error');
+		});
+	}
+
+	
 }

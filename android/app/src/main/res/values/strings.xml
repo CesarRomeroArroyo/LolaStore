@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">LolaStoreApp</string>
-    <string name="title_activity_main">LolaStoreApp</string>
-    <string name="package_name">com.lolastore.app</string>
-    <string name="custom_url_scheme">com.lolastore.app</string>
-</resources>
