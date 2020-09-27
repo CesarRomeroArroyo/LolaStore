@@ -7,7 +7,7 @@
 			<div class="modal__info__content__title">
 				{{'Adicionar color'|uppercase}}
 			</div>
-			<div class="modal__info__agregar">
+			<div class="modal__info__agregar" *ngIf="producto.colores?.length > 0">
 				<ion-item>
 					<ion-label color="primary">Colores</ion-label>
 					<ion-select okText="Seleccionar" cancelText="Cancelar" [(ngModel)]="color">
