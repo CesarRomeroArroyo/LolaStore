@@ -4,6 +4,9 @@
 			<app-favorito [producto]="producto"></app-favorito>
 			<img [src]="producto['url']" *ngIf="producto['foto'].length > 0" (click)="goToDetail(producto)">
 			<img [src]="producto.urls[0]" *ngIf="producto['foto'].length === 0" (click)="goToDetail(producto)">
+			<div class="agotado" *ngIf="producto.cantidad === 0">
+				Agotado
+			</div>
 		</div>
 		<div class="cards__card__info__price__ticked" *ngIf="producto.descuento > 0">
 			<div class="cards__card__info__price__triangulo"></div>
@@ -34,7 +37,19 @@
 		</div>
 		<div class="footer">
 			<div class="button">
-				<ion-button class="button__btn" (click)="addCar(producto)">Agregar</ion-button>
+				<ion-button 
+					class="button__btn" 
+					(click)="addCar(producto)" 
+					[disabled]="producto.cantidad === 0"
+					*ngIf="producto.colores?.length === 0; else verOpciones">Añadir al carrito
+				</ion-button>
+				<ng-template #verOpciones>
+					<ion-button 
+						class="button__btn"
+						[disabled]="producto.cantidad === 0" 
+						(click)="redirecTo('product-detail', producto.idunico)">Ver opciones
+					</ion-button>
+				</ng-template>
 			</div>
 		</div>
 	</div>

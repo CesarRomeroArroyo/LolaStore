@@ -88,6 +88,7 @@ export class AddCarComponent implements OnInit {
           this.pedido.push({ producto: this.producto, cantidad: this.cantidad, color: this.color });
           this.cartService.administrarProducto(this.pedido);
           this.presentToast('Producto Agregado', 'success');
+          this.close.emit(false);
         }
       } else {
         this.presentToast('Por favor elija un color', 'warning');

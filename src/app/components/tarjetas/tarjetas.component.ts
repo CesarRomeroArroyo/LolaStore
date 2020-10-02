@@ -38,6 +38,10 @@ export class TarjetasComponent implements OnInit {
     this.show = true;
   }
 
+  public redirecTo(path: string, idunico: string): void {
+    this.router.navigate([`${path}/${idunico}`]);
+  }
+
   public showModal(e): void {
     this.show = e;
   }
