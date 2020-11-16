@@ -40,6 +40,17 @@
 			</a>
 		</div>
 
+		<div class="contacto" *ngIf="mostrarCatalogo">
+			<a [href]="catalogo" target="_BLANK">
+				<div class="contacto__catalogo">
+					<i class="fa fa-file-text-o"></i>
+				</div>
+				<div class="contacto__texto">
+					Descarga nuestro Catalogo
+				</div>
+			</a>
+		</div>
+
 		<div class="title">
 			<div class="title__text"> {{'categorias'|uppercase}} </div>
 		</div>

@@ -11,7 +11,8 @@ import * as moment from 'moment';
 	styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
+	public catalogo: string;
+	public mostrarCatalogo: boolean = true;
 	public categorias: any;
 	public store: any;
 	public iter = 1;
@@ -56,6 +57,8 @@ export class HomePage implements OnInit {
 		this.facebook = transversal[0].facebook;
 		this.twitter = transversal[0].twitter;
 		this.instagram = transversal[0].instagram;
+		this.mostrarCatalogo = transversal[0].mostrarCatalogo;
+		this.catalogo = transversal[0].catalogo;
 	}
 
 

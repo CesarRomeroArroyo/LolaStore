@@ -38,6 +38,7 @@ export class CartPage implements OnInit {
   domicilios: [];
   store: any;
   verificarDomicilio: any;
+  imagen: string;
   constructor(
     private firebase: FirebaseService,
     private router: Router,
@@ -91,6 +92,9 @@ export class CartPage implements OnInit {
     this.firebase.obtener("transversal").subscribe((t) => {
       if(t[0].descuento>0){
         this.discount = t[0].descuento;
+      }
+      if(t[0].imagenCarrito){
+        this.imagen = t[0].imagenCarrito;
       }
       if(t[0].obsequios){
         this.obsequios = t[0].obsequios;

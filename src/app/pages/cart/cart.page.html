@@ -1,10 +1,8 @@
 <ion-content [fullscreen]="true">
   <div class="container" *ngIf="productsGrl.length > 0">
-    <!-- <div class="container__header">
-			<div class="container__header__back" (click)="irAtras()">
-				<ion-icon name="chevron-back-outline"></ion-icon>
-			</div>
-    </div> -->
+    <div class="container__header">
+			<img src="{{imagen}}" alt="">
+    </div>
     <div class="container__address">
       <div class="container__address__title">
         <i class="fa fa-map-marker" aria-hidden="true"></i> Entregar en:
@@ -80,19 +78,20 @@
           {{gift.obsequio}}
         </div>
       </div>
-      <div class="container__title" (click)="finalizarPedido()">
+      <div class="container__title">
         <div class="container__title__values">Subtotal: {{calcularPago()| currency: 'USD':true:'2.0'}}</div>
         
         <div class="container__title__values" *ngIf="domicilio()==0 && verificarDomicilio.length == 0 && mismaCiudad()==true">Valor Domicilio: <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>Calculando Domicilio...</div>
         <div class="container__title__values" *ngIf="domicilio()==0 && verificarDomicilio.length > 0 && mismaCiudad()==true">Valor Domicilio: $0</div>
         <div class="container__title__values" *ngIf="domicilio()!=0 && mismaCiudad()==true">Valor Domicilio: {{domicilio()| currency: 'USD':true:'2.0'}}</div>
-        
-        
         Total a pagar: {{calcularPago()+ domicilio()| currency: 'USD':true:'2.0'}}
-        <div class="container__title__sub">Toca para realizar el pedido</div>
+      </div>
+      <div class="container__title">
+        <ion-button color="danger">Finalizar Compra</ion-button>
       </div>
       <div class="container__footer">&nbsp;</div>
     </div>
+    
   </div>
   <div class="container" *ngIf="productsGrl.length == 0">
     <div class="container__header">

@@ -159,6 +159,21 @@
     left: 1px;
     color: var(--ion-color-success);
   }
+  &__catalogo{
+    height: 60px;
+    width: 60px;
+    border: 2px solid #f7d8dd;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    top: -4px;
+    left: 1px;
+    color: var(--ion-color-primary);
+  }
   &__texto{
     height: 50px;
     width: 100%;
