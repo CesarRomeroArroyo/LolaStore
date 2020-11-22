@@ -1,73 +1,77 @@
 <ion-content>
-	<div class="container" *ngIf="producto">
-		<div class="container__header">
-			<img [src]="producto['url']" *ngIf="producto.fotos.length === 0">
-			<ion-slides pager="true" [options]="slideOpts" *ngIf="producto.fotos.length > 0">
-				<ion-slide *ngFor="let url of producto.urls">
-					<img [src]="url">
-				</ion-slide>
-			</ion-slides>
+  <div class="container" *ngIf="producto">
+    <div class="container__header">
+      <img [src]="producto['url']" *ngIf="producto.fotos.length === 0">
+      <ion-slides pager="true" [options]="slideOpts" *ngIf="producto.fotos.length > 0">
+        <ion-slide *ngFor="let url of producto.urls">
+          <img [src]="url">
+        </ion-slide>
+      </ion-slides>
 
-			<div class="container__header__icon">
-				<ion-icon name="chevron-back-outline" color="dark" (click)="back()"></ion-icon>
-				<div class="container__header__ticked" *ngIf="producto.descuento > 0">
-					<div class="container__header__ticked__triangulo"></div>
-					<div class="container__header__icon__desc">
-						{{producto.descuento}}% descuento
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container__details">
-			<div class="container__details__title">
-			</div>
-			<div class="container__details__info">
-				<div class="container__details__info__title">
-					{{producto.nombre | uppercase}}
-				</div>
-				<div class="container__details__info__subtitle">
-					{{producto.subtitulo | uppercase}}
-				</div>
-				<div class="container__details__info__text">
-					{{producto.descripcion}}
-				</div>
-				<div class="container__details__info__arrays" *ngIf="producto.ingredientes?.length > 0">
-					<h6>Ingredientes</h6>
-					{{producto.ingredientes}}
-				</div>
-				<div class="container__details__info__precio">
-					${{producto.precio | number}}
-				</div>
-				<div class="container__details__info__arrays" *ngIf="producto.colores?.length > 0">
-					<ion-item>
-						<ion-label color="primary">Colores</ion-label>
-						<ion-select okText="Seleccionar" cancelText="Cancelar" [(ngModel)]="colorSelected">
-							<ion-select-option [value]="color" *ngFor="let color of producto.colores">
-								{{color}}
-							</ion-select-option>
-						</ion-select>
-					</ion-item>
-				</div>
-			</div>
-			<div class="container__details__cantidad" *ngIf="producto.cantidad !== 0; else agotado">
-				<div class="container__details__cantidad__inputs">
-					<ion-icon name="remove-outline" (click)="restar()"></ion-icon>
-					<ion-input [(ngModel)]="cantidad" [disabled]="true" type="number" class="input"></ion-input>
-					<ion-icon name="add-outline" (click)="adicionar()"></ion-icon>
-				</div>
-			</div>
-			<ng-template #agotado>
-				<div class="agotado">
-					Producto sin disponibilidad
-				</div>
-			</ng-template>
-			<div class="container__details__buttom">
-				<ion-button 
-					shape="round" 
-					[disabled]="producto.cantidad === 0"
-					(click)="addCar()">Adicionar al carrito
-				</ion-button>
-			</div>
-		</div>
-	</div>
+      <div class="container__header__icon">
+        <ion-icon name="chevron-back-outline" color="dark" (click)="back()"></ion-icon>
+        <div class="container__header__ticked" *ngIf="producto.descuento > 0">
+          <div class="container__header__ticked__triangulo"></div>
+          <div class="container__header__icon__desc">
+            {{producto.descuento}}% descuento
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container__details">
+      <div class="container__details__title">
+      </div>
+      <div class="container__details__info">
+        <div class="container__details__info__title">
+          {{producto.nombre | uppercase}}
+        </div>
+        <div class="container__details__info__subtitle">
+          {{producto.subtitulo | uppercase}}
+        </div>
+        <div class="container__details__info__text">
+          {{producto.descripcion}}
+        </div>
+        <div class="container__details__info__arrays" *ngIf="producto.ingredientes?.length > 0">
+          <h6>Ingredientes</h6>
+          {{producto.ingredientes}}
+        </div>
+        <div class="container__details__info__precio" *ngIf="producto.descuento === 0 else descuento">
+          ${{producto.precio|number}}
+        </div>
+        <ng-template #descuento>
+          <div class="container__details__info__precio">
+            <div>${{producto.precio|number}}</div>
+            <div>→</div>
+            <div>${{calculoDescuento(producto)|number}}</div>
+          </div>
+        </ng-template>
+        <div class="container__details__info__arrays" *ngIf="producto.colores?.length > 0">
+          <ion-item>
+            <ion-label color="primary">Colores</ion-label>
+            <ion-select okText="Seleccionar" cancelText="Cancelar" [(ngModel)]="colorSelected">
+              <ion-select-option [value]="color" *ngFor="let color of producto.colores">
+                {{color}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+      </div>
+      <div class="container__details__cantidad" *ngIf="producto.cantidad !== 0; else agotado">
+        <div class="container__details__cantidad__inputs">
+          <ion-icon name="remove-outline" (click)="restar()"></ion-icon>
+          <ion-input [(ngModel)]="cantidad" [disabled]="true" type="number" class="input"></ion-input>
+          <ion-icon name="add-outline" (click)="adicionar()"></ion-icon>
+        </div>
+      </div>
+      <ng-template #agotado>
+        <div class="agotado">
+          Producto sin disponibilidad
+        </div>
+      </ng-template>
+      <div class="container__details__buttom">
+        <ion-button shape="round" [disabled]="producto.cantidad === 0" (click)="addCar()">Adicionar al carrito
+        </ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>
