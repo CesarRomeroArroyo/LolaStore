@@ -78,6 +78,18 @@
           {{gift.obsequio}}
         </div>
       </div>
+      <div class="container__gifts">
+        <div class="container__gifts__title">
+          <i class="fa fa-gift" aria-hidden="true"></i> Medio de  pago:
+        </div>
+        <div class="container__discount__item">
+          <select [(ngModel)]="fPago">
+            <option [value]="fp.nombre" *ngFor="let fp of formapago">
+              {{fp.nombre}}
+            </option>
+          </select>
+        </div>
+      </div>
       <div class="container__title">
         <div class="container__title__values">Subtotal: {{calcularPago()| currency: 'USD':true:'2.0'}}</div>
         
@@ -87,7 +99,7 @@
         Total a pagar: {{calcularPago()+ domicilio()| currency: 'USD':true:'2.0'}}
       </div>
       <div class="container__title">
-        <ion-button color="danger">Finalizar Compra</ion-button>
+        <ion-button color="danger" (click)="finalizarPedido()">Finalizar Compra</ion-button>
       </div>
       <div class="container__footer">&nbsp;</div>
     </div>
@@ -107,6 +119,6 @@
   </div>
   <app-direcciones class="modal animate__animated animate__fadeIn animate__faster" [showAdd]="false" [usuario]="user" (showModal)="closeModal($event)" (direccionSelected)="selecAdress($event)" *ngIf="showModal"></app-direcciones>
   <app-descuentos class="modal animate__animated animate__fadeIn animate__faster" *ngIf="showDescuentos" [discountProd]="discountProd" [decuentoAplicado]="decuentoAplicado" [total]="total" (descuentoSelected)="seleccionarDescuento($event)" (showModal)="closeDescuento($event)" ></app-descuentos>
-  <app-confirmacion class="modal animate__animated animate__fadeIn animate__faster" [formaspago]="formapago" *ngIf="showFormaPago" (showModal)="closeModalFormaPAgo($event)"></app-confirmacion>
+  <app-confirmacion class="modal animate__animated animate__fadeIn animate__faster" [fPago]="fPago" [formaspago]="formapago" *ngIf="showFormaPago" (showModal)="closeModalFormaPAgo($event)"></app-confirmacion>
 </ion-content>
 <app-tags></app-tags>

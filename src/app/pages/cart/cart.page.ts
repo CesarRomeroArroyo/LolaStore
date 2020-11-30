@@ -39,6 +39,7 @@ export class CartPage implements OnInit {
   store: any;
   verificarDomicilio: any;
   imagen: string;
+  fPago: any;
   constructor(
     private firebase: FirebaseService,
     private router: Router,
@@ -103,6 +104,7 @@ export class CartPage implements OnInit {
       }
       if(t[0].opcionespago){
         this.formapago = t[0].opcionespago;
+        this.verificarFormasPago();
       }
       if(t[0].domicilios){
         this.domicilios = t[0].domicilios;
@@ -125,6 +127,17 @@ export class CartPage implements OnInit {
         }
       }
     });
+  }
+
+  verificarFormasPago(){
+    console.log(this.user);
+    console.log(this.formapago);
+    if(this.user.ciudad != "VALLEDUPAR"){
+      this.formapago = this.formapago.filter((fp) =>{
+        return fp.numero != '0';
+      });
+    }
+    console.log(this.formapago);
   }
 
   asignarProductos(){
@@ -288,7 +301,9 @@ export class CartPage implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.guardarPedido();
-        this.showFormaPago = true;
+        if(this.fPago !== 'Pago Contra Entrega'){
+          this.showFormaPago = true;
+        }
       }
     });
   }
@@ -331,6 +346,7 @@ export class CartPage implements OnInit {
       estado: 1,
       idunico: this.idunico.uniqueId(),
       obsequios: this.obsequiosShow,
+      formapago: this.fPago
     };
     this.firebase.guardarDatos('pedidos', pedido).then(()=> {
       this.oneSignal.sendDirectMessage('Hola, tienes un nuevo pedido por atender.')

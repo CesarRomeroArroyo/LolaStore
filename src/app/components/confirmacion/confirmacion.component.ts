@@ -8,6 +8,7 @@ import { FirebaseService } from '@services/firebase.service';
 })
 export class ConfirmacionComponent implements OnInit {
   @Input() formaspago: any[];
+  @Input() fPago: any;
   @Output() showModal = new EventEmitter<boolean>();
   soporte: string;
   constructor(
