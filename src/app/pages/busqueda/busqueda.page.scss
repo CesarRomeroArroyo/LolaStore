@@ -2,6 +2,7 @@
     min-height: 100%;
     width: 100%;
     padding: 22% 0;
+    
     &__search {
         background: #f7d8dd;
         display: flex;
@@ -13,6 +14,7 @@
         width: 100%;
         z-index: 10;
         top: 0;
+        border-top: 33px solid #f7d8dd;
         &__input {
             position: relative;
             right: -20px;

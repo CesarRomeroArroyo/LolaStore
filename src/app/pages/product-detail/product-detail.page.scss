@@ -7,14 +7,14 @@ ion-content {
   background-color: var(--ion-color-light);
   min-height: 100vh;
   width: 100%;
-
+  flex-direction: column;
   &__header {
     display: flex;
     position: relative;
     overflow: hidden;
     font-size: 4vh;
     height: 60vh;
-    width: 100%;
+    
 
     >ion-slides {
       --bullet-background: black;
@@ -87,7 +87,7 @@ ion-content {
   }
 
   &__details {
-    position: absolute;
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;

@@ -205,5 +205,18 @@ export class FirebaseService {
 			return false;
 		});
 	}
+
+	async obtenerMovimientos(movimiento) {
+		let returnData = [];
+		var data = await this.db.collection('movimientos', ref => ref.where('movimiento', '==', movimiento)).get().toPromise();
+		data.forEach(info => {
+			var d = info.data();
+			d["id"] = info.id;
+			// console.log(info.id);
+			// console.log(info.data());
+			returnData.push(d);
+		});
+		return returnData;
+	  }
   
 }

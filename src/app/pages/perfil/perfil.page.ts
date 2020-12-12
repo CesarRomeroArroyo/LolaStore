@@ -69,7 +69,7 @@ export class PerfilPage implements OnInit {
 	}
 
 	validation() {
-		if (this.usuario.nombre != "" && this.usuario.email != "" && this.usuario.cedula != "" && this.usuario.contacto != "" && this.usuario.ciudad != "" && this.usuario.direccion != "") {
+		if (this.usuario.nombre != "" && this.usuario.email != "" && this.usuario.contacto != "" && this.usuario.ciudad != "" && this.usuario.direccion != "") {
 			return true;
 		} else {
 			return false;
@@ -79,7 +79,7 @@ export class PerfilPage implements OnInit {
 	async checkOutUser() {
 		let usuarios = await this.firebaseSvc.obtenerPromise('clientes');
 		usuarios.forEach(element => {
-			if (element.cedula === this.usuario.cedula && element.email === this.usuario.email) {
+			if (element.email === this.usuario.email) {
 				this.usuario = element;
 				localStorage.setItem("APP_USER", JSON.stringify(this.usuario));
 				this.presentToast('Ya estabas registrado en el sistema, Bienvenido Nuevamente!!!', 'success');

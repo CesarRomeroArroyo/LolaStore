@@ -6,8 +6,8 @@
 
 		<div class="container__form">
 			<ion-input class="input" placeholder="Nombre" [(ngModel)]="usuario.nombre"></ion-input>
-			<ion-input class="input" placeholder="Email" [(ngModel)]="usuario.email"></ion-input>
-			<ion-input class="input" placeholder="Cedula" (keyup)="checkOutUser()" [(ngModel)]="usuario.cedula"></ion-input>
+			<ion-input class="input" placeholder="Email" [(ngModel)]="usuario.email" (keyup)="checkOutUser()" ></ion-input>
+			<!-- <ion-input class="input" placeholder="Cedula" [(ngModel)]="usuario.cedula"></ion-input> -->
 			<ion-input class="input" placeholder="Telefono" [(ngModel)]="usuario.contacto"></ion-input>
 			<ion-select class="input" value="brown" okText="Seleccionar" cancelText="Cerrar"
 				placeholder="Seleccionar Ciudad" [(ngModel)]="usuario.ciudad">
