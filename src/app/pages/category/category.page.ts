@@ -88,10 +88,10 @@ export class CategoryPage implements OnInit {
 					nombre: element.nombre,
 					productos: this.busqueda(element.productos)
 				});
-				data.push({
+				/* data.push({
 					nombre: element.nombre,
 					productos: this.busquedaSubtitulo(element.productos)
-				});
+				}); */
 			});
 			this.dataShow = data;
 		}
@@ -102,27 +102,30 @@ export class CategoryPage implements OnInit {
 		var arrayBusqueda = this.buscarText.split(" ");
 		if(arrayBusqueda.length == 1){
 			retorno = productos.filter(prod => {
-				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+				//return prod.nombre.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+				return (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
 			})
 		}
 		if(arrayBusqueda.length == 2){
 			retorno = productos.filter(prod => {
-				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+				//return prod.nombre.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+				return (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0 && (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayBusqueda[1].toUpperCase()) >= 0;
 			})
-			retorno = retorno.filter(prod => {
+			/* retorno = retorno.filter(prod => {
 				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[1].toUpperCase()) >= 0;
-			})
+			}) */
 		}
 		if(arrayBusqueda.length == 3){
 			retorno = productos.filter(prod => {
-				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+				//return prod.nombre.toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0;
+				return (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayBusqueda[0].toUpperCase()) >= 0 && (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayBusqueda[1].toUpperCase()) >= 0 && (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayBusqueda[2].toUpperCase()) >= 0;
 			})
-			retorno = retorno.filter(prod => {
+			/* retorno = retorno.filter(prod => {
 				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[1].toUpperCase()) >= 0;
 			})
 			retorno = retorno.filter(prod => {
 				return prod.nombre.toUpperCase().indexOf(arrayBusqueda[2].toUpperCase()) >= 0;
-			})
+			}) */
 		}
 		return retorno;
 	}

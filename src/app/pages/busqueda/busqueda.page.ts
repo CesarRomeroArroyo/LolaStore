@@ -45,7 +45,7 @@ export class BusquedaPage implements OnInit {
 				subcategoria = {
 					nombre: sub.nombre,
 					productos: sub.productos.filter(prod => {
-						return prod.nombre.toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0;
+						return (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0;
 					})
 				}
 				if (subcategoria.productos.length > 0) {
@@ -56,12 +56,12 @@ export class BusquedaPage implements OnInit {
 				subcategoria = {
 					nombre: sub.nombre,
 					productos: sub.productos.filter(prod => {
-						return prod.nombre.toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0;
+						return (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0 && (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayQuery[1].toUpperCase()) >= 0;
 					})
 				}
-				subcategoria.productos = subcategoria.productos.filter(prod => {
-					return prod.nombre.toUpperCase().indexOf(arrayQuery[1].toUpperCase()) >= 0;
-				})
+				/* subcategoria.productos = subcategoria.productos.filter(prod => {
+					return (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayQuery[1].toUpperCase()) >= 0;
+				}) */
 				if (subcategoria.productos.length > 0) {
 					dataReturn.push(subcategoria);
 				}
@@ -70,15 +70,15 @@ export class BusquedaPage implements OnInit {
 				subcategoria = {
 					nombre: sub.nombre,
 					productos: sub.productos.filter(prod => {
-						return prod.nombre.toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0;
+						return (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayQuery[0].toUpperCase()) >= 0 && (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayQuery[1].toUpperCase()) >= 0 && (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayQuery[2].toUpperCase()) >= 0;
 					})
 				}
-				subcategoria.productos = subcategoria.productos.filter(prod => {
-					return prod.nombre.toUpperCase().indexOf(arrayQuery[1].toUpperCase()) >= 0;
+				/* subcategoria.productos = subcategoria.productos.filter(prod => {
+					return (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayQuery[1].toUpperCase()) >= 0;
 				})
 				subcategoria.productos = subcategoria.productos.filter(prod => {
-					return prod.nombre.toUpperCase().indexOf(arrayQuery[2].toUpperCase()) >= 0;
-				})
+					return (prod.nombre +' '+ prod.subtitulo).toUpperCase().indexOf(arrayQuery[2].toUpperCase()) >= 0;
+				}) */
 				if (subcategoria.productos.length > 0) {
 					dataReturn.push(subcategoria);
 				}
@@ -163,13 +163,13 @@ export class BusquedaPage implements OnInit {
 					subcategorias: subcategoria
 				});
 			});
-			this.data.forEach(cat => {
+			/* this.data.forEach(cat => {
 				let subcategoria = this.definirSubSubtitle(cat);
 				data.push({
 					nombre: cat.nombre,
 					subcategorias: subcategoria
 				});
-			});
+			}); */
 			this.dataShow = data;
 		}
 	}

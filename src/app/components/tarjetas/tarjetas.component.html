@@ -2,8 +2,7 @@
   <div class="cards__card animate__animated animate__backInUp" [class.card]="!wrap" *ngFor="let producto of array">
     <div class="cards__card__title">
       <app-favorito [producto]="producto"></app-favorito>
-      <img [src]="producto['url']" *ngIf="producto['foto'].length > 0" (click)="goToDetail(producto)">
-      <img [src]="producto.urls[0]" *ngIf="producto['foto'].length === 0" (click)="goToDetail(producto)">
+      <img [src]="producto.urls[0]" *ngIf="producto['fotos']" (click)="goToDetail(producto)">
       <div class="agotado" *ngIf="producto.cantidad === 0">
         Agotado
       </div>
