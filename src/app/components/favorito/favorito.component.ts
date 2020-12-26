@@ -64,12 +64,12 @@ export class FavoritoComponent implements OnInit {
           }
         }
       } else {
-        Swal.fire("", "Antes de agregar el producto a tus favoritos, necesitamoms tus datos", "info");
+        Swal.fire("", "Antes de agregar el producto a tus favoritos, necesitamos tus datos", "info");
         this.router.navigate(["/perfil"]);
       }
     }
     else {
-      Swal.fire("", "Antes de agregar el producto a tus favoritos, necesitamoms tus datos", "info");
+      Swal.fire("", "Antes de agregar el producto a tus favoritos, necesitamos tus datos", "info");
       this.router.navigate(["/perfil"]);
     }
   }
