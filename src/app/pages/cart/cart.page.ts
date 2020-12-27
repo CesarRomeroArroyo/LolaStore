@@ -64,6 +64,8 @@ export class CartPage implements OnInit {
   }
 
   async ionViewWillEnter() {
+    const tienda = await this.firebase.obtenerPromise('usuarios');
+    this.store = tienda[0];
     this.total = 0;
     this.discountProd = false;
     this.decuentoAplicado = "prod";
@@ -78,9 +80,8 @@ export class CartPage implements OnInit {
 		}
     this.asignarProductos();
     this.verficarData();
-    this.firebase.obtener('usuarios').subscribe((user) =>{
-      this.store = user[0];
-    });
+    
+    
     
     //this.actualizarInventario();
     const coordinates = await Geolocation.getCurrentPosition();
@@ -89,44 +90,44 @@ export class CartPage implements OnInit {
     this.gps.lat = coordinates.coords.latitude;
   }
 
-  verficarData() {
-    this.firebase.obtener("transversal").subscribe((t) => {
-      if(t[0].descuento>0){
-        this.discount = t[0].descuento;
-      }
-      if(t[0].imagenCarrito){
-        this.imagen = t[0].imagenCarrito;
-      }
-      if(t[0].obsequios){
-        this.obsequios = t[0].obsequios;
-        this.obserquioSiempre = t[0].obsequioinicial;
-        this.obtenerObssequios();
-      }
-      if(t[0].opcionespago){
-        this.formapago = t[0].opcionespago;
-        this.verificarFormasPago();
-      }
-      if(t[0].domicilios){
-        this.domicilios = t[0].domicilios;
-      }
-      if(this.discount > 0){
-        this.aplicarDesctuentoTienda()
-      } else {
-        this.verificarDesceunto = this.obsequios.filter((o) => {
-          return o.descuento == true;
-        });
-        var total = this.calcularPago();
-        if(this.verificarDesceunto.length > 0){
-          if(total >= this.verificarDesceunto[0].desde && total <= this.verificarDesceunto[0].hasta){
-            this.aplicarDesctuentoTransversal();
-          } else {
-            this.verificarDescuentoProductos();
-          } 
+  async verficarData() {
+    const t = await this.firebase.obtenerPromise("transversal");
+    if(t[0].descuento>0){
+      this.discount = t[0].descuento;
+    }
+    if(t[0].imagenCarrito){
+      this.imagen = t[0].imagenCarrito;
+    }
+    
+    if(t[0].opcionespago){
+      this.formapago = t[0].opcionespago;
+      this.verificarFormasPago();
+    }
+    if(t[0].domicilios){
+      this.domicilios = t[0].domicilios;
+    }
+    if(this.discount > 0){
+      this.aplicarDesctuentoTienda()
+    } else {
+      this.verificarDesceunto = this.obsequios.filter((o) => {
+        return o.descuento == true;
+      });
+      var total = this.calcularPago();
+      if(this.verificarDesceunto.length > 0){
+        if(total >= this.verificarDesceunto[0].desde && total <= this.verificarDesceunto[0].hasta){
+          this.aplicarDesctuentoTransversal();
         } else {
           this.verificarDescuentoProductos();
-        }
+        } 
+      } else {
+        this.verificarDescuentoProductos();
       }
-    });
+    }
+    if(t[0].obsequios){
+      this.obsequios = t[0].obsequios;
+      this.obserquioSiempre = t[0].obsequioinicial;
+      this.obtenerObssequios();
+    }
   }
 
   verificarFormasPago(){
@@ -208,10 +209,17 @@ export class CartPage implements OnInit {
     this.calcularPago();
     this.obsequiosShow = [];
     const index = this.obsequios.findIndex((data)=> {
-      return this.total >= data.desde && this.total <= data.hasta && data.hasta != 999999999;
+      return this.total >= data.desde && this.total <= data.hasta;
     });
     for (let i = 0; i <= index; i++) {
       this.obsequiosShow.push(this.obsequios[i]);
+      if(this.discount > 0 && this.obsequios[i].domicilio == "true"){
+        this.obsequiosShow = this.obsequiosShow.filter(d => d != this.obsequios[i]);
+      } 
+      if(this.discount > 0 && this.obsequios[i].descuento == "true"){
+        this.obsequiosShow = this.obsequiosShow.filter(d => d != this.obsequios[i]);
+      } 
+      
       console.log(this.obsequiosShow);
     }
   }
@@ -224,7 +232,7 @@ export class CartPage implements OnInit {
     this.verificarDesceunto = this.obsequiosShow.filter((o) => {
       return o.descuento == "true";
     });
-
+    console.log('Descuento -> '+this.verificarDesceunto);
     if(this.verificarDomicilio.length > 0 && this.mismaCiudad()){
       return 0;
     }
@@ -289,23 +297,28 @@ export class CartPage implements OnInit {
   }
 
   finalizarPedido(){
-    Swal.fire({
-      title: '',
-      text: 'Esta seguro de confirmar el pedido?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si',
-      cancelButtonText: 'No'
-    }).then((result) => {
-      if (result.value) {
-        this.guardarPedido();
-        if(this.fPago !== 'Pago Contra Entrega'){
-          this.showFormaPago = true;
+    if(this.fPago){
+      Swal.fire({
+        title: '',
+        text: 'Esta seguro de confirmar el pedido?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.value) {
+          this.guardarPedido();
+          if(this.fPago !== 'Pago Contra Entrega'){
+            this.showFormaPago = true;
+          }
         }
-      }
-    });
+      });
+    }
+    else{
+      Swal.fire('', 'Debes seleccionar un medio de pago', 'error');
+    }
   }
 
   guardarPedido(){

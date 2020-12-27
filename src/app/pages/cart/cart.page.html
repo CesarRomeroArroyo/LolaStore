@@ -83,7 +83,7 @@
           <i class="fa fa-gift" aria-hidden="true"></i> Medio de  pago:
         </div>
         <div class="container__discount__item">
-          <select [(ngModel)]="fPago">
+          <select [(ngModel)]="fPago" name="fPago">
             <option [value]="fp.nombre" *ngFor="let fp of formapago">
               {{fp.nombre}}
             </option>
