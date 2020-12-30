@@ -106,11 +106,17 @@ export class CartPage implements OnInit {
     if(t[0].domicilios){
       this.domicilios = t[0].domicilios;
     }
+    
+    if(t[0].obsequios){
+      this.obsequios = t[0].obsequios;
+      this.obserquioSiempre = t[0].obsequioinicial;
+      this.obtenerObssequios();
+    }
     if(this.discount > 0){
       this.aplicarDesctuentoTienda()
     } else {
       this.verificarDesceunto = this.obsequios.filter((o) => {
-        return o.descuento == true;
+        return o.descuento == "true";
       });
       var total = this.calcularPago();
       if(this.verificarDesceunto.length > 0){
@@ -122,11 +128,6 @@ export class CartPage implements OnInit {
       } else {
         this.verificarDescuentoProductos();
       }
-    }
-    if(t[0].obsequios){
-      this.obsequios = t[0].obsequios;
-      this.obserquioSiempre = t[0].obsequioinicial;
-      this.obtenerObssequios();
     }
   }
 
