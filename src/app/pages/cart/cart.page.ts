@@ -209,6 +209,12 @@ export class CartPage implements OnInit {
   obtenerObssequios(){
     this.calcularPago();
     this.obsequiosShow = [];
+    let verificarDescuentoProd = false;
+    this.products.forEach((p)=>{
+      if(p.producto.descuento != '0'){
+        verificarDescuentoProd = true;
+      }
+    })
     const index = this.obsequios.findIndex((data)=> {
       return this.total >= data.desde && this.total <= data.hasta;
     });
@@ -217,9 +223,13 @@ export class CartPage implements OnInit {
       if(this.discount > 0 && this.obsequios[i].domicilio == "true"){
         this.obsequiosShow = this.obsequiosShow.filter(d => d != this.obsequios[i]);
       } 
+      if(verificarDescuentoProd && this.obsequios[i].domicilio == "true"){ //Si encuentra al menos un producto con descuento 
+        this.obsequiosShow = this.obsequiosShow.filter(d => d != this.obsequios[i]);
+      } 
       if(this.discount > 0 && this.obsequios[i].descuento == "true"){
         this.obsequiosShow = this.obsequiosShow.filter(d => d != this.obsequios[i]);
       } 
+
       
       console.log(this.obsequiosShow);
     }
