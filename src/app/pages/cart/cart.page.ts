@@ -9,7 +9,7 @@ import { UtilsService } from '@services/utils.service';
 
 import { UniqueService } from '@services/unique.service';
 import { OneSignalService } from '@services/one-signal.service';
-
+import { LoadingController } from '@ionic/angular';
 const { Geolocation } = Plugins;
 
 @Component({
@@ -40,13 +40,16 @@ export class CartPage implements OnInit {
   verificarDomicilio: any;
   imagen: string;
   fPago: any;
+  sinCantidad: any;
+  valido = true;
   constructor(
     private firebase: FirebaseService,
     private router: Router,
     private cartService: CartService,
     private distanceService: UtilsService,
     private idunico: UniqueService,
-    private oneSignal: OneSignalService
+    private oneSignal: OneSignalService,
+    public loadingController: LoadingController
   ) {
     this.showModal = false;
     this.showDescuentos = false;
@@ -60,10 +63,17 @@ export class CartPage implements OnInit {
   }
 
   ngOnInit() {
-    
+    const prodPedido = JSON.parse(localStorage.getItem("APP_PEDIDO"));
+    prodPedido.forEach(prod => {
+      this.verificarCantidades(prod);  
+    });
   }
 
   async ionViewWillEnter() {
+    const loading = await this.loadingController.create({
+			message: 'Espera por favor, Cargando el Carrito... Por favor verifica que este encendido el GPS del equipo'
+      });
+		await loading.present();
     const tienda = await this.firebase.obtenerPromise('usuarios');
     this.store = tienda[0];
     this.total = 0;
@@ -72,6 +82,9 @@ export class CartPage implements OnInit {
     this.discount = 0;
     this.user = JSON.parse(localStorage.getItem("APP_USER"));
     const prodPedido = JSON.parse(localStorage.getItem("APP_PEDIDO"));
+    prodPedido.forEach(prod => {
+      this.verificarCantidades(prod);  
+    });
     console.log(prodPedido);
 		if(prodPedido){
 			this.productsGrl = prodPedido;
@@ -88,6 +101,7 @@ export class CartPage implements OnInit {
     console.log('Current', coordinates);
     this.gps.lon = coordinates.coords.longitude;
     this.gps.lat = coordinates.coords.latitude;
+    loading.dismiss();
   }
 
   async verficarData() {
@@ -320,9 +334,13 @@ export class CartPage implements OnInit {
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.value) {
-          this.guardarPedido();
-          if(this.fPago !== 'Pago Contra Entrega'){
-            this.showFormaPago = true;
+          if(!this.valido){
+            Swal.fire('', 'El producto "'+this.sinCantidad.nombre.toUpperCase()+'" se encuentra sin existencias, remuevelo del carrito para seguir comprando', 'error');
+          } else{
+            this.guardarPedido();
+            if(this.fPago !== 'Pago Contra Entrega'){
+              this.showFormaPago = true;
+            }
           }
         }
       });
@@ -330,6 +348,16 @@ export class CartPage implements OnInit {
     else{
       Swal.fire('', 'Debes seleccionar un medio de pago', 'error');
     }
+  }
+  
+  async verificarCantidades(prod){
+    
+    const producto = await this.firebase.obtenerIdPromise('productos', prod.producto.id);
+    if(producto[0].cantidad == 0){
+      this.sinCantidad = producto[0];
+      this.valido = false;
+    }
+    
   }
 
   guardarPedido(){
