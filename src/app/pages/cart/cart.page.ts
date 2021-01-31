@@ -9,7 +9,7 @@ import { UtilsService } from '@services/utils.service';
 
 import { UniqueService } from '@services/unique.service';
 import { OneSignalService } from '@services/one-signal.service';
-
+import { LoadingController } from '@ionic/angular';
 const { Geolocation } = Plugins;
 
 @Component({
@@ -40,13 +40,17 @@ export class CartPage implements OnInit {
   verificarDomicilio: any;
   imagen: string;
   fPago: any;
+  sinCantidad: any;
+  sinCantidades: any;
+  valido = true;
   constructor(
     private firebase: FirebaseService,
     private router: Router,
     private cartService: CartService,
     private distanceService: UtilsService,
     private idunico: UniqueService,
-    private oneSignal: OneSignalService
+    private oneSignal: OneSignalService,
+    public loadingController: LoadingController
   ) {
     this.showModal = false;
     this.showDescuentos = false;
@@ -60,10 +64,17 @@ export class CartPage implements OnInit {
   }
 
   ngOnInit() {
-    
+    /* const prodPedido = JSON.parse(localStorage.getItem("APP_PEDIDO"));
+    prodPedido.forEach(prod => {
+      this.verificarCantidades(prod);  
+    }); */
   }
 
   async ionViewWillEnter() {
+    const loading = await this.loadingController.create({
+			message: 'Espera por favor, Cargando el Carrito... Por favor verifica que este encendido el GPS del equipo'
+      });
+		await loading.present();
     const tienda = await this.firebase.obtenerPromise('usuarios');
     this.store = tienda[0];
     this.total = 0;
@@ -81,13 +92,16 @@ export class CartPage implements OnInit {
     this.asignarProductos();
     this.verficarData();
     
-    
+    prodPedido.forEach(prod => {
+      this.verificarCantidades(prod);  
+    });
     
     //this.actualizarInventario();
     const coordinates = await Geolocation.getCurrentPosition();
     console.log('Current', coordinates);
     this.gps.lon = coordinates.coords.longitude;
     this.gps.lat = coordinates.coords.latitude;
+    loading.dismiss();
   }
 
   async verficarData() {
@@ -243,7 +257,7 @@ export class CartPage implements OnInit {
     this.verificarDesceunto = this.obsequiosShow.filter((o) => {
       return o.descuento == "true";
     });
-    console.log('Descuento -> '+this.verificarDesceunto);
+    
     if(this.verificarDomicilio.length > 0 && this.mismaCiudad()){
       return 0;
     }
@@ -308,6 +322,10 @@ export class CartPage implements OnInit {
   }
 
   finalizarPedido(){
+    const prodPedido = JSON.parse(localStorage.getItem("APP_PEDIDO"));
+    prodPedido.forEach(prod => {
+      this.verificarCantidades(prod);  
+    });
     if(this.fPago){
       Swal.fire({
         title: '',
@@ -319,17 +337,49 @@ export class CartPage implements OnInit {
         confirmButtonText: 'Si',
         cancelButtonText: 'No'
       }).then((result) => {
-        if (result.value) {
+        if (result.value) {  
           this.guardarPedido();
           if(this.fPago !== 'Pago Contra Entrega'){
-            this.showFormaPago = true;
-          }
+              this.showFormaPago = true;
+          } 
         }
       });
     }
     else{
       Swal.fire('', 'Debes seleccionar un medio de pago', 'error');
     }
+  }
+  
+  async verificarCantidades(prod){
+    const producto = await this.firebase.obtenerIdPromise('productos', prod.producto.id);
+    this.productsGrl.forEach((p) => {
+      if(p.producto.id == producto[0].id){
+        p.producto.cantidad = producto[0].cantidad;
+      }
+    });
+    this.verificarCanidadCero();
+  }
+
+  verificarCanidadCero(){
+    this.sinCantidades = [];
+    this.sinCantidad = '';
+    this.sinCantidades = this.productsGrl.filter((p) => {
+      return p.producto.cantidad == 0;
+    });
+    this.sinCantidades.forEach(p => {
+      this.sinCantidad += ' '+p.producto.nombre+',';
+    });
+    this.productsGrl = this.productsGrl.filter((p) => {
+      return p.producto.cantidad != 0;
+    });
+    if(this.sinCantidades.length > 0){
+      Swal.fire('', 'Los productos"'+this.sinCantidad.toUpperCase()+'" se encuentran sin existencias y fueron removidos del carrito de compras', 'info');
+    }
+    this.asignarProductos();
+    this.domicilio();
+    this.cartService.administrarProducto(this.productsGrl);
+    this.obtenerObssequios();
+    this.verficarData();
   }
 
   guardarPedido(){
