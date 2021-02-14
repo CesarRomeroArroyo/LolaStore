@@ -71,10 +71,7 @@ export class CartPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    const loading = await this.loadingController.create({
-			message: 'Espera por favor, Cargando el Carrito... Por favor verifica que este encendido el GPS del equipo'
-      });
-		await loading.present();
+    /*  */
     const tienda = await this.firebase.obtenerPromise('usuarios');
     this.store = tienda[0];
     this.total = 0;
@@ -91,17 +88,21 @@ export class CartPage implements OnInit {
 		}
     this.asignarProductos();
     this.verficarData();
-    
+    const loading = await this.loadingController.create({
+			message: 'Espera por favor, Cargando el Carrito... Verificando disponibilidad de productos.'
+      });
+		await loading.present();
     prodPedido.forEach(prod => {
       this.verificarCantidades(prod);  
     });
+    loading.dismiss();
     
     //this.actualizarInventario();
     const coordinates = await Geolocation.getCurrentPosition();
     console.log('Current', coordinates);
     this.gps.lon = coordinates.coords.longitude;
     this.gps.lat = coordinates.coords.latitude;
-    loading.dismiss();
+    //
   }
 
   async verficarData() {
