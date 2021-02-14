@@ -101,7 +101,7 @@ export class HomePage implements OnInit {
 				data.push(element);
 			}
 		})
-		this.MejoresDescuentos = data.slice(0, 30);
+		this.MejoresDescuentos = data.slice(0, 10);
 	}
 
 	obtenerColor(index) {
