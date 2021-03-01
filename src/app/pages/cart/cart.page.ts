@@ -89,14 +89,11 @@ export class CartPage implements OnInit {
     this.asignarProductos();
     this.verficarData();
     
-    const loading = await this.loadingController.create({
-			message: 'Espera por favor, Cargando el Carrito... Verificando disponibilidad de los productos'
-      });
-		await loading.present();
-    prodPedido.forEach(prod => {
+    
+    /* prodPedido.forEach(prod => {
       this.verificarCantidades(prod);  
-    });
-    loading.dismiss();
+    }); */
+    
     //this.actualizarInventario();
     const coordinates = await Geolocation.getCurrentPosition();
     console.log('Current', coordinates);
